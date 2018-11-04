@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Botstrap CSS -->
+    <link rel="stylesheet" href="CSS/bootstrap.min.css">
+
+    <title>Inicio</title>
+
+    <style type="text/css">
+        @media (min-width: 768px) {
+            .puto {
+                margin-right: 0%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Barra nav -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:darkcyan;">
+        <a class="navbar-brand" href="#">Tibbon</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <!-- Icono menú hamburguesa -->
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav" style="width:100%;">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Tienda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contacto</a>
+                </li>
+                <li class="nav-item puto">
+                    <a class="nav-link" href="#">Login</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <h1>Bienvenido a Tibbon</h1>
+
+        <!-- Carrusel -->
+        <div id="carruselOfertas" class="carousel slide" data-ride="carousel">
+            <!-- Rayas de indicación de slides -->
+            <ol class="carousel-indicators">
+                <li data-target="#carruselOfertas" data-slide-to="0" class="active"></li>
+                <li data-target="#carruselOfertas" data-slide-to="1"></li>
+                <li data-target="#carruselOfertas" data-slide-to="2"></li>
+            </ol>
+            <!-- Imágenes -->
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="https://via.placeholder.com/800x400" alt="Primer slide">
+                    <!-- Texto adicional -->
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Primer Slide</h5>
+                        <p>Lorem ipsum dolor sit.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <!-- Texto adicional -->
+                    <img class="d-block w-100" src="https://via.placeholder.com/800x400" alt="Segunda slide">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Segunda Slide</h5>
+                        <p>Lorem ipsum dolor sit.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <!-- Texto adicional -->
+                    <img class="d-block w-100" src="https://via.placeholder.com/800x400" alt="Tercer slide">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Tercer Slide</h5>
+                        <p>Lorem ipsum dolor sit amet.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Flechas de avance y retroceso -->
+            <a class="carousel-control-prev" href="#carruselOfertas" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Anterior</span>
+            </a>
+            <a class="carousel-control-next" href="#carruselOfertas" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Siguiente</span>
+            </a>
+        </div>
+
+        <!-- Jumbotrom -->
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-4">¿Quiénes somos?</h1>
+                <p class="lead">Tibbon es una marca rosarina que se inició en el 2013, mejorando día a día la calidad
+                    de sus productos con tecnología e innovación constantes. Es una empresa familiar, la cual apunta a
+                    la venta de calzado unisex entre los 15 y los 35 años.</p>
+                <p class="lead">Diseñamos, fabricamos y comercializamos calzado, para brindar una experiencia de
+                    comodidad, confort y estilo a tus pies. Lo que nos importa es que estés a gusto con tus zapas y
+                    tengas ganas de usarlas todos los días.</p>
+                <p class="lead">Queremos fomentar nuestro crecimiento a nivel nacional, por esa misma razón desde
+                    principios del 2018 comenzamos con los envíos a gran parte de nuestro país.</p>
+                <hr class="my-4">
+                <p>Para mas infomación visite nuestra página de contacto.</p>
+                <a class="btn btn-info" href="#" role="button">Más info</a>
+            </div>
+        </div>
+
+        <!-- Cards -->
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <img src="https://via.placeholder.com/100x180" alt="Imagen producto">
+                    <div class="card-body">
+                        <p class="card-text">Precio producto</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/100x180" alt="Imagen producto">
+                        <div class="card-body">
+                            <p class="card-text">Precio producto</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                        <div class="card">
+                            <img src="https://via.placeholder.com/100x180" alt="Imagen producto">
+                            <div class="card-body">
+                                <p class="card-text">Precio producto</p>
+                            </div>
+                        </div>
+                    </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <!--
+    <script src="js/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="js/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    -->
+
+</body>
+
+</html>
