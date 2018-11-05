@@ -17,13 +17,21 @@
                 margin-right: 0%;
             }
         }
+
+        a:hover,
+        a:active,
+        a:link,
+        a:visited {
+            text-decoration: none;
+            color: black;
+        }
     </style>
 </head>
 
 <body>
     <!-- Barra nav -->
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:darkcyan;">
-        <a class="navbar-brand" href="#">Tibbon</a>
+        <a class="navbar-brand" href="inicio.html">Tibbon</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
             aria-expanded="false" aria-label="Toggle navigation">
             <!-- Icono menú hamburguesa -->
@@ -32,7 +40,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav" style="width:100%;">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Inicio</a>
+                    <a class="nav-link" href="inicio.html">Inicio</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Tienda</a>
@@ -61,7 +69,7 @@
             <!-- Imágenes -->
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="d-block w-100" src="https://via.placeholder.com/800x400" alt="Primer slide">
+                    <img class="d-block w-100" src="https://via.placeholder.com/400x200" alt="Primer slide">
                     <!-- Texto adicional -->
                     <div class="carousel-caption d-none d-md-block">
                         <h5>Primer Slide</h5>
@@ -70,7 +78,7 @@
                 </div>
                 <div class="carousel-item">
                     <!-- Texto adicional -->
-                    <img class="d-block w-100" src="https://via.placeholder.com/800x400" alt="Segunda slide">
+                    <img class="d-block w-100" src="https://via.placeholder.com/400x200" alt="Segunda slide">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>Segunda Slide</h5>
                         <p>Lorem ipsum dolor sit.</p>
@@ -78,7 +86,7 @@
                 </div>
                 <div class="carousel-item">
                     <!-- Texto adicional -->
-                    <img class="d-block w-100" src="https://via.placeholder.com/800x400" alt="Tercer slide">
+                    <img class="d-block w-100" src="https://via.placeholder.com/400x200" alt="Tercer slide">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>Tercer Slide</h5>
                         <p>Lorem ipsum dolor sit amet.</p>
@@ -98,8 +106,8 @@
 
         <!-- Jumbotrom -->
         <div class="jumbotron">
-            <div class="container">
-                <h1 class="display-4">¿Quiénes somos?</h1>
+            <a class="btn btn-lg mb-1" href="#collapseData" data-toggle="collapse">¿Quiénes somos?</a>
+            <div class="collapse text-justify" id="collapseData">
                 <p class="lead">Tibbon es una marca rosarina que se inició en el 2013, mejorando día a día la calidad
                     de sus productos con tecnología e innovación constantes. Es una empresa familiar, la cual apunta a
                     la venta de calzado unisex entre los 15 y los 35 años.</p>
@@ -115,37 +123,63 @@
         </div>
 
         <!-- Cards -->
-        <div class="row">
-            <div class="col">
+        <div class="card-deck">
+            <div class="col-sm-6 col-md-3" style="width: 20px">
                 <div class="card">
-                    <img src="https://via.placeholder.com/100x180" alt="Imagen producto">
+                    <img src="https://via.placeholder.com/100x100" alt="Imagen producto">
                     <div class="card-body">
-                        <p class="card-text">Precio producto</p>
+                        <p class="card-text">$00.00</p>
                     </div>
                 </div>
             </div>
-            <div class="col">
-                    <div class="card">
-                        <img src="https://via.placeholder.com/100x180" alt="Imagen producto">
-                        <div class="card-body">
-                            <p class="card-text">Precio producto</p>
-                        </div>
+            <div class="col-sm-6 col-md-3" style="width: 20px">
+                <div class="card">
+                    <img src="https://via.placeholder.com/100x100" alt="Imagen producto">
+                    <div class="card-body">
+                        <p class="card-text">$00.00</p>
                     </div>
                 </div>
-                <div class="col">
-                        <div class="card">
-                            <img src="https://via.placeholder.com/100x180" alt="Imagen producto">
-                            <div class="card-body">
-                                <p class="card-text">Precio producto</p>
-                            </div>
-                        </div>
+            </div>
+            <div class="col-sm-6 col-md-3" style="width: 20px">
+                <div class="card">
+                    <img src="https://via.placeholder.com/100x100" alt="Imagen producto">
+                    <div class="card-body">
+                        <p class="card-text">$00.00</p>
                     </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3" style="width: 20px">
+                <div class="card">
+                    <img src="https://via.placeholder.com/100x100" alt="Imagen producto">
+                    <div class="card-body">
+                        <p class="card-text">$00.00</p>
+                    </div>
+                </div>
+            </div>
         </div>
+
+
+        <!-- Footer -->
+        <footer class="row bg-dark text-white mt-4">
+            <!-- Columna contactos -->
+            <div class="col-sm-6">
+                <h5>Contactos</h5>
+                <ul>
+                    <li>Instragram</li>
+                    <li>Facebook</li>
+                    <li>Twitter</li>
+                </ul>
+            </div>
+            <!-- Columna extra-->
+            <div class="col-sm-6">
+                <h5>Lorem ipsum dolor sit.</h5>
+            </div>
+        </footer>
+
     </div>
 
+
     <!-- Bootstrap JS -->
-
-
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
