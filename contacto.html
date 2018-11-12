@@ -9,11 +9,10 @@
     <!-- Botstrap CSS -->
     <link rel="stylesheet" href="CSS/bootstrap.min.css">
 
-    <title>Login</title>
+    <title>Contacto</title>
 </head>
 
 <body>
-
     <!-- Barra nav -->
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:darkcyan;">
         <a class="navbar-brand" href="inicio.html">Tibbon</a>
@@ -40,31 +39,50 @@
         </div>
     </nav>
 
-    <!-- Formulario -->
     <div class="container">
-        <div class="col justify-content-around">
-            <div class="jumbotron">
-                <form action="" method="">
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="user" placeholder="Usuario">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" name="password" placeholder="Contraseña">
-                    </div>
-                    <div class="form-group form-check">
-                        <input type="checkbox" class="form-check-input" id="checkRecordar">
-                        <label class="form-check-label" for="checkRecordar">Recordar</label>
-                    </div>
-                    <div class="form-group text-center">
-                        <input type="button" class="btn btn-success" value="Loguearse">
-                        <input type="button" class="btn btn-primary" value="Registrarse">
-                    </div>
-                </form>
-            </div>
+
+        <!-- Imagen -->
+        <div class="text-center mt-5 mb-5">
+            <img class="img-fluid rounded" src="https://via.placeholder.com/400x200" alt="Ubicación en mapa">
         </div>
+
+        <!-- Formulario de contacto -->
+        <form action="" method="">
+            <p class="h3">Contacto</p>
+            <div class="form-row form-group">
+                <div class="col">
+                    <input type="text" class="form-control" name="" placeholder="Nombre">
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" name="" placeholder="E-mail">
+                </div>
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" name="" id="" placeholder="Comentario" cols="20" rows="5"></textarea>
+            </div>
+            <div class="form-group">
+                <input type="button" class="btn btn-outline-success" value="Enviar">
+            </div>
+        </form>
+
     </div>
 
-
+    <!-- Footer -->
+    <footer class="row bg-dark text-white mt-5">
+        <!-- Columna contactos -->
+        <div class="col-sm-6">
+            <h5>Contactos</h5>
+            <ul>
+                <li>Instragram</li>
+                <li>Facebook</li>
+                <li>Twitter</li>
+            </ul>
+        </div>
+        <!-- Columna extra-->
+        <div class="col-sm-6">
+            <h5>Lorem ipsum dolor sit.</h5>
+        </div>
+    </footer>
 
 
     <!-- Bootstrap JS -->
