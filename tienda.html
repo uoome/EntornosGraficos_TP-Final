@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Botstrap CSS -->
+    <link rel="stylesheet" href="CSS/bootstrap.min.css">
+
+    <title>Tienda</title>
+</head>
+
+<body>
+
+    <!-- Barra nav -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:darkcyan;">
+        <a class="navbar-brand" href="inicio.html">Tibbon</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <!-- Icono menú hamburguesa -->
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav" style="width:100%;">
+                <li class="nav-item">
+                    <a class="nav-link" href="inicio.html">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="tienda.html">Tienda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contacto.html">Contacto</a>
+                </li>
+                <li class="nav-item puto">
+                    <a class="nav-link" href="login.html">Login</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Migas de pan -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page"><a href="inicio.html">Inicio</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Tienda</li>
+        </ol>
+    </nav>
+
+    <div class="container">
+        <h1 class="h2">Tienda Tibbon</h1>
+
+        <!-- Row de 2 columnas -->
+        <div class="row text-center">
+            <!-- Columna izquierda -->
+            <div class="col">
+                <p>Resultados</p>
+            </div>
+            <!-- Columna derecha-->
+            <div class="col">
+                <form>
+                    <div class="form-group">
+                        <label for="selectFilter">Filtrar por:</label>
+                        <select class="form-control-sm" name="" id="selectFilter">
+                            <option value="">-</option>
+                            <option value="">Ofertas</option>
+                            <option value="">Nuevos Modelos</option>
+                            <option value="">Modelos Hombres</option>
+                            <option value="">Modelos Mujeres</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Cards de Productos -->
+        <div class="row">
+            <div class="card-deck">
+                <div class="card w-25 border-light mb-3">
+                    <img class="img-fluid d-block w-100" src="IMG/Zapatilla_01.jpg" alt="">
+                    <h5 class="card-title text-muted">Clásica Negro</h5>
+                    <p class="card-text">$00.00</p>
+                    <span>
+                        <a href="#" class="btn btn-outline-success">Comprar</a>
+                        <button class="btn btn-outline-info">+ Carro</button>
+                    </span>
+                </div>
+                <div class="card w-25 border-light mb-3">
+                    <img class="img-fluid d-block w-100" src="IMG/Zapatilla_02.jpg" alt="">
+                    <h5 class="card-title text-muted">Clásica Impress</h5>
+                    <p class="card-text">$00.00</p>
+                    <span>
+                        <a href="#" class="btn btn-outline-success">Comprar</a>
+                        <button class="btn btn-outline-info">+ Carro</button>
+                    </span>
+                </div>
+                <div class="card w-25 border-light mb-3">
+                    <img class="img-fluid d-block w-100" src="IMG/Zapatilla_03.jpg" alt="">
+                    <h5 class="card-title text-muted">Mode</h5>
+                    <p class="card-text">$00.00</p>
+                    <span>
+                        <a href="#" class="btn btn-outline-success">Comprar</a>
+                        <button class="btn btn-outline-info">+ Carro</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="card-deck">
+                <div class="card w-25 border-light mb-3">
+                    <img class="img-fluid d-block w-100" src="IMG/Zapatilla_04.jpg" alt="">
+                    <h5 class="card-title text-muted">Clásica Rosa Bebe</h5>
+                    <p class="card-text">$00.00</p>
+                    <span>
+                        <a href="#" class="btn btn-outline-success">Comprar</a>
+                        <button class="btn btn-outline-info">+ Carro</button>
+                    </span>
+                </div>
+                <div class="card w-25 border-light mb-3">
+                    <img class="img-fluid d-block w-100" src="IMG/Zapatilla_05.jpg" alt="">
+                    <h5 class="card-title text-muted">Conso</h5>
+                    <p class="card-text">$00.00</p>
+                    <span>
+                        <a href="#" class="btn btn-outline-success">Comprar</a>
+                        <button class="btn btn-outline-info">+ Carro</button>
+                    </span>
+                </div>
+                <div class="card w-25 border-light mb-3">
+                    <img class="img-fluid d-block w-100" src="IMG/Zapatilla_06.jpg" alt="">
+                    <h5 class="card-title text-muted">Pancha</h5>
+                    <p class="card-text">$00.00</p>
+                    <span>
+                        <a href="#" class="btn btn-outline-success">Comprar</a>
+                        <button class="btn btn-outline-info">+ Carro</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Paginación -->
+        <div class="row justify-content-around mt-3">
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="#">Anterior</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Siguiente</a></li>
+                </ul>
+            </nav>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="row bg-dark text-white mt-4 justify-content-around">
+
+        <!-- Columna contactos -->
+        <div class="col-4">
+            <h5>Redes sociales</h5>
+            <ul>
+                <li>Instragram</li>
+                <li>Facebook</li>
+                <li>Twitter</li>
+            </ul>
+        </div>
+
+        <!-- Columna extra-->
+        <div class="col-4">
+            <h5>E-mail</h5> <span>info@tibbon.com.ar</span>
+            <h5>Teléfono</h5> <span>341-689-1194</span>
+        </div>
+    </footer>
+
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
