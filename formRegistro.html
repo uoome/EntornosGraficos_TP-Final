@@ -9,7 +9,7 @@
     <!-- Botstrap CSS -->
     <link rel="stylesheet" href="CSS/bootstrap.min.css">
 
-    <title>Login</title>
+    <title>Formulario Registro de Usuario</title>
 </head>
 
 <body>
@@ -44,25 +44,53 @@
     <div class="container mt-5">
         <div class="col justify-content-around">
             <div class="jumbotron">
+                <h3>Complete datos de registro</h3>
+                <!-- Div de espacio -->
+                <div class="row mb-3"></div>
+
                 <form action="" method="">
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="user" placeholder="Usuario">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputName">Nombre:</label>
+                            <input type="text" class="form-control" name="inputName" value="" placeholder="Nicolas">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputApellido">Apellido:</label>
+                            <input type="text" class="form-control" name="inputApellido" value="" placeholder="Gomez">
+                        </div>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" name="password" placeholder="Contraseña">
+                        <label for="inputEmail">Email:</label>
+                        <input type="email" class="form-control" name="inputEmail" value="" placeholder="nicogomez@gmail.com">
                     </div>
-                    <div class="form-group form-check">
-                        <input type="checkbox" class="form-check-input" id="checkRecordar">
-                        <label class="form-check-label" for="checkRecordar">Recordar</label>
+                    <div class="form-group">
+                        <label for="inputUser">Usuario:</label>
+                        <input type="text" class="form-control" name="inputUser" value="" placeholder="NicoTibbon">
                     </div>
-                    <div class="form-group text-center">
-                        <input type="button" class="btn btn-success" value="Loguearse">
-                        <a class="btn btn-primary" href="formRegistro.html">Registrarse</a>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputPass">Contraseña:</label>
+                            <input type="password" class="form-control" name="inputPass" value="" placeholder="Contraseña">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputValidarPass">Validar contraseña:</label>
+                            <input type="password" class="form-control" name="inputValidarPass" value="" placeholder="Repetir contraseña">
+                        </div>
                     </div>
+                    <div class="form-row align-items-center">
+                        <div class="col-auto">
+                            <input type="submit" class="btn btn-success" value="Aceptar">
+                        </div>
+                        <div class="col-auto">
+                            <input type="submit" class="btn btn-primary" value="Borrar">
+                        </div>
+                    </div>
+
                 </form>
             </div>
         </div>
     </div>
+
 
 
     <!-- Bootstrap JS -->
