@@ -1,103 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <!-- Botstrap CSS -->
+        <link rel="stylesheet" href="CSS/Bootstrap/bootstrap.min.css" />
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="CSS/fontawesome-free-5.14.0-web/css/all.css" />
+        <script defer src="CSS/fontawesome-free-5.14.0-web/js/all.js"></script>
 
-    <!-- Botstrap CSS -->
-    <link rel="stylesheet" href="CSS/bootstrap.min.css">
+        <!-- Icon -->
+		<link rel="shortcut icon" href="IMG/favicon.ico" type="image/x-icon">
 
-    <title>Contacto</title>
-</head>
+        <title>Pagina de Contacto | Tibbonzapas</title>
+    </head>
 
-<body>
-    <!-- Barra nav -->
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:darkcyan;">
-        <a class="navbar-brand" href="inicio.html">Tibbon</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
-            aria-expanded="false" aria-label="Toggle navigation">
-            <!-- Icono menú hamburguesa -->
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav" style="width:100%;">
-                <li class="nav-item">
-                    <a class="nav-link" href="inicio.html">Inicio</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="tienda.html">Tienda</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="contacto.html">Contacto</a>
-                </li>
-                <li class="nav-item puto">
-                    <a class="nav-link" href="login.html">Login</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
-    <div class="container-fluid">
-
-        <!-- Imagen -->
-        <div class="text-center mt-5 mb-5">
-            <img class="img-fluid rounded w-75" src="IMG/Tibbon_locacion.png" alt="Ubicación en mapa">
-        </div>
-
-        <!-- Formulario de contacto -->
-        <form action="" method="">
-            <p class="h3">Contacto</p>
-            <div class="form-row form-group">
-                <div class="col">
-                    <input type="text" class="form-control" name="" placeholder="Nombre">
-                </div>
-                <div class="col">
-                    <input type="text" class="form-control" name="" placeholder="E-mail">
-                </div>
-            </div>
-            <div class="form-group">
-                <textarea class="form-control" name="" id="" placeholder="Comentario" cols="20" rows="5"></textarea>
-            </div>
-            <div class="form-group">
-                <input type="submit" class="btn btn-outline-success" value="Enviar">
-            </div>
-        </form>
-
-        <!-- Footer -->
-        <footer class="row bg-dark text-white mt-4 justify-content-around">
-
-            <!-- Columna contactos -->
-            <div class="col-4">
-                <h5>Redes sociales</h5>
-                <ul>
-                    <li>Instragram</li>
-                    <li>Facebook</li>
-                    <li>Twitter</li>
+    <body>
+        <!-- Barra nav -->
+		<nav
+            class="navbar navbar-expand-lg navbar-dark"
+            style="background-color: darkcyan;"
+        >
+            <a class="navbar-brand" href="inicio.html">
+                <i class="fas fa-shoe-prints"></i>
+                Tibbonzapas
+            </a>
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <!-- Icono menú hamburguesa -->
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav" style="width: 100%;">
+                    <li class="nav-item">
+                        <a class="nav-link" href="inicio.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="tienda.html">Tienda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contacto.html">Contacto</a>
+                    </li>
+                    <li class="nav-item ml-auto">
+                        <a class="nav-link" href="login.html">Login</a>
+                    </li>
                 </ul>
             </div>
+        </nav>	
 
-            <!-- Columna extra-->
-            <div class="col-4">
-                <h5>E-mail</h5> <span>info@tibbon.com.ar</span>
-                <h5>Teléfono</h5> <span>341-689-1194</span>
+        <div class="container">
+            <!-- Imagen -->
+            <div class="text-center mt-5 mb-5">
+                <img
+                class="img-fluid rounded w-75"
+                src="IMG/Tibbon_locacion.png"
+                alt="Ubicación en mapa"
+                />
             </div>
-        </footer>
 
-    </div>
+            <!-- Formulario de contacto -->
+            <div class="jumbotron">
+                <form action="" method="">
+                    <p class="h3">Contactenos</p>
+                    <div class="form-row form-group">
+                        <div class="col-md-6">
+                            <input
+                            type="text"
+                            class="form-control"
+                            name=""
+                            placeholder="Nombre"
+                            />
+                        </div>
+                        <div class="col-md-6">
+                            <input
+                            type="text"
+                            class="form-control"
+                            name=""
+                            placeholder="E-mail"
+                            />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <textarea
+                            class="form-control"
+                            name=""
+                            id=""
+                            placeholder="Comentario"
+                            cols="20"
+                            rows="5"
+                        ></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-outline-success" value="Enviar" />
+                        <input type="reset" class="btn btn-outline-secondary" value="Borrar">
+                    </div>
+                </form>
+            </div>
+        </div>
 
+        <!-- Footer -->
+			<footer class="row bg-dark text-white mt-4 justify-content-around">
+				<!-- Columna contactos -->
+				<div class="col-4">
+				<h5>Redes sociales</h5>
+				<ul class="fa-ul">
+					<li>
+					<span class="fa-li"><i class="fab fa-instagram"></i></span
+					>Tibbon@Instagram
+					</li>
+					<li>
+					<span class="fa-li"><i class="fab fa-facebook"></i></span
+					>Tibbonzapas
+					</li>
+					<li>
+					<span class="fa-li"><i class="fab fa-twitter"></i></span
+					>@Tibbonzapas
+					</li>
+				</ul>
+				</div>
 
+				<!-- Columna extra-->
+				<div class="col-4">
+				<h5>Otros contactos</h5>
+				<ul class="fa-ul">
+					<li>
+					<span class="fa-li"><i class="fas fa-envelope-square"></i></span
+					>info@tibbonzapas.com
+					</li>
+					<li>
+					<span class="fa-li"><i class="fas fa-mobile-alt"></i></span
+					>999-999-9999
+					</li>
+				</ul>
+				</div>
+			</footer>
+        
 
-
-    <!-- Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
-
-</body>
-
+        <!-- Bootstrap JS -->
+        <script
+        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"
+        ></script>
+        <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"
+        ></script>
+        <script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"
+        ></script>
+    </body>
 </html>

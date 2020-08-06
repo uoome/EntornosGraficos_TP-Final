@@ -1,196 +1,284 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<!-- Botstrap CSS -->
+		<link rel="stylesheet" href="CSS/Bootstrap/bootstrap.min.css" />
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="CSS/fontawesome-free-5.14.0-web/css/all.css" />
+		<script defer src="CSS/fontawesome-free-5.14.0-web/js/all.js"></script>
 
-    <!-- Botstrap CSS -->
-    <link rel="stylesheet" href="CSS/bootstrap.min.css">
+		<!-- Icon -->
+		<link rel="shortcut icon" href="IMG/favicon.ico" type="image/x-icon">
 
-    <title>Inicio</title>
+		<title>Inicio | Tibbonzapas</title>
 
-    <style type="text/css">
-        @media (min-width: 768px) {
-            .puto {
-                margin-right: 0%;
-            }
-        }
+		<style type="text/css">
+		a:hover,
+		a:active,
+		a:link,
+		a:visited {
+			text-decoration: none;
+			color: black;
+		}
+		</style>
+	</head>
 
-        a:hover,
-        a:active,
-        a:link,
-        a:visited {
-            text-decoration: none;
-            color: black;
-        }
-    </style>
-</head>
+	<body>
+		<!-- Barra nav -->
+		<nav
+			class="navbar navbar-expand-lg navbar-dark"
+			style="background-color: darkcyan;"
+		>
+			<a class="navbar-brand" href="inicio.html">
+				<i class="fas fa-shoe-prints"></i>
+				Tibbonzapas
+			</a>
+			<button
+				class="navbar-toggler"
+				type="button"
+				data-toggle="collapse"
+				data-target="#navbarNav"
+				aria-controls="navbarNav"
+				aria-expanded="false"
+				aria-label="Toggle navigation"
+			>
+				<!-- Icono menú hamburguesa -->
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav" style="width: 100%;">
+					<li class="nav-item">
+						<a class="nav-link" href="inicio.html">Inicio</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="tienda.html">Tienda</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="contacto.html">Contacto</a>
+					</li>
+					<li class="nav-item ml-auto">
+						<a class="nav-link" href="login.html">Login</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
 
-<body>
-    <!-- Barra nav -->
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:darkcyan;">
-        <a class="navbar-brand" href="inicio.html">Tibbon</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
-            aria-expanded="false" aria-label="Toggle navigation">
-            <!-- Icono menú hamburguesa -->
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav" style="width:100%;">
-                <li class="nav-item">
-                    <a class="nav-link" href="inicio.html">Inicio</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="tienda.html">Tienda</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="contacto.html">Contacto</a>
-                </li>
-                <li class="nav-item puto">
-                    <a class="nav-link" href="login.html">Login</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+		<!-- Content -->
+		<div class="container-fluid">
+			<div class="container">
+				<h1 class="text-center">Bienvenido a Tibbonzapas</h1>
 
-    <div class="container-fluid">
-        <h1 class="text-center">Bienvenido a Tibbon</h1>
+				<!-- Carrusel -->
+				<div id="carruselOfertas" class="carousel slide" data-ride="carousel">
+					<!-- Rayas de indicación de slides -->
+					<ol class="carousel-indicators">
+						<li
+							data-target="#carruselOfertas"
+							data-slide-to="0"
+							class="active"
+						></li>
+						<li data-target="#carruselOfertas" data-slide-to="1"></li>
+					</ol>
 
-        <!-- Carrusel -->
-        <div id="carruselOfertas" class="carousel slide" data-ride="carousel">
+					<!-- Imágenes -->
+					<div class="carousel-inner">
+						<div class="carousel-item active">
+							<img
+								class="img-fluid d-block w-100"
+								src="IMG/Tibbon_Slide01.jpg"
+								alt="Primer slide"
+							/>
+							<!-- Texto adicional -->
+							<div class="carousel-caption d-none d-md-block">
+								<h5>Tibbonzapas</h5>
+								<p>Modernas 2020 !</p>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<img
+								class="img-fluid d-block w-100"
+								src="IMG/Tibbon_Slide02.jpg"
+								alt="Segunda slide"
+							/>
+							<!-- Texto adicional -->
+							<div class="carousel-caption d-none d-md-block">
+								<h5>Tibbonzapas para hombres y mujeres</h5>
+								<p>Nuevos mdelos</p>
+							</div>
+						</div>
+					</div>
 
-            <!-- Rayas de indicación de slides -->
-            <ol class="carousel-indicators">
-                <li data-target="#carruselOfertas" data-slide-to="0" class="active"></li>
-                <li data-target="#carruselOfertas" data-slide-to="1"></li>
-            </ol>
+					<!-- Flechas de avance y retroceso -->
+					<a
+						class="carousel-control-prev"
+						href="#carruselOfertas"
+						role="button"
+						data-slide="prev"
+					>
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="sr-only">Anterior</span>
+					</a>
+					<a
+						class="carousel-control-next"
+						href="#carruselOfertas"
+						role="button"
+						data-slide="next"
+					>
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="sr-only">Siguiente</span>
+					</a>
+				</div>
 
-            <!-- Imágenes -->
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img class="img-fluid d-block w-100" src="IMG/Tibbon_Slide01.jpg" alt="Primer slide">
-                    <!-- Texto adicional -->
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Zapatillas Tibbon</h5>
-                        <p>Modernas 2018 !</p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <!-- Texto adicional -->
-                    <img class="img-fluid d-block w-100" src="IMG/Tibbon_Slide02.jpg" alt="Segunda slide">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Zapatillas Tibbon para hombres y mujeres</h5>
-                        <p>Nuevos mdelos</p>
-                    </div>
-                </div>
-            </div>
+				<!-- Jumbotrom -->
+				<div class="jumbotron">
+					<a
+						class="btn btn-lg mb-1"
+						href="#collapseData"
+						data-toggle="collapse"
+					>
+						¿Quiénes somos?
+					</a>
+					<div class="collapse text-justify" id="collapseData">
+						<p class="lead">
+							Tibbon es una marca rosarina que se inició en el 2013, mejorando
+							día a día la calidad de sus productos con tecnología e innovación
+							constantes. Es una empresa familiar, la cual apunta a la venta de
+							calzado unisex entre los 15 y los 35 años.
+						</p>
+						<p class="lead">
+							Diseñamos, fabricamos y comercializamos calzado, para brindar una
+							experiencia de comodidad, confort y estilo a tus pies. Lo que nos
+							importa es que estés a gusto con tus zapas y tengas ganas de
+							usarlas todos los días.
+						</p>
+						<p class="lead">
+							Queremos fomentar nuestro crecimiento a nivel nacional, por esa
+							misma razón desde principios del 2018 comenzamos con los envíos a
+							gran parte de nuestro país.
+						</p>
+						<hr class="my-4" />
+						<p>Para mas infomación visite nuestra página de contacto.</p>
+						<a 
+							class="btn btn-info" 
+							href="contacto.html" 
+							role="button"
+						>
+							<i class="far fa-question-circle"></i>
+							<span>Más info</span>
+						</a>					
+					</div>
+				</div>
 
-            <!-- Flechas de avance y retroceso -->
-            <a class="carousel-control-prev" href="#carruselOfertas" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Anterior</span>
-            </a>
-            <a class="carousel-control-next" href="#carruselOfertas" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Siguiente</span>
-            </a>
-        </div>
+				<!-- Cards -->
+				<div class="card-deck">
+				<div class="col-sm-6 col-md-3" style="width: 20px;">
+					<div class="card">
+					<img
+						class="img-fluid d-block"
+						src="IMG/Zapatilla_01.jpg"
+						alt="Imagen producto"
+					/>
+					<div class="card-body">
+						<p class="card-text">$00.00</p>
+					</div>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-3" style="width: 20px;">
+					<div class="card">
+					<img
+						class="img-fluid d-block"
+						src="IMG/Zapatilla_02.jpg"
+						alt="Imagen producto"
+					/>
+					<div class="card-body">
+						<p class="card-text">$00.00</p>
+					</div>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-3" style="width: 20px;">
+					<div class="card">
+					<img
+						class="img-fluid d-block"
+						src="IMG/Zapatilla_03.jpg"
+						alt="Imagen producto"
+					/>
+					<div class="card-body">
+						<p class="card-text">$00.00</p>
+					</div>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-3" style="width: 20px;">
+					<div class="card">
+					<img
+						class="img-fluid d-block"
+						src="IMG/Zapatilla_04.jpg"
+						alt="Imagen producto"
+					/>
+					<div class="card-body">
+						<p class="card-text">$00.00</p>
+					</div>
+					</div>
+				</div>
+				</div>
+			</div>
 
-        <!-- Jumbotrom -->
-        <div class="jumbotron">
-            <a class="btn btn-lg mb-1" href="#collapseData" data-toggle="collapse">¿Quiénes somos?</a>
-            <div class="collapse text-justify" id="collapseData">
-                <p class="lead">Tibbon es una marca rosarina que se inició en el 2013, mejorando día a día la calidad
-                    de sus productos con tecnología e innovación constantes. Es una empresa familiar, la cual apunta a
-                    la venta de calzado unisex entre los 15 y los 35 años.</p>
-                <p class="lead">Diseñamos, fabricamos y comercializamos calzado, para brindar una experiencia de
-                    comodidad, confort y estilo a tus pies. Lo que nos importa es que estés a gusto con tus zapas y
-                    tengas ganas de usarlas todos los días.</p>
-                <p class="lead">Queremos fomentar nuestro crecimiento a nivel nacional, por esa misma razón desde
-                    principios del 2018 comenzamos con los envíos a gran parte de nuestro país.</p>
-                <hr class="my-4">
-                <p>Para mas infomación visite nuestra página de contacto.</p>
-                <a class="btn btn-info" href="contacto.html" role="button">Más info</a>
-            </div>
-        </div>
+			<!-- Footer -->
+			<footer class="row bg-dark text-white mt-4 justify-content-around">
+				<!-- Columna contactos -->
+				<div class="col-4">
+				<h5>Redes sociales</h5>
+				<ul class="fa-ul">
+					<li>
+						<span class="fa-li"><i class="fab fa-instagram"></i></span
+						>Tibbon@Instagram
+					</li>
+					<li>
+						<span class="fa-li"><i class="fab fa-facebook"></i></span
+						>Tibbonzapas
+					</li>
+					<li>
+						<span class="fa-li"><i class="fab fa-twitter"></i></span
+						>@Tibbonzapas
+					</li>
+				</ul>
+				</div>
 
-        <!-- Cards -->
-        <div class="card-deck">
-            <div class="col-sm-6 col-md-3" style="width: 20px">
-                <div class="card">
-                    <img class="img-fluid d-block" src="IMG/Zapatilla_01.jpg" alt="Imagen producto">
-                    <div class="card-body">
-                        <p class="card-text">$00.00</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3" style="width: 20px">
-                <div class="card">
-                    <img class="img-fluid d-block" src="IMG/Zapatilla_02.jpg" alt="Imagen producto">
-                    <div class="card-body">
-                        <p class="card-text">$00.00</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3" style="width: 20px">
-                <div class="card">
-                    <img class="img-fluid d-block" src="IMG/Zapatilla_03.jpg" alt="Imagen producto">
-                    <div class="card-body">
-                        <p class="card-text">$00.00</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3" style="width: 20px">
-                <div class="card">
-                    <img class="img-fluid d-block" src="IMG/Zapatilla_04.jpg" alt="Imagen producto">
-                    <div class="card-body">
-                        <p class="card-text">$00.00</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+				<!-- Columna extra-->
+				<div class="col-4">
+				<h5>Otros contactos</h5>
+				<ul class="fa-ul">
+					<li>
+					<span class="fa-li"><i class="fas fa-envelope-square"></i></span
+					>info@tibbonzapas.com
+					</li>
+					<li>
+					<span class="fa-li"><i class="fas fa-mobile-alt"></i></span
+					>999-999-9999
+					</li>
+				</ul>
+				</div>
+			</footer>
+		</div>
 
-
-        <!-- Footer -->
-        <footer class="row bg-dark text-white mt-4 justify-content-around">
-
-            <!-- Columna contactos -->
-            <div class="col-4">
-                <h5>Redes sociales</h5>
-                <ul>
-                    <li>Instragram</li>
-                    <li>Facebook</li>
-                    <li>Twitter</li>
-                </ul>
-            </div>
-
-            <!-- Columna extra-->
-            <div class="col-4">
-                <h5>E-mail</h5> <span>info@tibbon.com.ar</span>
-                <h5>Teléfono</h5> <span>341-689-1194</span>
-            </div>
-        </footer>
-
-    </div>
-
-    <!-- Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
-    <!--
-    <script src="js/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="js/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-    <script src="js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
-    -->
-
-</body>
-
+		<!-- Bootstrap JS -->
+		<script
+		src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"
+		></script>
+		<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+		crossorigin="anonymous"
+		></script>
+		<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+		crossorigin="anonymous"
+		></script>
+	</body>
 </html>
