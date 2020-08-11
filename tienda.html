@@ -81,19 +81,36 @@
 
     <!-- Content -->
     <div class="container-fluid">
+
       <div class="container">
-        <h1 class="h2">Tienda Tibbonzapas</h1>
-  
+        <h1 class="h2 text-center">Tienda Tibbonzapas</h1>
+        <hr />
         <!-- Row de 2 columnas -->
-        <div class="row text-center">
+        <div class="row row-cols-2 row-cols-md-4 justify-content-around">
           <!-- Columna izquierda -->
-          <div class="col">
-            <p>Resultados</p>
+          <div class="col col-md-4">
+            <p>Resultados: <i>nro</i> </p>
           </div>
           <!-- Columna derecha-->
-          <div class="col">
+          <div class="col col-md-4">
             <form>
-              <div class="form-group">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <!-- Boton buscar -->
+                  <button class="btn btn-outline-secondary" type="button" name="btnBuscar" value="">
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>
+                <select class="custom-select" id="selectFilter" aria-label="Selector de opciones de filtro">
+                  <option value="">Elija...</option>
+                  <option value="">Ofertas</option>
+                  <option value="">Nuevos Modelos</option>
+                  <option value="">Modelos Hombres</option>
+                  <option value="">Modelos Mujeres</option>
+                </select>
+                </select>
+              </div>
+              <!-- <div class="form-group">
                 <label for="selectFilter">Filtrar por:</label>
                 <select class="form-control-sm" name="" id="selectFilter">
                   <option value="">-</option>
@@ -102,102 +119,72 @@
                   <option value="">Modelos Hombres</option>
                   <option value="">Modelos Mujeres</option>
                 </select>
-              </div>
+              </div> -->
             </form>
           </div>
         </div>
   
         <!-- Cards de Productos -->
-        <div class="row">
-          <div class="card-deck">
-            <div class="card w-25 border-light mb-3">
-              <img
-                class="img-fluid d-block w-100"
-                src="IMG/Zapatilla_01.jpg"
-                alt=""
-              />
-              <h5 class="card-title text-muted">Clásica Negro</h5>
-              <p class="card-text">$00.00</p>
-              <span>
-                <button class="btn btn-success" type="button">
-                  <i class="fas fa-cash-register"></i>
-                  Comprar
-                </button>
-                <button class="btn btn-info">
+        <!-- Hay que automatizar el listado con php o js -->
+        <div class="row row-cols-2 row-cols-md-4">
+          <div class="col mb-4">
+            <div class="card h-100 bg-light">
+              <img src="IMG/Zapatilla_01.jpg" class="card-img-top" alt="Imagen modelo Clasica Negro">
+              <div class="card-body">
+                <h5 class="card-title">Clasica Negro</h5>
+                <p class="card-text">$ 00.00</p>
+                <hr />
+                <a href="detalle-producto.html" class="btn btn-success btn-block">
                   <i class="fas fa-cart-arrow-down"></i>
-                  Agregar al carro
+                  Comprar
+                </a>
+                <button role="button" name="btnAddCarro" class="btn btn-info btn-block" value="Comprar">
+                  <i class="fas fa-cart-arrow-down"></i>
                 </button>
-              </span>
-            </div>
-            <div class="card w-25 border-light mb-3">
-              <img
-                class="img-fluid d-block w-100"
-                src="IMG/Zapatilla_02.jpg"
-                alt=""
-              />
-              <h5 class="card-title text-muted">Clásica Impress</h5>
-              <p class="card-text">$00.00</p>
-              <span>
-                <a href="#" class="btn btn-outline-success">Comprar</a>
-                <button class="btn btn-outline-info">+ Carro</button>
-              </span>
-            </div>
-            <div class="card w-25 border-light mb-3">
-              <img
-                class="img-fluid d-block w-100"
-                src="IMG/Zapatilla_03.jpg"
-                alt=""
-              />
-              <h5 class="card-title text-muted">Mode</h5>
-              <p class="card-text">$00.00</p>
-              <span>
-                <a href="#" class="btn btn-outline-success">Comprar</a>
-                <button class="btn btn-outline-info">+ Carro</button>
-              </span>
+              </div>
             </div>
           </div>
-        </div>
-  
-        <div class="row">
-          <div class="card-deck">
-            <div class="card w-25 border-light mb-3">
-              <img
-                class="img-fluid d-block w-100"
-                src="IMG/Zapatilla_04.jpg"
-                alt=""
-              />
-              <h5 class="card-title text-muted">Clásica Rosa Bebe</h5>
-              <p class="card-text">$00.00</p>
-              <span>
-                <a href="#" class="btn btn-outline-success">Comprar</a>
-                <button class="btn btn-outline-info">+ Carro</button>
-              </span>
+          <div class="col mb-4">
+            <div class="card h-100 bg-light">
+              <img src="IMG/Zapatilla_02.jpg" class="card-img-top" alt="Imagen modelo Clasica Impress">
+              <div class="card-body">
+                <h5 class="card-title">Clasica Impress</h5>
+                <p class="card-text">$ 00.00</p>
+                <hr />
+                <a href="#" class="btn btn-success btn-block">
+                  <i class="fas fa-cart-arrow-down"></i>
+                  Comprar
+                </a>
+                <button role="button" name="btnAddCarro" class="btn btn-info btn-block" value="Comprar">
+                  <i class="fas fa-cart-arrow-down"></i>
+                </button>
+              </div>
             </div>
-            <div class="card w-25 border-light mb-3">
-              <img
-                class="img-fluid d-block w-100"
-                src="IMG/Zapatilla_05.jpg"
-                alt=""
-              />
-              <h5 class="card-title text-muted">Conso</h5>
-              <p class="card-text">$00.00</p>
-              <span>
-                <a href="#" class="btn btn-outline-success">Comprar</a>
-                <button class="btn btn-outline-info">+ Carro</button>
-              </span>
+          </div>
+          <div class="col mb-4">
+            <div class="card h-100 bg-light">
+              <img src="IMG/Zapatilla_03.jpg" class="card-img-top" alt="Imagen modelo Mode">
+              <div class="card-body">
+                <h5 class="card-title">Mode</h5>
+                <p class="card-text">$ 00.00</p>
+                <hr />
+                <a href="#" class="btn btn-success btn-block">
+                  <i class="fas fa-cart-arrow-down"></i>
+                  Comprar
+                </a>
+                <button role="button" name="btnAddCarro" class="btn btn-info btn-block" value="Comprar">
+                  <i class="fas fa-cart-arrow-down"></i>
+                </button>
+              </div>
             </div>
-            <div class="card w-25 border-light mb-3">
-              <img
-                class="img-fluid d-block w-100"
-                src="IMG/Zapatilla_06.jpg"
-                alt=""
-              />
-              <h5 class="card-title text-muted">Pancha</h5>
-              <p class="card-text">$00.00</p>
-              <span>
-                <a href="#" class="btn btn-outline-success">Comprar</a>
-                <button class="btn btn-outline-info">+ Carro</button>
-              </span>
+          </div>
+          <div class="col mb-4">
+            <div class="card h-100 bg-light">
+              <img src="..." class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              </div>
             </div>
           </div>
         </div>

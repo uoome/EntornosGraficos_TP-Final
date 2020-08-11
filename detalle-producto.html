@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Botstrap CSS -->
+	<link rel="stylesheet" href="CSS/Bootstrap/bootstrap.min.css" />
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="CSS/fontawesome-free-5.14.0-web/css/all.css" />
+	<script defer src="CSS/fontawesome-free-5.14.0-web/js/all.js"></script>
+
+	<!-- Icon -->
+	<link rel="shortcut icon" href="IMG/favicon.ico" type="image/x-icon">
+
+    <title>Detalle Producto x | Tibbonzapas</title>
+</head>
+<body>
+    <!-- Barra nav -->
+	<nav
+        class="navbar navbar-expand-lg navbar-dark"
+        style="background-color: darkcyan;"
+    >
+        <a class="navbar-brand" href="inicio.html">
+            <i class="fas fa-shoe-prints"></i>
+            Tibbonzapas
+        </a>
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+        >
+            <!-- Icono menú hamburguesa -->
+            <span class="fas fa-hamburger"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto fa-ul" style="width: 100%;">
+                <li class="nav-item">
+                    <a class="nav-link" href="inicio.html">
+                        <i class="fas fa-home"></i>
+                        Inicio
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="tienda.html">
+                        <i class="fas fa-store"></i>
+                        Tienda
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contacto.html">
+                        <i class="fas fa-phone-volume"></i>
+                        Contacto
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="login.html">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Login
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Migas de pan -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page">
+                <a href="inicio.html">
+                    Inicio
+                </a>
+            </li>
+            <li class="breadcrumb-item" aria-current="page">
+                <a href="tienda.html">
+                    Tienda
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                Detalle Producto x
+            </li>
+        </ol>
+    </nav>
+
+    <!-- Content -->
+    <div class="container-fluid">
+        <!-- Media del producto -->
+        <div class="media">
+            <!-- Imagen -->
+            <img src="IMG/Zapatilla_01.jpg " class="img-fluid w-50 mr-3" alt="...">
+            <!-- Detalles -->
+            <div class="media-body">
+                <h1 class="mt-0">Clasica Negro</h1>
+                <p><b>$ 00.00</b></p>
+                <p>Zapatilla Clásica en Negro ¡Tu estilo sos vos! ideal para los días de verano, color negro para hombres. Fabricadas en lona negra con goma blanca.</p>
+                <hr />
+                <form action="">
+                    <div class="form-group">
+                        <label for="colorSelect">Color</label>
+                        <select 
+                            class="form-control form-control-sm" 
+                            id="colorSelect"
+                            required
+                        >
+                            <option value="">Seleccione color..</option>
+                            <option value="">Blanco</option>
+                            <option value="">Negro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="talleSelect">Talle</label>
+                        <select 
+                            class="form-control form-control-sm" 
+                            id="talleSelect"
+                            required
+                        >
+                            <option value="">Seleccione talle..</option>
+                            <option value="">Blanco</option>
+                            <option value="">36</option>
+                            <option value="">37</option>
+                            <option value="">38</option>
+                            <option value="">39</option>
+                            <option value="">40</option>
+                            <option value="">41</option>
+                            <option value="">42</option>
+                            <option value="">43</option>
+                            <option value="">44</option>
+                            <option value="">45</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="col col-sm-3">
+                            <input type="text" name="" id="inputCantidad" class="form-control form-control" value="1">
+                        </div>
+                        <dov class="col col-sm-9">
+                            <button role="button" name="btnAddCarro" class="btn btn-info btn-block" value="Comprar">
+                                <i class="fas fa-cart-arrow-down"></i>
+                            </button>
+                        </dov>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <hr />
+
+        <h3>Mas Detalles</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo, exercitationem nam corrupti ad vitae nulla dignissimos atque sit aut, quisquam officiis sint velit aperiam magnam consequatur, optio saepe esse vel?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo, exercitationem nam corrupti ad vitae nulla dignissimos atque sit aut, quisquam officiis sint velit aperiam magnam consequatur, optio saepe esse vel?</p>
+        
+
+        <!-- Footer -->
+		<footer class="row bg-dark text-white mt-4 justify-content-around">
+			<!-- Columna contactos -->
+			<div class="col-4">
+		    	<h5>Redes sociales</h5>
+				<ul class="fa-ul">
+					<li>
+						<span class="fa-li"><i class="fab fa-instagram"></i></span>
+						Tibbon@Instagram
+					</li>
+					<li>
+						<span class="fa-li"><i class="fab fa-facebook"></i></span>
+						Tibbonzapas
+					</li>
+					<li>
+						<span class="fa-li"><i class="fab fa-twitter"></i></span>
+						@Tibbonzapas
+					</li>
+				</ul>
+			</div>
+
+			<!-- Columna extra-->
+			<div class="col-4">
+				<h5>Otros contactos</h5>
+				<ul class="fa-ul">
+					<li>
+					<span class="fa-li"><i class="fas fa-envelope-square"></i></span>
+					info@tibbonzapas.com
+					</li>
+					<li>
+					<span class="fa-li"><i class="fas fa-mobile-alt"></i></span>
+					999-999-9999
+					</li>
+			    </ul>
+			</div>
+		</footer>
+    </div>
+
+
+    <!-- Bootstrap JS -->
+	<script
+		src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"
+	></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+		crossorigin="anonymous"
+	></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+		crossorigin="anonymous"
+	></script>
+</body>
+</html>
