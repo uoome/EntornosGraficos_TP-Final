@@ -37,93 +37,108 @@
                 aria-label="Toggle navigation"
             >
                 <!-- Icono menú hamburguesa -->
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav" style="width: 100%;">
-                    <li class="nav-item">
-                        <a class="nav-link" href="inicio.html">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="tienda.html">Tienda</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contacto.html">Contacto</a>
-                    </li>
-                    <li class="nav-item ml-auto">
-                        <a class="nav-link" href="login.html">Login</a>
-                    </li>
-                </ul>
-            </div>
+				<span class="fas fa-hamburger"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav mr-auto fa-ul" style="width: 100%;">
+					<li class="nav-item">
+						<a class="nav-link" href="inicio.html">
+							<i class="fas fa-home"></i>
+							Inicio
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="tienda.html">
+							<i class="fas fa-store"></i>
+							Tienda
+						</a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="contacto.html">
+							<i class="fas fa-phone-volume"></i>
+							Contacto
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="login.html">
+							<i class="fas fa-sign-in-alt"></i>
+							Login
+						</a>
+					</li>
+				</ul>
+			</div>
         </nav>	
 
-        <div class="container">
-            <!-- Imagen -->
-            <div class="text-center mt-5 mb-5">
-                <img
-                class="img-fluid rounded w-75"
-                src="IMG/Tibbon_locacion.png"
-                alt="Ubicación en mapa"
-                />
+        <!-- Content -->
+        <div class="container-fuild">
+            <div class="container mt-2 shadow p-3 mb-5 bg-white rounded">
+                <div class="card bg-light">
+                    <div class="card-header">
+                        <img src="IMG/Tibbon_locacion.png" class="card-img-top mx-auto d-block" alt="Ubicación en mapa">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Contactenos</h5>
+                        <form action="" method="">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        name=""
+                                        placeholder="Nombre"
+                                        required
+                                        autofocus
+                                    />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        name=""
+                                        placeholder="E-mail"
+                                        required
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <textarea
+                                    class="form-control"
+                                    name=""
+                                    id=""
+                                    placeholder="Comentario"
+                                    cols="20"
+                                    rows="5"
+                                    required
+                                ></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success btn-block">
+                                    <i class="fas fa-envelope-square"></i>
+                                    Enviar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
 
-            <!-- Formulario de contacto -->
-            <div class="jumbotron">
-                <form action="" method="">
-                    <p class="h3">Contactenos</p>
-                    <div class="form-row form-group">
-                        <div class="col-md-6">
-                            <input
-                            type="text"
-                            class="form-control"
-                            name=""
-                            placeholder="Nombre"
-                            />
-                        </div>
-                        <div class="col-md-6">
-                            <input
-                            type="text"
-                            class="form-control"
-                            name=""
-                            placeholder="E-mail"
-                            />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <textarea
-                            class="form-control"
-                            name=""
-                            id=""
-                            placeholder="Comentario"
-                            cols="20"
-                            rows="5"
-                        ></textarea>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-outline-success" value="Enviar" />
-                        <input type="reset" class="btn btn-outline-secondary" value="Borrar">
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <!-- Footer -->
+            <!-- Footer -->
 			<footer class="row bg-dark text-white mt-4 justify-content-around">
 				<!-- Columna contactos -->
 				<div class="col-4">
 				<h5>Redes sociales</h5>
 				<ul class="fa-ul">
 					<li>
-					<span class="fa-li"><i class="fab fa-instagram"></i></span
-					>Tibbon@Instagram
+						<span class="fa-li"><i class="fab fa-instagram"></i></span>
+						Tibbon@Instagram
 					</li>
 					<li>
-					<span class="fa-li"><i class="fab fa-facebook"></i></span
-					>Tibbonzapas
+						<span class="fa-li"><i class="fab fa-facebook"></i></span>
+						Tibbonzapas
 					</li>
 					<li>
-					<span class="fa-li"><i class="fab fa-twitter"></i></span
-					>@Tibbonzapas
+						<span class="fa-li"><i class="fab fa-twitter"></i></span>
+						@Tibbonzapas
 					</li>
 				</ul>
 				</div>
@@ -133,17 +148,17 @@
 				<h5>Otros contactos</h5>
 				<ul class="fa-ul">
 					<li>
-					<span class="fa-li"><i class="fas fa-envelope-square"></i></span
-					>info@tibbonzapas.com
+					<span class="fa-li"><i class="fas fa-envelope-square"></i></span>
+					info@tibbonzapas.com
 					</li>
 					<li>
-					<span class="fa-li"><i class="fas fa-mobile-alt"></i></span
-					>999-999-9999
+					<span class="fa-li"><i class="fas fa-mobile-alt"></i></span>
+					999-999-9999
 					</li>
 				</ul>
 				</div>
 			</footer>
-        
+        </div>
 
         <!-- Bootstrap JS -->
         <script
