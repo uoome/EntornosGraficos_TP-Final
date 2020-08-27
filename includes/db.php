@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -13,3 +16,7 @@ if ($conn->connect_error) {
 }
 
 ?>
+
+<!-- 
+58 bruto, prepaga swiss-medical
+cargo "associated" -->
