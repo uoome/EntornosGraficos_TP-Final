@@ -78,11 +78,12 @@
                             <p class="card-text">$ 00.00</p>
                             <hr />
                             <a href="detalle-producto.php" class="btn btn-success btn-block">
-                                <i class="fas fa-cart-arrow-down"></i>
+                                <i class="fas fa-money-bill-wave"></i>
                                 Comprar
                             </a>
                             <button role="button" name="btnAddCarro" class="btn btn-info btn-block" value="Comprar">
                                 <i class="fas fa-cart-arrow-down"></i>
+                                Agregar al carro
                             </button>
                         </div>
                     </div>

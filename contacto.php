@@ -1,14 +1,22 @@
-<?php include("includes/db.php") ?>
+<?php 
+// Anterior
+// include("includes/db.php"); 
+
+// Nuevo
+include_once ($_SERVER['DOCUMENT_ROOT'].'/rutas.php');
+include (INCLUDES_PATH."db.php");
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <!-- Cabeceras -->
-<?php include("includes/header.php") ?>
+<?php include(INCLUDES_PATH."header.php") ?>
 
 <body>
     <!-- NavBar -->
-    <?php include("includes/navbar.php") ?>
+    <?php include(INCLUDES_PATH."navbar.php") ?>
 
     <!-- Content -->
     <div class="container-fuild">
@@ -44,11 +52,11 @@
         </div>
 
         <!-- Footer -->
-        <?php include("includes/footer.html") ?>
+        <?php include(INCLUDES_PATH."footer.html") ?>
     </div>
 
     <!-- Scripts -->
-    <?php include("includes/scripts.php") ?>
+    <?php include(INCLUDES_PATH."scripts.php") ?>
 
 </body>
 

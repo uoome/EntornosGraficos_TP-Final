@@ -1,4 +1,10 @@
 <?php
+// Anterior
+// include("Data/usuario-data.php");
+
+// Nuevo
+include_once($_SERVER['DOCUMENT_ROOT'].'EntornosGraficos_TP-Final/rutas.php');
+include_once(DATA_PATH."usuario-data.php");
 
 session_start();
 
@@ -7,16 +13,18 @@ $username = "root";
 $password = "";
 $db = "tibbonzapas";
 
-// Crear conexion (POO)
-$conn = new mysqli($servername, $username, $password, $db);
+try {
+  // Crear conexion (POO)
+  $conn = new mysqli($servername, $username, $password, $db);
 
-// Chequear
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
+  // Chequear
+  if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+  }
+
+} catch (Exception $ex) {
+  echo "Error al conectar la DB: " . $ex->getMessage();
 }
 
 ?>
 
-<!-- 
-58 bruto, prepaga swiss-medical
-cargo "associated" -->

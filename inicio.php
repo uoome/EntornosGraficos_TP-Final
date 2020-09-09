@@ -1,14 +1,21 @@
-<?php include("includes/db.php") ?>
+<?php 
+// Anterior
+// include("includes/db.php"); 
+
+// Nuevo
+include_once($_SERVER['DOCUMENT_ROOT'].'EntornosGraficos_TP-Final/rutas.php');
+include(INCLUDES_PATH."db.php");
+?>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <!-- Cabeceras -->
-<?php include("includes/header.php") ?>
+<?php include(INCLUDES_PATH."header.php") ?>
 
 <body>
     <!-- NavBar -->
-    <?php include("includes/navbar.php") ?>
+    <?php include(INCLUDES_PATH."navbar.php") ?>
 
     <!-- Content -->
     <div class="container-fluid">
@@ -56,9 +63,11 @@
 
             <!-- Jumbotrom -->
             <div class="jumbotron">
-                <a class="btn btn-lg mb-1" href="#collapseData" data-toggle="collapse">
-                    ¿Quiénes somos?
-                </a>
+                <div class="text-center">
+                    <a class="btn btn-lg mb-1" href="#collapseData" data-toggle="collapse">
+                        ¿Quiénes somos?
+                    </a>
+                </div>
                 <div class="collapse text-justify" id="collapseData">
                     <p class="lead">
                         Tibbon es una marca rosarina que se inició en el 2013, mejorando
@@ -124,11 +133,11 @@
         </div>
 
         <!-- Footer -->
-        <?php include("includes/footer.html") ?>
+        <?php include(INCLUDES_PATH."footer.html") ?>
     </div>
 
     <!-- Scripts -->
-    <?php include("includes/scripts.php") ?>
+    <?php include(INCLUDES_PATH."scripts.php") ?>
 
 </body>
 

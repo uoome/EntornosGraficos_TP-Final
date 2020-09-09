@@ -1,17 +1,32 @@
-<?php include("includes/db.php") ?>
+<?php 
+// Anterior
+// include("includes/db.php");
+// Nuevo
+include_once($_SERVER['DOCUMENT_ROOT'].'EntornosGraficos_TP-Final/rutas.php');
+include(INCLUDES_PATH."db.php"); 
+?>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <!-- Cabeceras -->
-<?php include("includes/header.php") ?>
+<?php include(INCLUDES_PATH."header.php"); ?>
 
 <body>
     <!-- NavBar -->
-    <?php include("includes/navbar.php") ?>
+    <?php include(INCLUDES_PATH."navbar.php"); ?>
 
-    <!-- Formulario -->
-    <div class="container mt-5">
+    <!-- Content | Solo visible para usuario administrador -->
+    <?php
+    // Si hay usuario loggeado
+    if (isset($_SESSION['usuarioActual'])) {
+        $usuarioActual = $_SESSION['usuarioActual'];
+        // Si el usuario es administrador
+        if ($usuarioActual->get_tipo() == UserTypeEnum::Administrator) {
+
+    ?>
+
+    <div class="container mt-3">
         <div class="col justify-content-around">
 
             <!-- Mensaje alerta -->
@@ -29,8 +44,9 @@
                     <i class="fas fa-user-plus"></i>
                     Complete datos de registro
                 </h3>
-
-                <form action="Forms/manejo-registro-admin.php" method="POST">
+                
+                <!-- Formulario -->
+                <form action="Forms/admin-alta-usuario.php" method="POST">
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputName">Nombre:</label>
@@ -163,8 +179,17 @@
                         </div>
                     </div>
 
-                    <!-- Cerrar sesion -->
-                    <?php session_unset(); ?>
+                    <!-- Limpiar mensajes de error -->
+                    <?php 
+                        if(isset($_SESSION['mensaje'])) unset($_SESSION['mensaje']); 
+                        if(isset($_SESSION['nombreErr'])) unset($_SESSION['nombreErr']); 
+                        if(isset($_SESSION['apeErr'])) unset($_SESSION['apeErr']); 
+                        if(isset($_SESSION['emailErr'])) unset($_SESSION['emailErr']); 
+                        if(isset($_SESSION['telefErr'])) unset($_SESSION['telefErr']); 
+                        if(isset($_SESSION['usernameErr'])) unset($_SESSION['usernameErr']); 
+                        if(isset($_SESSION['passErr'])) unset($_SESSION['passErr']); 
+                        if(isset($_SESSION['validarPassErr'])) unset($_SESSION['validarPassErr']); 
+                    ?>
 
                     <div class="form-group col">
                         <button type="submit" name="save_admin" class="btn btn-success btn-block">
@@ -183,8 +208,17 @@
         </div>
     </div>
 
+    <!-- Mensaje de autorizacion -->
+    <?php } } else { ?>
+    <div class="container mt-3">
+        <div class="alert alert-danger text-center" role="alert">
+            No esta autorizado a estar en esta seccion!
+        </div>
+    </div>
+    <?php } ?>
+
     <!-- Scripts -->
-    <?php include("includes/scripts.php") ?>
+    <?php include(INCLUDES_PATH."scripts.php"); ?>
 
 </body>
 
