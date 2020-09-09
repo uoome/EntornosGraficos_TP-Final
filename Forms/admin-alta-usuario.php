@@ -34,10 +34,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Mensaje exito
             $_SESSION['mensaje'] = "Usuario creado con exito !";
             $_SESSION['tipo_mensaje'] = "success";
+            $altaOk = true;
         } else {
             // Mensaje error
             $_SESSION['mensaje'] = "Error: " . $query . "<br>" . $conn->error;
             $_SESSION['tipo_mensaje'] = "danger";
+            $altaOk = false;
         }
     } else {
         $_SESSION['mensaje'] = "<strong>Ups!</strong> Complete los datos correctamente";
@@ -45,9 +47,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     //Redireccionar al form correspondiente
+    // Si es registro por admin -> Volver a la misma pag
     if(isset($_POST['save_admin'])) header("Location: ../registro-administrador.php");
 
-    if(isset($_POST['save_client'])) header("Location: ../registro-cliente.php");
+    // Si es registro de cliente 
+    if(isset($_POST['save_client'])){
+        // Validar registro correcto y redireccionar a 'login.php'
+        if($altaok === TRUE) header("Location: ../login.php");
+        // Sino redireccionar a 'registro-cliente.php'
+        else header("Location: ../registro-cliente.php");
+    }
 } else {
     // Mensaje error
     $_SESSION['mensaje'] = "Error al enviar formulario por metodo POST.\n";

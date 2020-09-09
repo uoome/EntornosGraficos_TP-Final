@@ -1,11 +1,6 @@
 <?php 
-// Anterior
-// include("includes/db.php"); 
-
-// Nuevo
-include_once ($_SERVER['DOCUMENT_ROOT'].'/rutas.php');
-include (INCLUDES_PATH."db.php");
-
+include_once($_SERVER['DOCUMENT_ROOT'].'EntornosGraficos_TP-Final/rutas.php');
+include_once(INCLUDES_PATH."db.php");
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +23,7 @@ include (INCLUDES_PATH."db.php");
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">Contactenos</h5>
-                    <form action="" method="">
+                    <form action="#" method="POST">
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <input type="text" class="form-control" name="nombre_contacto" placeholder="Nombre" required autofocus />
@@ -41,7 +36,7 @@ include (INCLUDES_PATH."db.php");
                             <textarea class="form-control" name="coment_contacto" placeholder="Comentario" rows="5" required></textarea>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-success btn-block">
+                            <button type="submit" name="send_contacto" class="btn btn-success btn-block">
                                 <i class="fas fa-envelope-square"></i>
                                 Enviar
                             </button>

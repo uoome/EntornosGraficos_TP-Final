@@ -1,14 +1,17 @@
-<?php include("includes/db.php") ?>
+<?php 
+include_once($_SERVER['DOCUMENT_ROOT'].'EntornosGraficos_TP-Final/rutas.php');
+include_once(INCLUDES_PATH."db.php");
+?>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <!-- Cabeceras -->
-<?php include("includes/header.php") ?>
+<?php include(INCLUDES_PATH."header.php") ?>
 
 <body>
     <!-- NavBar -->
-    <?php include("includes/navbar.php") ?>
+    <?php include(INCLUDES_PATH."navbar.php") ?>
 
     <!-- Migas de pan -->
     <nav aria-label="breadcrumb">
@@ -20,24 +23,32 @@
         </ol>
     </nav>
 
-    <!-- Content -->
+    <!-- Content | Mostrar solo si hay zapatillas  -->
     <div class="container-fluid">
 
         <div class="container">
             <h1 class="h2 text-center">Tienda Tibbonzapas</h1>
             <hr />
+            <?php
+                $sql = "SELECT * FROM zapatilla;";
+                $result = $conn->query($sql);
+                $cant = $result->num_rows;
+                if ($cant > 0) {                    
+            ?>
             <!-- Row de 2 columnas -->
             <div class="row row-cols-2 row-cols-md-4 justify-content-around">
                 <!-- Columna izquierda -->
                 <div class="col col-md-4">
-                    <p>Resultados: <i>nro</i> </p>
+                    <p>
+                        Resultados: <i><?= $cant ?></i>
+                    </p>
                 </div>
                 <!-- Columna derecha-->
                 <div class="col col-md-4">
                     <form>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <!-- Boton buscar -->
+                                <!-- Boton buscar | Agregar filtros -->
                                 <button class="btn btn-outline-secondary" type="button" name="btnBuscar" value="">
                                     <i class="fas fa-search"></i>
                                 </button>
@@ -68,14 +79,24 @@
             </div>
 
             <!-- Cards de Productos -->
-            <!-- Hay que automatizar el listado con php o js -->
             <div class="row row-cols-2 row-cols-md-4">
+                <?php
+                    while ($row = $result->fetch_assoc()) {
+                ?>
                 <div class="col mb-4">
                     <div class="card h-100 bg-light">
-                        <img src="IMG/Zapatilla_01.jpg" class="card-img-top" alt="Imagen modelo Clasica Negro">
+                        <img 
+                            src="<?= $row['img_path'] ?>" 
+                            class="card-img-top" 
+                            alt="Imagen modelo <?= $row['nombre'] ?>"
+                        >
                         <div class="card-body">
-                            <h5 class="card-title">Clasica Negro</h5>
-                            <p class="card-text">$ 00.00</p>
+                            <h5 class="card-title">
+                                <?= $row['nombre'] ?>
+                            </h5>
+                            <p class="card-text">
+                                $ <?php if(empty($row['precio'])) echo "0.0"; else echo $row['precio']; ?>
+                            </p>
                             <hr />
                             <a href="detalle-producto.php" class="btn btn-success btn-block">
                                 <i class="fas fa-money-bill-wave"></i>
@@ -88,52 +109,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="col mb-4">
-                    <div class="card h-100 bg-light">
-                        <img src="IMG/Zapatilla_02.jpg" class="card-img-top" alt="Imagen modelo Clasica Impress">
-                        <div class="card-body">
-                            <h5 class="card-title">Clasica Impress</h5>
-                            <p class="card-text">$ 00.00</p>
-                            <hr />
-                            <a href="#" class="btn btn-success btn-block">
-                                <i class="fas fa-cart-arrow-down"></i>
-                                Comprar
-                            </a>
-                            <button role="button" name="btnAddCarro" class="btn btn-info btn-block" value="Comprar">
-                                <i class="fas fa-cart-arrow-down"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-4">
-                    <div class="card h-100 bg-light">
-                        <img src="IMG/Zapatilla_03.jpg" class="card-img-top" alt="Imagen modelo Mode">
-                        <div class="card-body">
-                            <h5 class="card-title">Mode</h5>
-                            <p class="card-text">$ 00.00</p>
-                            <hr />
-                            <a href="#" class="btn btn-success btn-block">
-                                <i class="fas fa-cart-arrow-down"></i>
-                                Comprar
-                            </a>
-                            <button role="button" name="btnAddCarro" class="btn btn-info btn-block" value="Comprar">
-                                <i class="fas fa-cart-arrow-down"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-4">
-                    <div class="card h-100 bg-light">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        </div>
-                    </div>
-                </div>
+                <?php }  ?>
             </div>
 
             <!-- Paginación -->
+            <!-- Hay que automatizar el listado acorde a la cantidad de registros recibidos -->
             <div class="row justify-content-around mt-3">
                 <nav aria-label="Page navigation">
                     <ul class="pagination">
@@ -152,13 +132,19 @@
 
         </div>
 
+    <?php } else { ?>
+        <div class="alert alert-warning" role="alert">
+            Lo sentimos, ha ocurrido un error al recupera datos de la DB. Intente mas tarde.
+        </div>
+    <?php } ?>
+
         <!-- Footer -->
-        <?php include("includes/footer.html") ?>
+        <?php include(INCLUDES_PATH."footer.html") ?>
 
     </div>
 
     <!-- Scripts -->
-    <?php include("includes/scripts.php") ?>
+    <?php include(INCLUDES_PATH."scripts.php") ?>
 
 </body>
 
