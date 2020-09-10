@@ -17,7 +17,7 @@ include_once(INCLUDES_PATH."db.php");
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item" aria-current="page">
-                <a href="inicio.html">Inicio</a>
+                <a href="inicio.php">Inicio</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">Tienda</li>
         </ol>
@@ -98,7 +98,11 @@ include_once(INCLUDES_PATH."db.php");
                                 $ <?php if(empty($row['precio'])) echo "0.0"; else echo $row['precio']; ?>
                             </p>
                             <hr />
-                            <a href="detalle-producto.php" class="btn btn-success btn-block">
+                            <a 
+                                href="detalle-producto.php?id=<?= $row["id_zapatilla"] ?>" 
+                                class="btn btn-success btn-block"
+                                title="Comprar Producto <?= $row['nombre'] ?>"
+                            >
                                 <i class="fas fa-money-bill-wave"></i>
                                 Comprar
                             </a>
