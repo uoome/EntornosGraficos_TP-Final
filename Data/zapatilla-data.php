@@ -5,6 +5,7 @@ class Zapatilla
     private $id_zapatilla;
     private $nombre;
     private $color;
+    private $descripcion;
     private $precio;
 
     // Constructor
@@ -45,6 +46,16 @@ class Zapatilla
     function set_color($color)
     {
         $this->color = $color;
+    }
+
+    function get_descripcion()
+    {
+        return $this->descripcion;
+    }
+
+    function set_descripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
     }
 
     function get_precio()

@@ -1,9 +1,7 @@
 <?php 
-// Anterior
-// include("includes/db.php");
-// Nuevo
-include_once($_SERVER['DOCUMENT_ROOT'].'/EntornosGraficos_TP-Final/rutas.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'EntornosGraficos_TP-Final/rutas.php');
 include(INCLUDES_PATH."db.php");
+include(DATA_PATH."usuario-data.php");
 ?>
 
 <!DOCTYPE html>
@@ -20,6 +18,7 @@ include(INCLUDES_PATH."db.php");
     <?php
     // Si hay usuario loggeado
     if (isset($_SESSION['usuarioActual'])) {
+        $usuarioActual = new Usuario();
         $usuarioActual = $_SESSION['usuarioActual'];
         // Si el usuario es administrador
         if ($usuarioActual->get_tipo() == UserTypeEnum::Administrator) {
@@ -53,6 +52,7 @@ include(INCLUDES_PATH."db.php");
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Color</th>
                                 <th scope="col">Precio</th>
+                                <th scope="col">Imagen</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -93,6 +93,12 @@ include(INCLUDES_PATH."db.php");
                                         <?php
                                         if(empty($row["precio"])) echo "0.0";
                                         else echo $row["precio"];
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        if(empty($row["img_path"])) echo "NO";
+                                        else echo "SI";
                                         ?>
                                     </td>
                                 </tr>

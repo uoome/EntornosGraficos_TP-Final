@@ -161,7 +161,7 @@ function validarDatosZapatilla()
 
         // Si todo ok -> Guardar img en server
         if ($uploadOk !== 0 && $flag == TRUE) {
-            $img_path = "Uploads/" . basename($image['name']); // Path que se guarda en la DB
+            $img_path = basename($image['name']); // Path que se guarda en la DB
             $directiorio_final = UPLOADS_PATH . basename($image['name']);
 
             if (move_uploaded_file($image['tmp_name'], $directiorio_final)) {

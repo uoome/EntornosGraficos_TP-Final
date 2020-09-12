@@ -1,8 +1,4 @@
 <?php 
-// Anterior
-// include("includes/db.php"); 
-
-// Nuevo
 include_once($_SERVER['DOCUMENT_ROOT'].'/EntornosGraficos_TP-Final/rutas.php');
 include(DB_PATH."db.php");
 ?>
