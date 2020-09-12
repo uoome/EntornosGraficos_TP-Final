@@ -17,7 +17,7 @@ include_once(DB_PATH."db.php");
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item" aria-current="page">
-                <a href="inicio.php">Inicio</a>
+                <a href="index.php">Inicio</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">Tienda</li>
         </ol>

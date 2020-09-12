@@ -1,6 +1,6 @@
 <!-- Barra nav -->
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: darkcyan;">
-    <a class="navbar-brand" href="inicio.php">
+    <a class="navbar-brand" href="index.php">
         <i class="fas fa-shoe-prints"></i>
         Tibbonzapas
     </a>
@@ -19,7 +19,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto fa-ul">
             <li class="nav-item active">
-                <a class="nav-link" href="inicio.php">
+                <a class="nav-link" href="index.php">
                     <i class="fas fa-home"></i>
                     Inicio
                 </a>

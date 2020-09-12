@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["usuarioActual"] = $usuario;
 
             //Redireccionar al inicio
-            header("Location: inicio.php");
+            header("Location: index.php");
         }
     } else {
         // Mensaje error

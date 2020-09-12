@@ -31,7 +31,7 @@ include_once(INCLUDES_PATH.'/db.php');
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item" aria-current="page">
-                <a href="inicio.php">
+                <a href="index.php">
                     Inicio
                 </a>
             </li>
