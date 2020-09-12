@@ -66,7 +66,7 @@ include_once(INCLUDES_PATH.'/db.php');
                     <b>$ 00.00</b>
                     <?php } ?>
                 </p>
-                <p>Agregar detalle.</p>
+                <p><?= $data['descripcion'] ?></p>
                 <hr />
                 <form action="#" method="">
                     <div class="form-group">

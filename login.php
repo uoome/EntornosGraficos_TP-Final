@@ -1,8 +1,4 @@
 <?php
-// Anterior
-// include("includes/db.php");
-// include_once("includes/validacion-forms-admin.php");
-
 // Nuevo
 include_once($_SERVER['DOCUMENT_ROOT'].'/EntornosGraficos_TP-Final/rutas.php');
 include_once(DB_PATH."db.php");
