@@ -1,6 +1,6 @@
 <?php 
 // Nuevo
-include_once($_SERVER['DOCUMENT_ROOT'].'EntornosGraficos_TP-Final/rutas.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/EntornosGraficos_TP-Final/rutas.php');
 include(INCLUDES_PATH."db.php");
 ?>
 

@@ -3,7 +3,7 @@
 // include("Data/usuario-data.php");
 
 // Nuevo
-include_once($_SERVER['DOCUMENT_ROOT'].'EntornosGraficos_TP-Final/rutas.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/EntornosGraficos_TP-Final/rutas.php');
 include_once(DATA_PATH."usuario-data.php");
 
 session_start();

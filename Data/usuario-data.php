@@ -3,7 +3,7 @@
 // include("usertype-enum.php");
 
 // Nuevo
-include_once($_SERVER['DOCUMENT_ROOT'].'EntornosGraficos_TP-Final/rutas.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/EntornosGraficos_TP-Final/rutas.php');
 include(DATA_PATH."usertype-enum.php");
 
 class Usuario

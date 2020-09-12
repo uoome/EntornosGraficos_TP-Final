@@ -5,9 +5,9 @@
 // include("../includes/validacion-forms-admin.php");
 
 // Nuevo
-include_once($_SERVER['DOCUMENT_ROOT'].'EntornosGraficos_TP-Final/rutas.php');
-include_once(INCLUDES_PATH."db.php");
-// include_once(DATA_PATH."usuario-data.php");
+include_once($_SERVER['DOCUMENT_ROOT'].'/EntornosGraficos_TP-Final/rutas.php');
+include_once(DB_PATH."db.php");
+// include_on|ce(DATA_PATH."usuario-data.php");
 include_once(INCLUDES_PATH."validacion-forms-admin.php");
 
 // Logica si hay POST

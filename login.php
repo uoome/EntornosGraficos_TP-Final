@@ -4,8 +4,8 @@
 // include_once("includes/validacion-forms-admin.php");
 
 // Nuevo
-include_once($_SERVER['DOCUMENT_ROOT'].'EntornosGraficos_TP-Final/rutas.php');
-include_once(INCLUDES_PATH."db.php");
+include_once($_SERVER['DOCUMENT_ROOT'].'/EntornosGraficos_TP-Final/rutas.php');
+include_once(DB_PATH."db.php");
 include_once(INCLUDES_PATH."validacion-forms-admin.php");
 
 // Validar el post
@@ -16,6 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Armar query
     $query = "SELECT * FROM usuario WHERE username = '$username' AND password = '$password' ;";
+
     $data = $conn->query($query);
     if ($data->num_rows > 0) {
         while ($row = $data->fetch_assoc()) {
