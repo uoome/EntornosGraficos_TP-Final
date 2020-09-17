@@ -1,30 +1,42 @@
 <?php
-// Anterior
-// include("Data/usuario-data.php");
 
-// Nuevo
-include_once($_SERVER['DOCUMENT_ROOT'].'/EntornosGraficos_TP-Final/rutas.php');
-include_once(DATA_PATH."usuario-data.php");
+class ConnectionDB
+{
+  // Variables
+  private $servername;
+  private $username;
+  private $password;
+  private $dbname;
+  public $conn;
 
-session_start();
+  // Metodos
+  protected function connect() {
+    $this->servername = "localhost";
+    $this->username = "root";
+    $this->password = "";
+    $this->dbname = "tibbonzapas";
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$db = "tibbonzapas";
+    try {
+      $this->conn = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
 
-try {
-  // Crear conexion (POO)
-  $conn = new mysqli($servername, $username, $password, $db);
-
-  // Chequear
-  if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+      if ($this->conn->connect_error) {
+        die("Connection failed: " . $this->conn->connect_error);
+      } else return $this->conn;
+    } catch(mysqli_sql_exception $sqlEx) {
+      echo "Error al abrir conexion a DB: " . $sqlEx->getMessage();
+    } catch(Exception $ex) {
+      echo "Error al abrir conexion a DB: " . $ex->getMessage();
+    }
   }
 
-} catch (Exception $ex) {
-  echo "Error al conectar la DB: " . $ex->getMessage();
+  protected function closeConnection() {
+    try{
+      if($this->conn !== null) $this->conn->close();
+    } catch(mysqli_sql_exception $sqlEx) {
+      echo "Error al cerrar conexion a DB: " . $sqlEx->getMessage();
+    } catch(Exception $ex) {
+      echo "Error al cerrar conexion a DB: " . $ex->getMessage();
+    }
+  }
+
 }
-
-?>
-

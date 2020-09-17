@@ -62,18 +62,6 @@ include_once(DB_PATH."db.php");
                             </select>
                             </select>
                         </div>
-                        <!-- 
-                            <div class="form-group">
-                            <label for="selectFilter">Filtrar por:</label>
-                            <select class="form-control-sm" name="" id="selectFilter">
-                            <option value="">-</option>
-                            <option value="">Ofertas</option>
-                            <option value="">Nuevos Modelos</option>
-                            <option value="">Modelos Hombres</option>
-                            <option value="">Modelos Mujeres</option>
-                            </select>
-                            </div> 
-                        -->
                     </form>
                 </div>
             </div>

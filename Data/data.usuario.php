@@ -1,10 +1,6 @@
 <?php
-// Anterior
-// include("usertype-enum.php");
-
-// Nuevo
 include_once($_SERVER['DOCUMENT_ROOT'].'/EntornosGraficos_TP-Final/rutas.php');
-include(DATA_PATH."usertype-enum.php");
+include_once(DATA_PATH."usertype.enum.php");
 
 class Usuario
 {
@@ -19,17 +15,7 @@ class Usuario
     private $tipo;
 
     // Constructor
-    function __construct()
-    {
-        $this->id_usuario = '';
-        $this->nombre = '';
-        $this->apellido = '';
-        $this->username = '';
-        $this->password = '';
-        $this->email = '';
-        $this->telefono = '';
-        $this->tipo = '';
-    }
+    function __construct() {}
 
     // Getters y Setters
 
@@ -119,4 +105,5 @@ class Usuario
         }
     }
 }
+
 ?>

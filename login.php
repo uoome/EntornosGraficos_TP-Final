@@ -1,35 +1,26 @@
 <?php
 // Nuevo
 include_once($_SERVER['DOCUMENT_ROOT'].'/EntornosGraficos_TP-Final/rutas.php');
-include_once(DB_PATH."db.php");
+include_once(DAO_PATH."db.php");
+include_once(DAO_PATH."dao.usuario.php");
 include_once(INCLUDES_PATH."validacion-forms-admin.php");
+
+// Iniciar sesion
+session_start();
 
 // Validar el post
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Traer y limpiar datos
     $username = test_input($_POST["username"]);
     $password = test_input($_POST["password"]);
-
-    // Armar query
-    $query = "SELECT * FROM usuario WHERE username = '$username' AND password = '$password' ;";
-
-    $data = $conn->query($query);
-    if ($data->num_rows > 0) {
-        while ($row = $data->fetch_assoc()) {
-            $usuario = new Usuario();
-            $usuario->set_id($row["id_usuario"]);
-            $usuario->set_nombre($row["nombre"]);
-            $usuario->set_apellido($row["apellido"]);
-            $usuario->set_username($row["username"]);
-            $usuario->set_tipo($row["tipo_usuario"]);
-            // Se omite password
-
-            // Agregar usuario a la session
-            $_SESSION["usuarioActual"] = $usuario;
-
-            //Redireccionar al inicio
-            header("Location: index.php");
-        }
+    // Enviar datos
+    $usuarioService = new UsuarioService();
+    $usuarioLogueado = $usuarioService->login($username, $password);   
+    // Setear usuario
+    if($usuarioLogueado != null){
+        $_SESSION['usuarioActual'] = $usuarioLogueado;
+        // Redirect index.php
+        header("Location: index.php");
     } else {
         // Mensaje error
         $_SESSION['mensaje'] = "Credenciales incorrectas";
@@ -43,11 +34,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="en">
 
 <!-- Cabeceras -->
-<?php include("includes/header.php") ?>
+<?php include(INCLUDES_PATH."header.php") ?>
 
 <body>
     <!-- NavBar -->
-    <?php include("includes/navbar.php") ?>
+    <?php include(INCLUDES_PATH."navbar.php") ?>
 
     <!-- Content -->
     <div class="container col-md-4 mt-5">
@@ -87,10 +78,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
     <!-- Limpiar mensajes -->
-    <?php unset($_SESSION['mensaje']); ?>
+    <?php if(isset($_SESSION['mensaje']))unset($_SESSION['mensaje']); ?>
 
     <!-- Scripts -->
-    <?php include("includes/scripts.php") ?>
+    <?php include(INCLUDES_PATH."scripts.php") ?>
 
 </body>
 

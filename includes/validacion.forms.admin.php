@@ -1,10 +1,6 @@
 <?php
-// Funciones para validacion de datos de formularios
-// include_once("../Data/usertype-enum.php");
-
-// Nuevo
 include_once($_SERVER['DOCUMENT_ROOT'] . '/EntornosGraficos_TP-Final/rutas.php');
-include_once(DATA_PATH . "usertype-enum.php");
+include_once(DATA_PATH . "usertype.enum.php");
 
 function test_input($data)
 { // Funcion que limpia los datos enviados en el form
@@ -96,7 +92,7 @@ function validarDatosZapatilla()
 {
     // Variables
     $flag = true;
-    global $nombre, $color, $precio, $img_path;
+    global $nombre, $color, $precio, $descripcion, $img_path, $talle;
 
     /* Validar nombre (requerido) */
     if (empty($_POST['nombreZapatilla'])) {
@@ -129,6 +125,15 @@ function validarDatosZapatilla()
         }
     } else $precio = null;
 
+    /* Validar descripcion */
+    if(empty($_POST['descripcionZapatilla'])) $descripcion = null;
+    else {
+        $descripcion = stripslashes($_POST['descripcionZapatilla']); // Quitar '\'
+        $descripcion = htmlspecialchars($descripcion); // Formatear caracteres especiales
+    }
+
+    if(empty($_POST['talleZapa'])) $talle = null;
+    else $talle = $_POST['talleZapa'];
 
     /* Validar Imagen */
     // Guardar campo en variable local

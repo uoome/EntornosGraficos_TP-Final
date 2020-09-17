@@ -1,6 +1,9 @@
 <?php 
 include_once($_SERVER['DOCUMENT_ROOT'].'/EntornosGraficos_TP-Final/rutas.php');
-include(DB_PATH."db.php");
+include(DAO_PATH."db.php");
+include(DATA_PATH . "data.usuario.php");
+// Iniciar sesion
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -24,6 +27,7 @@ include(DB_PATH."db.php");
                 <ol class="carousel-indicators">
                     <li data-target="#carruselOfertas" data-slide-to="0" class="active"></li>
                     <li data-target="#carruselOfertas" data-slide-to="1"></li>
+                    <li data-target="#carruselOfertas" data-slide-to="2s"></li>
                 </ol>
 
                 <!-- Imágenes -->
@@ -41,7 +45,14 @@ include(DB_PATH."db.php");
                         <!-- Texto adicional -->
                         <div class="carousel-caption d-none d-md-block">
                             <h5>Tibbonzapas para hombres y mujeres</h5>
-                            <p>Nuevos mdelos</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img class="img-fluid d-block w-100" src="IMG/Tibbon_Slide03.jpg" alt="Tercer slide" />
+                        <!-- Texto adicional -->
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Nuevos modelos</h5>
+                            <p>Visite nuestra tienda para ver mas modelos.</p>
                         </div>
                     </div>
                 </div>
