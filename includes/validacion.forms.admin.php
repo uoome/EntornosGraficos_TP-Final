@@ -67,7 +67,7 @@ function validarDatosUsuario()
     }
 
     if (!empty($_POST["inputTelefono"])) {
-        $regexEnteros = "/^\d+$/"; // regex que valida solo numeros enteros
+        $regexEnteros = "/^\d+$/"; // regex que valida solo numeros enteros | No funca
         $telefono = test_input($_POST["inputTelefono"]);
         $pregMatchValue = preg_match($telefono, $regexEnteros);
 

@@ -42,7 +42,8 @@ class ZapatillaDataService extends ConnectionDB
     {
         try {
             // Armar query
-            $sql = "INSERT INTO `zapatilla`(nombre, color, precio, descripcion, img_path, talle) VALUES (?,?,?,?,?,?);";
+            $sql = "INSERT INTO `zapatilla`(nombre, color, precio, descripcion, img_path, talle) 
+            VALUES (?,?,?,?,?,?);";
             // Armar statement
             $stmt = $this->connect()->prepare($sql);
             $stmt->bind_param(
@@ -69,4 +70,49 @@ class ZapatillaDataService extends ConnectionDB
         return $flag;
     }
 
+    // Consulta elimina una zapatilla
+    function deleteZapatilla($id)
+    {
+        try {
+            // Armar query
+            $queryDelete = "DELETE FROM `zapatilla` WHERE id_zapatilla = ?;";
+            // Armar statement
+            $stmt = $this->connect()->prepare($queryDelete);
+            $stmt->bind_param("i", $id);
+            // Ejecutar delete
+            $flag = $stmt->execute();
+            // Cerrar prep
+            $stmt->close();
+            // Cerrar conexion
+            $this->closeConnection();
+        } catch (mysqli_sql_exception $sqlEx) {
+            echo "Error al insertar nueva zapatilla: " . $sqlEx->getMessage();
+        } catch (Exception $ex) {
+            echo "Error al insertar nueva zapatilla: " . $ex->getMessage();
+        }
+        // Devolver resultado
+        return $flag;
+    }
+
+    function validarExistenciaDeZapatilla($id)
+    {
+        $idValido = null;
+
+        try {
+            // Armar query
+            $query = "SELECT id_zapatilla FROM `zapatilla` WHERE id_zapatilla = '$id';";
+            // Armar statement
+            $idValido = $this->connect()->query($query);
+            // Cerrar conexion
+            $this->closeConnection();
+        } catch (mysqli_sql_exception $sqlEx) {
+            echo "Error al insertar nueva zapatilla: " . $sqlEx->getMessage();
+        } catch (Exception $ex) {
+            echo "Error al insertar nueva zapatilla: " . $ex->getMessage();
+        }
+        // Devolver resultado
+        return $idValido;
+    }
 }
+
+?>

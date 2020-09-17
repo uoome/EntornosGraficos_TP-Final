@@ -1,9 +1,14 @@
 <?php 
-// Anterior
-// include("includes/db.php");
-// Nuevo
 include_once($_SERVER['DOCUMENT_ROOT'].'/EntornosGraficos_TP-Final/rutas.php');
-include(INCLUDES_PATH."db.php");
+include(DAO_PATH."db.php");
+include(DAO_PATH."dao.usuario.php");
+
+// Iniciar/Retomar sesion
+session_start();
+// Fetch usuario
+$usuarioActual = new Usuario();
+if(isset($_SESSION['usuarioActual'])) $usuarioActual = $_SESSION['usuarioActual'];
+else $usuarioActual = null;
 
 ?>
 
@@ -19,12 +24,11 @@ include(INCLUDES_PATH."db.php");
 
     <!-- Content | Solo visible para usuario administrador -->
     <?php
-    // Si hay usuario loggeado
-    if (isset($_SESSION['usuarioActual'])) {
-        $usuarioActual = $_SESSION['usuarioActual'];
-        // Si el usuario es administrador
-        if ($usuarioActual->get_tipo() == UserTypeEnum::Administrator) {
-
+    // Si hay usuario loggeado y  es Admin
+    if (
+        $usuarioActual != null && 
+        $usuarioActual->get_tipo() == UserTypeEnum::Administrator
+    ) {
     ?>
 
     <div class="container mt-3">
@@ -62,31 +66,33 @@ include(INCLUDES_PATH."db.php");
                         </thead>
                         <tbody>
                         <?php
-                        $sql = "SELECT * FROM usuario;";
-                        $result = $conn->query($sql);
-                        if ($result->num_rows > 0) {
-                            while ($row = $result->fetch_assoc()) {
+                        // Traer usuarios
+                        $usuarioService = new UsuarioService();
+                        $data = $usuarioService->getUsuarios();
+                        // Si hay datos
+                        if ($data != null) {
+                            foreach($data as $user) {
                         ?>
                             <tr>
                                 <td class="text-center">
                                     <div class="btn-group btn-group-sm" role="group">
-                                        <a href="Forms/admin-modificar-usuario.php?id=<?= $row["id_usuario"] ?>" class="btn btn-info" title="Modificar Usuario">
+                                        <a href="Forms/admin-modificar-usuario.php?id=<?= $user["id_usuario"] ?>" class="btn btn-info" title="Modificar Usuario">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a href="Forms/admin-delete-usuario.php?id=<?= $row["id_usuario"] ?>" class="btn btn-danger" title="Eliminar Usuario">
+                                        <a href="Forms/admin-delete-usuario.php?id=<?= $user["id_usuario"] ?>" class="btn btn-danger" title="Eliminar Usuario">
                                             <i class="fas fa-trash"></i>
                                         </a>
                                     </div>
                                 </td>
-                                <td><?= $row["id_usuario"] ?></td>
-                                <td><?= $row["nombre"] ?></td>
-                                <td><?= $row["apellido"] ?></td>
-                                <td><?= $row["username"] ?></td>
-                                <td><?= $row["email"] ?></td>
-                                <td><?= $row["telefono"] ?></td>
+                                <td><?= $user["id_usuario"] ?></td>
+                                <td><?= $user["nombre"] ?></td>
+                                <td><?= $user["apellido"] ?></td>
+                                <td><?= $user["username"] ?></td>
+                                <td><?= $user["email"] ?></td>
+                                <td><?= $user["telefono"] ?></td>
                                 <td>
                                     <?php
-                                    switch ($row["tipo_usuario"]) {
+                                    switch ($user["tipo_usuario"]) {
                                         case UserTypeEnum::Administrator:
                                             echo "Administrador";
                                             break;
@@ -115,7 +121,7 @@ include(INCLUDES_PATH."db.php");
             <!-- Card-Footer -->
             <div class="card-footer">
                 <a 
-                    href="registro-administrador.php" 
+                    href="registro.administrador.php" 
                     class="btn btn-primary" 
                     title="Crear Usuario"
                 >
@@ -126,7 +132,7 @@ include(INCLUDES_PATH."db.php");
     </div>
 
     <!-- Mensaje de autorizacion -->
-    <?php } } else { ?>
+    <?php } else { ?>
     <div class="container mt-3">
         <div class="alert alert-danger text-center" role="alert">
             No esta autorizado a estar en esta seccion!

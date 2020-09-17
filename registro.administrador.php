@@ -1,9 +1,14 @@
 <?php 
-// Anterior
-// include("includes/db.php");
-// Nuevo
-include_once($_SERVER['DOCUMENT_ROOT'].'/EntornosGraficos_TP-Final/rutas.php');
-include(INCLUDES_PATH."db.php"); 
+include_once($_SERVER['DOCUMENT_ROOT'] . '/EntornosGraficos_TP-Final/rutas.php');
+include(DAO_PATH . "db.php");
+include(DATA_PATH . "data.usuario.php");
+
+// Iniciar sesion
+session_start();
+// Fetch usuario
+$usuarioActual = new Usuario();
+if (isset($_SESSION['usuarioActual'])) $usuarioActual = $_SESSION['usuarioActual'];
+else $usuarioActual = null;
 ?>
 
 <!DOCTYPE html>
@@ -18,12 +23,11 @@ include(INCLUDES_PATH."db.php");
 
     <!-- Content | Solo visible para usuario administrador -->
     <?php
-    // Si hay usuario loggeado
-    if (isset($_SESSION['usuarioActual'])) {
-        $usuarioActual = $_SESSION['usuarioActual'];
-        // Si el usuario es administrador
-        if ($usuarioActual->get_tipo() == UserTypeEnum::Administrator) {
-
+    // Si hay usuario loggeado y es administrador
+    if (
+        $usuarioActual != null &&
+        $usuarioActual->get_tipo() == UserTypeEnum::Administrator
+    ) {
     ?>
 
     <div class="container mt-3">
@@ -46,7 +50,7 @@ include(INCLUDES_PATH."db.php");
                 </h3>
                 
                 <!-- Formulario -->
-                <form action="Forms/admin-alta-usuario.php" method="POST">
+                <form action="Forms/admin.alta.usuario.php" method="POST">
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputName">Nombre:</label>
@@ -209,7 +213,7 @@ include(INCLUDES_PATH."db.php");
     </div>
 
     <!-- Mensaje de autorizacion -->
-    <?php } } else { ?>
+    <?php } else { ?>
     <div class="container mt-3">
         <div class="alert alert-danger text-center" role="alert">
             No esta autorizado a estar en esta seccion!

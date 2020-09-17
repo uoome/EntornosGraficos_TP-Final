@@ -1,7 +1,7 @@
 <?php 
 include_once($_SERVER['DOCUMENT_ROOT'].'EntornosGraficos_TP-Final/rutas.php');
 include(DATA_PATH."data.usuario.php");
-include(DAO_PATH."dao.zapas.php");
+include(DAO_PATH."dao.zapatilla.php");
 
 // Iniciar sesion
 session_start();
@@ -75,14 +75,14 @@ else $usuarioActual = null;
                                     <td>
                                         <div class="btn-group btn-group-sm" role="group">
                                             <a 
-                                                href="Forms/admin-modificar-zapatilla.php?id=<?= $zapa["id_zapatilla"] ?>" 
+                                                href="Forms/admin.modificar.zapatilla.php?id=<?= $zapa["id_zapatilla"] ?>" 
                                                 class="btn btn-info" 
                                                 title="Modificar Zapatilla"
                                             >
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             <a 
-                                                href="Forms/admin-delete-zapatilla.php?id=<?= $zapa["id_zapatilla"] ?>" 
+                                                href="Forms/admin.delete.zapatilla.php?id=<?= $zapa["id_zapatilla"] ?>" 
                                                 class="btn btn-danger" 
                                                 title="Eliminar Zapatilla"
                                             >

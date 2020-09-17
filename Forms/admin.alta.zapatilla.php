@@ -1,7 +1,7 @@
 <?php
 include_once($_SERVER['DOCUMENT_ROOT'].'/EntornosGraficos_TP-Final/rutas.php');
 include_once(DAO_PATH."db.php");
-include_once(DAO_PATH."dao.zapas.php");
+include_once(DAO_PATH."dao.zapatilla.php");
 include_once(DATA_PATH."data.zapatilla.php");
 include_once(INCLUDES_PATH."validacion.forms.admin.php");
 
@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['tipo_mensaje'] = "success";
         } else {
             // Mensaje error
-            $_SESSION['mensaje'] = "Error: " . $sql . "<br>" . $conn->error;
+            $_SESSION['mensaje'] = "Error al guardar zapatilla.";
             $_SESSION['tipo_mensaje'] = "danger";
         }
     } else {
