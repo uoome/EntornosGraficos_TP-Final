@@ -1,14 +1,17 @@
-<?php 
+<?php
 // Archivo que contiene consultas de DB dedicadas a la tabla `usuario`
 include_once($_SERVER['DOCUMENT_ROOT'] . '/EntornosGraficos_TP-Final/rutas.php');
 include_once(DAO_PATH . "db.php");
 include_once(DATA_PATH . "data.usuario.php");
 
-class UsuarioService extends ConnectionDB {
+class UsuarioService extends ConnectionDB
+{
 
     /* CONSULTAS */
 
-    function login($user, $pass) {
+    function login($user, $pass)
+    {
+
         $usuarioLogueado = null;
 
         $query = "SELECT * FROM usuario WHERE username = '$user' AND password = '$pass' ;";
@@ -28,9 +31,9 @@ class UsuarioService extends ConnectionDB {
                 }
             }
         } catch (mysqli_sql_exception $sqlEx) {
-            echo "Error en consulta 'getZapatillas': " . $sqlEx->getMessage();
+            die("Error (SQL) al validar loguin: " . $sqlEx->getMessage());
         } catch (Exception $ex) {
-            echo "Error en consulta 'getZapatillas': " . $ex->getMessage();
+            die("Error al validar loguin: " . $sqlEx->getMessage());
         }
         // Agregar usuario a la session
         return $usuarioLogueado;
@@ -56,9 +59,9 @@ class UsuarioService extends ConnectionDB {
             // Cerrar conexion
             $this->closeConnection();
         } catch (mysqli_sql_exception $sqlEx) {
-            echo "Error en consulta 'getZapatillas': " . $sqlEx->getMessage();
+            die("Error (SQL) en consulta 'getUsuarios': " . $sqlEx->getMessage());
         } catch (Exception $ex) {
-            echo "Error en consulta 'getZapatillas': " . $ex->getMessage();
+            die("Error en consulta 'getUsuarios': " . $ex->getMessage());
         }
         // Devolver data
         return $usuarios;
@@ -89,9 +92,9 @@ class UsuarioService extends ConnectionDB {
             // Cerrar conexion
             $this->closeConnection();
         } catch (mysqli_sql_exception $sqlEx) {
-            echo "Error al insertar nuevo cliente: " . $sqlEx->getMessage();
+            die("Error (SQL) al insertar nuevo cliente: " . $sqlEx->getMessage());
         } catch (Exception $ex) {
-            echo "Error al insertar nuevo cliente: " . $ex->getMessage();
+            die("Error al insertar nuevo cliente: " . $ex->getMessage());
         }
         // Devolver resultado
         return $flag;
@@ -122,12 +125,60 @@ class UsuarioService extends ConnectionDB {
             // Cerrar conexion
             $this->closeConnection();
         } catch (mysqli_sql_exception $sqlEx) {
-            echo "Error al insertar nuevo administrador: " . $sqlEx->getMessage();
+            die("Error (SQL) al insertar nuevo administrador: " . $sqlEx->getMessage());
         } catch (Exception $ex) {
-            echo "Error al insertar nuevo administrador: " . $ex->getMessage();
+            die("Error al insertar nuevo administrador: " . $ex->getMessage());
         }
         // Devolver resultado
         return $flag;
     }
 
+    // Consulta elimina una zapatilla
+    function deleteUsuario($id)
+    {
+        try {
+            // Armar query
+            $queryDelete = "DELETE FROM `usuario` WHERE id_usuario = ?;";
+            // Armar statement
+            $stmt = $this->connect()->prepare($queryDelete);
+            $stmt->bind_param("i", $id);
+            // Ejecutar delete
+            $flag = $stmt->execute();
+            // Cerrar prep
+            $stmt->close();
+            // Cerrar conexion
+            $this->closeConnection();
+        } catch (mysqli_sql_exception $sqlEx) {
+            die("Error (SQL) al eliminar usuario: " . $sqlEx->getMessage());
+        } catch (Exception $ex) {
+            die("Error al eliminar usuario: " . $sqlEx->getMessage());
+        }
+        // Devolver resultado
+        return $flag;
+    }
+
+    function existeUsuario($id)
+    {
+        $idValido = false;
+
+        try {
+            // Armar query
+            $query = "SELECT id_usuario FROM `usuario` WHERE id_usuario = '$id';";
+            // Armar statement
+            $data = $this->connect()->query($query);
+            // Validar devolucion
+            if ($data->num_rows > 0)
+                $idValido = true;
+            // Cerrar conexion
+            $this->closeConnection();
+        } catch (mysqli_sql_exception $sqlEx) {
+            die("Error (SQL) al validar existencia de usuario en DB: " . $sqlEx->getMessage());
+        } catch (Exception $ex) {
+            die("Error al validar existencia de usuario en DB: " . $sqlEx->getMessage());
+        }
+        // Devolver resultado
+        return $idValido;
+    }
 }
+
+?>

@@ -29,9 +29,9 @@ class ZapatillaDataService extends ConnectionDB
             // Cerrar conexion
             $this->closeConnection();
         } catch (mysqli_sql_exception $sqlEx) {
-            echo "Error en consulta 'getZapatillas': " . $sqlEx->getMessage();
+            die("Error (SQL) en consulta 'getZapatillas': " . $sqlEx->getMessage());
         } catch (Exception $ex) {
-            echo "Error en consulta 'getZapatillas': " . $ex->getMessage();
+            die("Error en consulta 'getZapatillas': " . $ex->getMessage());
         }
         // Devolver data
         return $zapatillas;
@@ -62,9 +62,9 @@ class ZapatillaDataService extends ConnectionDB
             // Cerrar conexion
             $this->closeConnection();
         } catch (mysqli_sql_exception $sqlEx) {
-            echo "Error al insertar nueva zapatilla: " . $sqlEx->getMessage();
+            die("Error (SQL) al insertar nueva zapatilla: " . $sqlEx->getMessage());
         } catch (Exception $ex) {
-            echo "Error al insertar nueva zapatilla: " . $ex->getMessage();
+            die("Error al insertar nueva zapatilla: " . $sqlEx->getMessage());
         }
         // Devolver resultado
         return $flag;
@@ -86,9 +86,9 @@ class ZapatillaDataService extends ConnectionDB
             // Cerrar conexion
             $this->closeConnection();
         } catch (mysqli_sql_exception $sqlEx) {
-            echo "Error al insertar nueva zapatilla: " . $sqlEx->getMessage();
+            die("Error (SQL) al eliminar una zapatilla: " . $sqlEx->getMessage()); 
         } catch (Exception $ex) {
-            echo "Error al insertar nueva zapatilla: " . $ex->getMessage();
+            die("Error (SQL) al eliminar una zapatilla: " . $sqlEx->getMessage()); 
         }
         // Devolver resultado
         return $flag;
@@ -109,9 +109,9 @@ class ZapatillaDataService extends ConnectionDB
             // Cerrar conexion
             $this->closeConnection();
         } catch (mysqli_sql_exception $sqlEx) {
-            echo "Error al insertar nueva zapatilla: " . $sqlEx->getMessage();
+            die("Error (SQL) validar existentcia de zapatilla en DB: " . $sqlEx->getMessage()); 
         } catch (Exception $ex) {
-            echo "Error al insertar nueva zapatilla: " . $ex->getMessage();
+            die("Error validar existentcia de zapatilla en DB: " . $sqlEx->getMessage()); 
         }
         // Devolver resultado
         return $idValido;

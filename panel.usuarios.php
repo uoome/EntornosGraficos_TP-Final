@@ -79,7 +79,7 @@ else $usuarioActual = null;
                                         <a href="Forms/admin-modificar-usuario.php?id=<?= $user["id_usuario"] ?>" class="btn btn-info" title="Modificar Usuario">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a href="Forms/admin-delete-usuario.php?id=<?= $user["id_usuario"] ?>" class="btn btn-danger" title="Eliminar Usuario">
+                                        <a href="Forms/admin.delete.usuario.php?id=<?= $user["id_usuario"] ?>" class="btn btn-danger" title="Eliminar Usuario">
                                             <i class="fas fa-trash"></i>
                                         </a>
                                     </div>

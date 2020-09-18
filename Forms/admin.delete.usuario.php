@@ -1,32 +1,30 @@
 <?php
 include_once($_SERVER['DOCUMENT_ROOT'].'/EntornosGraficos_TP-Final/rutas.php');
 include(DAO_PATH."db.php");
-include(DAO_PATH."dao.zapatilla.php");
+include(DAO_PATH."dao.usuario.php");
 
 // Iniciar/Retomar session
 session_start();
 
 if (isset($_GET['id'])) {
-    $result = false;
-    // Fecth id
+    $resul = false;
+    // Fetch id
     $id = $_GET['id'];
     // Service
-    $zapatillaService = new ZapatillaDataService();
-    // Validar si existe el registro a eliminar
-    $existe = $zapatillaService->validarExistenciaDeZapatilla($id);
+    $usuarioService = new UsuarioService();
+    // Validar si existe el registro
+    $existe = $usuarioService->existeUsuario($id);
 
-    // Si existe -> Eliminar
-    if($existe) 
-    {
-        $result = $zapatillaService->deleteZapatilla($id);
-        
-        if ($result) {
+    if($existe) {
+        $resul = $usuarioService->deleteUsuario($id);
+
+        if ($resul) {
             // Mensaje exito
-            $_SESSION['mensaje'] = "Zapatilla eliminada con exito !";
+            $_SESSION['mensaje'] = "Usuario eliminado con exito !";
             $_SESSION['tipo_mensaje'] = "success";
         } else {
             // Mensaje error
-            $_SESSION['mensaje'] = "Error al eliminar zapatilla.";
+            $_SESSION['mensaje'] = "Error al eliminar usuario: " . $conn->error;
             $_SESSION['tipo_mensaje'] = "danger";
         }
     } else {
@@ -36,7 +34,7 @@ if (isset($_GET['id'])) {
     }
 
     //Redireccionar al form
-    header("Location: ../panel.zapatillas.php");
+    header("Location: ../panel.usuarios.php");
 }
 
 ?>
