@@ -96,13 +96,16 @@ class ZapatillaDataService extends ConnectionDB
 
     function validarExistenciaDeZapatilla($id)
     {
-        $idValido = null;
+        $idValido = false;
 
         try {
             // Armar query
             $query = "SELECT id_zapatilla FROM `zapatilla` WHERE id_zapatilla = '$id';";
             // Armar statement
-            $idValido = $this->connect()->query($query);
+            $data = $this->connect()->query($query);
+            // Validar devolucion
+            if($data->num_rows > 0) 
+                $idValido = true;
             // Cerrar conexion
             $this->closeConnection();
         } catch (mysqli_sql_exception $sqlEx) {

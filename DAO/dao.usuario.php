@@ -64,7 +64,39 @@ class UsuarioService extends ConnectionDB {
         return $usuarios;
     }
 
-    // Consulta que inserta una nueva zapatilla
+    // Consulta que inserta usuario cliente
+    function insertClient($client)
+    {
+        try {
+            // Armar query
+            $sql = "INSERT INTO `usuario`(nombre, apellido, username, password, email, tipo_usuario) 
+            VALUES (?,?,?,?,?,?);";
+            // Armar statement
+            $stmt = $this->connect()->prepare($sql);
+            $stmt->bind_param(
+                "sssssi",
+                $client->get_nombre(),
+                $client->get_apellido(),
+                $client->get_username(),
+                $client->get_password(),
+                $client->get_email(),
+                $client->get_tipo()
+            );
+            // Ejecutar y guardar resultado
+            $flag = $stmt->execute();
+            // Cerrar prep
+            $stmt->close();
+            // Cerrar conexion
+            $this->closeConnection();
+        } catch (mysqli_sql_exception $sqlEx) {
+            echo "Error al insertar nuevo cliente: " . $sqlEx->getMessage();
+        } catch (Exception $ex) {
+            echo "Error al insertar nuevo cliente: " . $ex->getMessage();
+        }
+        // Devolver resultado
+        return $flag;
+    }
+    // Consulta que inserta usuario administrador
     function insertAdmin($admin)
     {
         try {
@@ -92,7 +124,7 @@ class UsuarioService extends ConnectionDB {
         } catch (mysqli_sql_exception $sqlEx) {
             echo "Error al insertar nuevo administrador: " . $sqlEx->getMessage();
         } catch (Exception $ex) {
-            echo "Error al insertar nuev0 administrador: " . $ex->getMessage();
+            echo "Error al insertar nuevo administrador: " . $ex->getMessage();
         }
         // Devolver resultado
         return $flag;

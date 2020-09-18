@@ -16,20 +16,23 @@ if (isset($_GET['id'])) {
     $existe = $zapatillaService->validarExistenciaDeZapatilla($id);
 
     // Si existe -> Eliminar
-    if($existe) $result = $zapatillaService->deleteZapatilla($id);
+    if($existe) 
+    {
+        $result = $zapatillaService->deleteZapatilla($id);
+        
+        if ($result) {
+            // Mensaje exito
+            $_SESSION['mensaje'] = "Zapatilla eliminada con exito !";
+            $_SESSION['tipo_mensaje'] = "success";
+        } else {
+            // Mensaje error
+            $_SESSION['mensaje'] = "Error al eliminar zapatilla.";
+            $_SESSION['tipo_mensaje'] = "danger";
+        }
+    }
     else {
         // Mensaje error
         $_SESSION['mensaje'] = "El registro a eliminar no existe.";
-        $_SESSION['tipo_mensaje'] = "danger";
-    }
-
-    if ($result) {
-        // Mensaje exito
-        $_SESSION['mensaje'] = "Zapatilla eliminada con exito !";
-        $_SESSION['tipo_mensaje'] = "success";
-    } else {
-        // Mensaje error
-        $_SESSION['mensaje'] = "Error al eliminar zapatilla.";
         $_SESSION['tipo_mensaje'] = "danger";
     }
 

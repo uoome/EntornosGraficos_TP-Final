@@ -2,6 +2,7 @@
 include_once($_SERVER['DOCUMENT_ROOT'] . '/EntornosGraficos_TP-Final/rutas.php');
 include_once(DATA_PATH . "usertype.enum.php");
 
+
 function test_input($data)
 { // Funcion que limpia los datos enviados en el form
     $data = trim($data); // Quitar espacios
@@ -81,7 +82,7 @@ function validarDatosUsuario()
         }
     }
 
-    if (empty($_POST["adminCheck"])) {
+    if (!isset($_POST["adminCheck"]) || empty($_POST["adminCheck"])) {
         $type = UserTypeEnum::Client;
     } else $type = UserTypeEnum::Administrator;
 

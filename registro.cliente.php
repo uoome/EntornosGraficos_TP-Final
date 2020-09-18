@@ -1,7 +1,11 @@
 <?php 
 // Nuevo
 include_once($_SERVER['DOCUMENT_ROOT'].'/EntornosGraficos_TP-Final/rutas.php');
-include(INCLUDES_PATH."db.php");
+include(DAO_PATH."db.php");
+include(DATA_PATH."data.usuario.php"); // Necesario para que no crashee el navbar
+
+// Iniciar/Retornar sesion
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +37,7 @@ include(INCLUDES_PATH."db.php");
                     Complete datos de registro
                 </h3>
                 <!-- Formulario -->
-                <form action="Forms/admin-alta-usuario.php" method="POST">
+                <form action="Forms/admin.alta.usuario.php" method="POST">
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputName">Nombre:</label>

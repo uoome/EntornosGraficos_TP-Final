@@ -1,6 +1,6 @@
 <?php
 // Fetch usuario
-$usuarioActual = new Usuario();
+$usuarioActual = new Usuario(); // No se si es necesario
 if (isset($_SESSION['usuarioActual'])) $usuarioActual = $_SESSION['usuarioActual'];
 else $usuarioActual = null;
 
@@ -47,12 +47,7 @@ else $usuarioActual = null;
             <?php } ?>
 
             <!-- Carro Compra | Usuario Loggeado -->
-            <?php 
-            if (
-                $usuarioActual != null && 
-                $usuarioActual->get_tipo() == UserTypeEnum::Administrator
-            ) { 
-            ?>
+            <?php if ($usuarioActual != null) { ?>
                 <li class="nav-item">
                     <a class="nav-link" href="#">
                         <i class="fas fa-cart-arrow-down"></i>
@@ -60,6 +55,7 @@ else $usuarioActual = null;
                     </a>
                 </li>
                 <!-- Dropdown ABMs | Usuario Admin -->
+                <?php if ($usuarioActual->get_tipo() == UserTypeEnum::Administrator) { ?>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-wrench"></i>
@@ -77,7 +73,7 @@ else $usuarioActual = null;
                         </a>
                     </div>
                 </li>
-            <?php } ?>
+            <?php } } ?>
 
         </ul>
 

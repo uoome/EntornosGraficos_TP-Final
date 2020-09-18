@@ -3,7 +3,7 @@
 include_once($_SERVER['DOCUMENT_ROOT'].'/EntornosGraficos_TP-Final/rutas.php');
 include_once(DAO_PATH."db.php");
 include_once(DAO_PATH."dao.usuario.php");
-include_once(INCLUDES_PATH."validacion-forms-admin.php");
+include_once(INCLUDES_PATH."validacion.forms.admin.php");
 
 // Iniciar sesion
 session_start();
@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <button class="btn btn-info btn-block" type="submit">
                         Log in
                     </button>
-                    <a class="btn btn-secondary btn-block" href="registro-cliente.php">
+                    <a class="btn btn-secondary btn-block" href="registro.cliente.php">
                         Registrarse
                     </a>
                 </form>
