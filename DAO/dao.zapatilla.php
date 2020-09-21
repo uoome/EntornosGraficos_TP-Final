@@ -37,6 +37,29 @@ class ZapatillaDataService extends ConnectionDB
         return $zapatillas;
     }
 
+    // Consulta que retorna datos de una zapatilla
+    function getZapatilla($id) {
+        $zapatilla = null;
+        $query = "SELECT * FROM `zapatilla` WHERE id_zapatilla = '$id';";
+
+        try {
+            // Ejecutar query
+            $data = $this->connect()->query($query);
+            // Si hay datos devueltos -> Fetch data
+            if ($data->num_rows > 0) 
+                $zapatilla = $data->fetch_assoc();
+                // $zapatilla = $data->fetch_all();
+            // Cerrar conexion
+            $this->closeConnection();
+        } catch (mysqli_sql_exception $sqlEx) {
+            die("Error (SQL) en consulta 'getZapatilla': " . $sqlEx->getMessage());
+        } catch (Exception $ex) {
+            die("Error en consulta 'getZapatilla': " . $ex->getMessage());
+        }
+        // Devolver data
+        return $zapatilla;
+    }
+
     // Consulta que inserta una nueva zapatilla
     function insertZapa($newZapa)
     {

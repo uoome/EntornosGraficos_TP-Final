@@ -116,6 +116,13 @@ else $usuarioActual = null;
 
                         </tbody>
                     </table>
+
+                    <!-- Limpiar mensajes de sesion -->
+                    <?php 
+                    unset($_SESSION['mensaje']); 
+                    unset($_SESSION['tipo_mensaje']); 
+                    ?>
+                    
                 </div>
             </div>        
             <!-- Card-Footer -->

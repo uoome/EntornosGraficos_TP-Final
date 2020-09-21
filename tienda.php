@@ -1,6 +1,13 @@
 <?php 
 include_once($_SERVER['DOCUMENT_ROOT'].'/EntornosGraficos_TP-Final/rutas.php');
-include_once(DB_PATH."db.php");
+include_once(DAO_PATH."db.php");
+
+include(DAO_PATH."dao.usuario.php");
+include(DAO_PATH."dao.zapatilla.php");
+
+// Iniciar/Retomar sesion
+session_start();
+
 ?>
 
 <!DOCTYPE html>
@@ -30,17 +37,18 @@ include_once(DB_PATH."db.php");
             <h1 class="h2 text-center">Tienda Tibbonzapas</h1>
             <hr />
             <?php
-                $sql = "SELECT * FROM zapatilla;";
-                $result = $conn->query($sql);
-                $cant = $result->num_rows;
-                if ($cant > 0) {                    
+                $zapatillaService = new ZapatillaDataService();
+                $zapas = $zapatillaService->getZapatillas();
+                
+                // Si hay datos
+                if ($zapas != null) {                    
             ?>
             <!-- Row de 2 columnas -->
             <div class="row row-cols-2 row-cols-md-4 justify-content-around">
                 <!-- Columna izquierda -->
                 <div class="col col-md-4">
                     <p>
-                        Resultados: <i><?= $cant ?></i>
+                        Resultados: <i>x</i>
                     </p>
                 </div>
                 <!-- Columna derecha-->
@@ -69,27 +77,28 @@ include_once(DB_PATH."db.php");
             <!-- Cards de Productos -->
             <div class="row row-cols-2 row-cols-md-4">
                 <?php
-                    while ($row = $result->fetch_assoc()) {
+                    foreach($zapas as $zapa) {
+                    // while ($row = $result->fetch_assoc()) {
                 ?>
                 <div class="col mb-4">
                     <div class="card h-100 bg-light">
                         <img 
-                            src="<?= $row['img_path'] ?>" 
+                            src="<?= $zapa['img_path'] ?>" 
                             class="card-img-top" 
-                            alt="Imagen modelo <?= $row['nombre'] ?>"
+                            alt="Imagen modelo <?= $zapa['nombre'] ?>"
                         >
                         <div class="card-body">
                             <h5 class="card-title">
-                                <?= $row['nombre'] ?>
+                                <?= $zapa['nombre'] ?>
                             </h5>
                             <p class="card-text">
-                                $ <?php if(empty($row['precio'])) echo "0.0"; else echo $row['precio']; ?>
+                                $ <?php if(empty($zapa['precio'])) echo "0.0"; else echo $zapa['precio']; ?>
                             </p>
                             <hr />
                             <a 
-                                href="detalle-producto.php?id=<?= $row["id_zapatilla"] ?>" 
+                                href="detalle.producto.php?id=<?= $zapa["id_zapatilla"] ?>" 
                                 class="btn btn-success btn-block"
-                                title="Comprar Producto <?= $row['nombre'] ?>"
+                                title="Comprar Producto <?= $zapa['nombre'] ?>"
                             >
                                 <i class="fas fa-money-bill-wave"></i>
                                 Comprar

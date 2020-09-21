@@ -1,6 +1,13 @@
 <?php 
 include_once($_SERVER['DOCUMENT_ROOT'].'/EntornosGraficos_TP-Final/rutas.php');
-include_once(INCLUDES_PATH.'/db.php');
+include_once(DAO_PATH."db.php");
+
+include(DAO_PATH."dao.usuario.php");
+include(DAO_PATH."dao.zapatilla.php");
+
+// Iniciar/Retomar sesion
+session_start();
+
 ?>
 
 <!DOCTYPE html>
@@ -19,12 +26,16 @@ include_once(INCLUDES_PATH.'/db.php');
         if(isset($_GET['id'])) {
             // Guardar
             $id = $_GET['id'];
+            // Service
+            $zapatillaService = new ZapatillaDataService();
             // Buscar producto en la DB
-            $existeZapaQuery = "SELECT * FROM `zapatilla` WHERE id_zapatilla = '$id';";
-            $existentZapa = $conn->query($existeZapaQuery);
-            // Si hay datos devueltos
-            if ($existentZapa->num_rows == 1) {
-                $data = $existentZapa->fetch_assoc();        
+            $existe = $zapatillaService->validarExistenciaDeZapatilla($id);
+            // Si encontro el registro
+            if ($existe) {
+                $data = $zapatillaService->getZapatilla($id); 
+                // Si hay datos devueltos
+                if($data != null) {
+                    // print_r($data);  
     ?>
 
     <!-- Migas de pan -->
@@ -41,13 +52,14 @@ include_once(INCLUDES_PATH.'/db.php');
                 </a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">
-                Detalle Producto <?= $data['nombre'] ?>
+                Detalle Producto '<?= $data['nombre'] ?>'
             </li>
         </ol>
     </nav>
 
     <!-- Content -->
     <div class="container-fluid">
+
         <!-- Media del producto -->
         <div class="media">
             <!-- Imagen -->
@@ -66,8 +78,11 @@ include_once(INCLUDES_PATH.'/db.php');
                     <b>$ 00.00</b>
                     <?php } ?>
                 </p>
-                <p><?= $data['descripcion'] ?></p>
+                <p>
+                    <?php if(isset($data['descripcion'])) $data['descripcion']; ?>
+                </p>
                 <hr />
+                <!-- Form -->
                 <form action="#" method="">
                     <div class="form-group">
                         <label for="colorSelect">Color</label>
@@ -80,18 +95,17 @@ include_once(INCLUDES_PATH.'/db.php');
                     <div class="form-group">
                         <label for="talleSelect">Talle</label>
                         <select class="form-control form-control-sm" id="talleSelect" required>
-                            <option value="">Seleccione talle..</option>
-                            <option value="">Blanco</option>
-                            <option value="">36</option>
-                            <option value="">37</option>
-                            <option value="">38</option>
-                            <option value="">39</option>
-                            <option value="">40</option>
-                            <option value="">41</option>
-                            <option value="">42</option>
-                            <option value="">43</option>
-                            <option value="">44</option>
-                            <option value="">45</option>
+                            <option value="0" <?php if($data['talle'] == 0) echo 'selected'?>>Seleccione talle..</option>
+                            <option value="36" <?php if($data['talle'] == 36) echo 'selected'?>>36</option>
+                            <option value="37" <?php if($data['talle'] == 37) echo 'selected'?>>37</option>
+                            <option value="38" <?php if($data['talle'] == 38) echo 'selected'?>>38</option>
+                            <option value="39" <?php if($data['talle'] == 39) echo 'selected'?>>39</option>
+                            <option value="40" <?php if($data['talle'] == 40) echo 'selected'?>>40</option>
+                            <option value="41" <?php if($data['talle'] == 41) echo 'selected'?>>41</option>
+                            <option value="42" <?php if($data['talle'] == 42) echo 'selected'?>>42</option>
+                            <option value="43" <?php if($data['talle'] == 43) echo 'selected'?>>43</option>
+                            <option value="44" <?php if($data['talle'] == 44) echo 'selected'?>>44</option>
+                            <option value="45" <?php if($data['talle'] == 45) echo 'selected'?>>45</option>
                         </select>
                     </div>
                     <div class="form-row">
@@ -114,7 +128,7 @@ include_once(INCLUDES_PATH.'/db.php');
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo, exercitationem nam corrupti ad vitae nulla dignissimos atque sit aut, quisquam officiis sint velit aperiam magnam consequatur, optio saepe esse vel?</p>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo, exercitationem nam corrupti ad vitae nulla dignissimos atque sit aut, quisquam officiis sint velit aperiam magnam consequatur, optio saepe esse vel?</p>
 
-        <?php } else { ?>
+        <?php } } else { ?>
             <div class="alert alert-warning" role="alert">
                 Lo sentimos, ha ocurrido un error al recuperar datos de la DB. Intente mas tarde.
             </div>            
