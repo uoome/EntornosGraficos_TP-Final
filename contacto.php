@@ -1,6 +1,7 @@
 <?php 
 include_once($_SERVER['DOCUMENT_ROOT'].'/EntornosGraficos_TP-Final/rutas.php');
-include_once(DB_PATH."db.php");
+include_once(DAO_PATH."db.php");
+include_once(DATA_PATH."data.usuario.php"); // Necesario para que no crashee el navbar
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +24,7 @@ include_once(DB_PATH."db.php");
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">Contactenos</h5>
-                    <form action="#" method="POST">
+                    <form action="Forms/manejo.contacto.php" method="POST">
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <input type="text" class="form-control" name="nombre_contacto" placeholder="Nombre" required autofocus />

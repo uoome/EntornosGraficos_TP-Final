@@ -49,7 +49,7 @@ else $usuarioActual = null;
             <!-- Carro Compra | Usuario Loggeado -->
             <?php if ($usuarioActual != null) { ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="verCarro.php">
                         <i class="fas fa-cart-arrow-down"></i>
                         Carro
                     </a>

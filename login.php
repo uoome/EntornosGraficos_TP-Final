@@ -1,9 +1,9 @@
 <?php
 // Nuevo
-include_once($_SERVER['DOCUMENT_ROOT'].'/EntornosGraficos_TP-Final/rutas.php');
-include_once(DAO_PATH."db.php");
-include_once(DAO_PATH."dao.usuario.php");
-include_once(INCLUDES_PATH."validacion.forms.admin.php");
+include_once($_SERVER['DOCUMENT_ROOT'] . '/EntornosGraficos_TP-Final/rutas.php');
+include_once(DAO_PATH . "db.php");
+include_once(DAO_PATH . "dao.usuario.php");
+include_once(INCLUDES_PATH . "validacion.forms.admin.php");
 
 // Iniciar sesion
 session_start();
@@ -15,9 +15,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = test_input($_POST["password"]);
     // Enviar datos
     $usuarioService = new UsuarioService();
-    $usuarioLogueado = $usuarioService->login($username, $password);   
+    $usuarioLogueado = $usuarioService->login($username, $password);
     // Setear usuario
-    if($usuarioLogueado != null){
+    if ($usuarioLogueado != null) {
         $_SESSION['usuarioActual'] = $usuarioLogueado;
         // Redirect index.php
         header("Location: index.php");
@@ -34,11 +34,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="en">
 
 <!-- Cabeceras -->
-<?php include(INCLUDES_PATH."header.php") ?>
+<?php include(INCLUDES_PATH . "header.php") ?>
 
 <body>
     <!-- NavBar -->
-    <?php include(INCLUDES_PATH."navbar.php") ?>
+    <?php include(INCLUDES_PATH . "navbar.php") ?>
 
     <!-- Content -->
     <div class="container col-md-4 mt-5">
@@ -78,10 +78,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
     <!-- Limpiar mensajes -->
-    <?php if(isset($_SESSION['mensaje']))unset($_SESSION['mensaje']); ?>
+    <?php if (isset($_SESSION['mensaje'])) unset($_SESSION['mensaje']); ?>
 
     <!-- Scripts -->
-    <?php include(INCLUDES_PATH."scripts.php") ?>
+    <?php include(INCLUDES_PATH . "scripts.php") ?>
 
 </body>
 

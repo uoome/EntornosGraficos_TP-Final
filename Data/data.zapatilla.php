@@ -9,6 +9,7 @@ class Zapatilla
     private $precio;
     private $img_path;
     private $talle;
+    private $qty;
 
     // Constructor
     function __construct() {}
@@ -83,5 +84,17 @@ class Zapatilla
     {
         $this->talle = $t;
     }
+
+    function get_qty()
+    {
+        return $this->qty;
+    }
+
+    function set_qty($q)
+    {
+        $this->qty = $q;
+    }
+
 }
+
 ?>

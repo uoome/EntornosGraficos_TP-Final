@@ -14,6 +14,7 @@ class ZapatillaDataService extends ConnectionDB
     {
         $zapatillas = null;
         $query = "SELECT * FROM `zapatilla`;";
+        // $query = "SELECT * FROM `zapatilla` ORDER BY id_zapatilla DESC LIMIT 10;";
 
         try {
             // Ejecutar query
@@ -37,8 +38,44 @@ class ZapatillaDataService extends ConnectionDB
         return $zapatillas;
     }
 
-    // Consulta que retorna datos de una zapatilla
-    function getZapatilla($id) {
+    /**
+     * Consulta que retorna 4 zapatillas de muestra
+     * @return null/Zapatilla[] 
+     */
+    function getMuestra()
+    {
+        $zapatillas = null;
+        $query = "SELECT * FROM `zapatilla` ORDER BY id_zapatilla LIMIT 4;";
+
+        try {
+            // Ejecutar query
+            $data = $this->connect()->query($query);
+            $numRows = $data->num_rows;
+            // Si hay datos devueltos
+            if ($numRows > 0) {
+                // Fetch data
+                while ($row = $data->fetch_assoc()) {
+                    $zapatillas[] = $row;
+                }
+            }
+            // Cerrar conexion
+            $this->closeConnection();
+        } catch (mysqli_sql_exception $sqlEx) {
+            die("Error (SQL) en consulta 'getZapatillas': " . $sqlEx->getMessage());
+        } catch (Exception $ex) {
+            die("Error en consulta 'getZapatillas': " . $ex->getMessage());
+        }
+        // Devolver data
+        return $zapatillas;
+    }
+
+    /**
+     * Consulta que retorna datos de una zapatilla
+     * @param int $id
+     * @return null/Zapatilla
+     */
+    function getZapatilla($id) 
+    {
         $zapatilla = null;
         $query = "SELECT * FROM `zapatilla` WHERE id_zapatilla = '$id';";
 
@@ -47,8 +84,18 @@ class ZapatillaDataService extends ConnectionDB
             $data = $this->connect()->query($query);
             // Si hay datos devueltos -> Fetch data
             if ($data->num_rows > 0) 
-                $zapatilla = $data->fetch_assoc();
-                // $zapatilla = $data->fetch_all();
+                // Crear zapa
+                $zapatilla = new Zapatilla();
+                // Guadar datos
+                while($row = $data->fetch_assoc()){
+                    $zapatilla->set_id($row['id_zapatilla']);
+                    $zapatilla->set_nombre($row['nombre']);
+                    $zapatilla->set_color($row['color']);
+                    $zapatilla->set_precio($row['precio']);
+                    $zapatilla->set_descripcion($row['descripcion']);
+                    $zapatilla->set_talle($row['talle']);
+                    $zapatilla->set_img_path($row['img_path']);
+                }
             // Cerrar conexion
             $this->closeConnection();
         } catch (mysqli_sql_exception $sqlEx) {

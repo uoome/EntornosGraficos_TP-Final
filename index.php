@@ -1,9 +1,14 @@
 <?php 
 include_once($_SERVER['DOCUMENT_ROOT'].'/EntornosGraficos_TP-Final/rutas.php');
 include(DAO_PATH."db.php");
+include(DAO_PATH."dao.zapatilla.php");
 include(DATA_PATH . "data.usuario.php");
 // Iniciar sesion
 session_start();
+
+$zapaService = new ZapatillaDataService();
+$muestra = $zapaService->getMuestra();
+
 ?>
 
 <!DOCTYPE html>
@@ -95,7 +100,7 @@ session_start();
                     </p>
                     <hr class="my-4" />
                     <p>Para mas infomación visite nuestra página de contacto.</p>
-                    <a class="btn btn-info" href="contacto.html" role="button">
+                    <a class="btn btn-info" href="contacto.php" role="button">
                         <i class="far fa-question-circle"></i>
                         <span>Más info</span>
                     </a>
@@ -103,40 +108,33 @@ session_start();
             </div>
 
             <!-- Cards -->
+            <?php if($muestra != null) { ?>
             <div class="card-deck">
+                <?php foreach($muestra as $m) { ?>
                 <div class="col-sm-6 col-md-3" style="width: 20px;">
                     <div class="card h-100 bg-light mb-1">
-                        <img class="img-fluid d-block" src="IMG/Zapatilla_01.jpg" alt="Imagen producto" />
+                        <img 
+                            class="img-fluid d-block" 
+                            src="<?= $m['img_path'] ?>" 
+                            alt="Imagen modelo <?= $m['nombre'] ?>" 
+                        />
                         <div class="card-body">
-                            <p class="card-text">$00.00</p>
+                            <p class="card-text">
+                                $ <?php if(empty($m['precio'])) echo "0.0"; else echo $m['precio']; ?>
+                            </p>
+                            <a 
+                                href="detalle.producto.php?id=<?= $m["id_zapatilla"] ?>" 
+                                class="btn btn-info btn-block"
+                                title="Ver detalle modelo '<?= $m['nombre'] ?>'"
+                            >
+                                Detalle
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-3" style="width: 20px;">
-                    <div class="card h-100 bg-light mb-1">
-                        <img class="img-fluid d-block" src="IMG/Zapatilla_02.jpg" alt="Imagen producto" />
-                        <div class="card-body">
-                            <p class="card-text">$00.00</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-3" style="width: 20px;">
-                    <div class="card h-100 bg-light mb-1">
-                        <img class="img-fluid d-block" src="IMG/Zapatilla_03.jpg" alt="Imagen producto" />
-                        <div class="card-body">
-                            <p class="card-text">$00.00</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-3" style="width: 20px;">
-                    <div class="card h-100 bg-light mb-1">
-                        <img class="img-fluid d-block" src="IMG/Zapatilla_04.jpg" alt="Imagen producto" />
-                        <div class="card-body">
-                            <p class="card-text">$00.00</p>
-                        </div>
-                    </div>
-                </div>
+                <?php } ?>
             </div>
+            <?php } ?>
         </div>
 
         <!-- Footer -->

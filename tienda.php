@@ -8,6 +8,11 @@ include(DAO_PATH."dao.zapatilla.php");
 // Iniciar/Retomar sesion
 session_start();
 
+// Fetch usuario
+$usuarioActual = new Usuario(); // No se si es necesario
+if (isset($_SESSION['usuarioActual'])) $usuarioActual = $_SESSION['usuarioActual'];
+else $usuarioActual = null;
+
 ?>
 
 <!DOCTYPE html>
@@ -34,25 +39,34 @@ session_start();
     <div class="container-fluid">
 
         <div class="container">
+            <!-- Mensaje alerta -->
+            <?php if ($usuarioActual == null) { ?>
+                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                    Debe loguarse para realizar compras
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <?php } ?>
+
             <h1 class="h2 text-center">Tienda Tibbonzapas</h1>
             <hr />
             <?php
                 $zapatillaService = new ZapatillaDataService();
                 $zapas = $zapatillaService->getZapatillas();
-                
                 // Si hay datos
                 if ($zapas != null) {                    
             ?>
-            <!-- Row de 2 columnas -->
+            <!-- Row de 3 columnas -->
             <div class="row row-cols-2 row-cols-md-4 justify-content-around">
                 <!-- Columna izquierda -->
-                <div class="col col-md-4">
+                <div class="col">
                     <p>
                         Resultados: <i>x</i>
                     </p>
                 </div>
-                <!-- Columna derecha-->
-                <div class="col col-md-4">
+                <!-- Columna central-->
+                <div class="col">
                     <form>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
@@ -68,9 +82,14 @@ session_start();
                                 <option value="">Modelos Hombres</option>
                                 <option value="">Modelos Mujeres</option>
                             </select>
-                            </select>
                         </div>
                     </form>
+                </div>
+                <!-- Columna Derecha -->
+                <div class="col text-right">
+                    <a class="btn ml-auto" href="verCarro.php" title="Ver carro de compras">
+                        <i class="fas fa-cart-arrow-down"></i>
+                    </a>
                 </div>
             </div>
 
@@ -95,6 +114,24 @@ session_start();
                                 $ <?php if(empty($zapa['precio'])) echo "0.0"; else echo $zapa['precio']; ?>
                             </p>
                             <hr />
+                            <?php if ($usuarioActual == null) { ?>
+                            <a 
+                                href="login.php" 
+                                class="btn btn-success btn-block"
+                                title="Comprar Producto <?= $zapa['nombre'] ?>"
+                            >
+                                <i class="fas fa-money-bill-wave"></i>
+                                Comprar
+                            </a>
+                            <a 
+                                class="btn btn-info btn-block" 
+                                href="login.php" 
+                                title="Agregar producto <?= $zapa['nombre'] ?> al carro"
+                            >
+                                <i class="fas fa-cart-arrow-down"></i>
+                                Agregar al carro
+                            </a>
+                            <?php } else { ?>
                             <a 
                                 href="detalle.producto.php?id=<?= $zapa["id_zapatilla"] ?>" 
                                 class="btn btn-success btn-block"
@@ -103,10 +140,14 @@ session_start();
                                 <i class="fas fa-money-bill-wave"></i>
                                 Comprar
                             </a>
-                            <button role="button" name="btnAddCarro" class="btn btn-info btn-block" value="Comprar">
+                            <a 
+                                class="btn btn-info btn-block" 
+                                href="Forms/manejo.carro.php?action=addToCart&id=<?php echo $zapa["id_zapatilla"]; ?>&qty=1"
+                            >
                                 <i class="fas fa-cart-arrow-down"></i>
-                                Agregar al carro
-                            </button>
+                                Add to cart
+                            </a>
+                            <?php }  ?>
                         </div>
                     </div>
                 </div>

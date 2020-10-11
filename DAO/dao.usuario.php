@@ -9,12 +9,18 @@ class UsuarioService extends ConnectionDB
 
     /* CONSULTAS */
 
+    // Consulta para manejo de login -> Agregar pass encriptadas
+    /**
+     * @param string $user
+     * @param string $pass
+     * @return null/Usuario
+     */
     function login($user, $pass)
     {
 
         $usuarioLogueado = null;
 
-        $query = "SELECT * FROM usuario WHERE username = '$user' AND password = '$pass' ;";
+        $query = "SELECT * FROM `usuario` WHERE username = '$user' AND password = '$pass' ;";
 
         try {
             $data = $this->connect()->query($query);
@@ -26,6 +32,8 @@ class UsuarioService extends ConnectionDB
                     $usuarioLogueado->set_nombre($row["nombre"]);
                     $usuarioLogueado->set_apellido($row["apellido"]);
                     $usuarioLogueado->set_username($row["username"]);
+                    $usuarioLogueado->set_email($row["email"]);
+                    $usuarioLogueado->set_telefono($row["telefono"]);
                     $usuarioLogueado->set_tipo($row["tipo_usuario"]);
                     // Se omite password
                 }
@@ -37,6 +45,28 @@ class UsuarioService extends ConnectionDB
         }
         // Agregar usuario a la session
         return $usuarioLogueado;
+    }
+
+    function getUser($id) {
+        $usuario = null;
+
+        try {
+            // Armar query
+            $query = "SELECT * FROM `usuario` WHERE id_usuario = '$id';";
+            // Ejecutar query
+            $data = $this->connect()->query($query);
+            // Validar devolucion
+            if ($data->num_rows > 0)
+                $usuario = $data;
+            // Cerrar conexion
+            $this->closeConnection();
+        } catch (mysqli_sql_exception $sqlEx) {
+            die("Error (SQL) al traer datos del Usuario desde la DB: " . $sqlEx->getMessage());
+        } catch (Exception $ex) {
+            die("Error al traer datos del Usuario desde la DB: " . $sqlEx->getMessage());
+        }
+        // Devolver resultado
+        return $usuario;
     }
 
     // Consulta que retorna un array de usuarios
