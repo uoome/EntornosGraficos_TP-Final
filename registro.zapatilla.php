@@ -69,22 +69,6 @@ else $usuarioActual = null;
                             <?php } ?>
                         </div>
                     </div>
-                    <!-- Input Color -->
-                    <div class="form-group row">
-                        <label for="inputColor" class="col-md-2 col-form-label">Color</label>
-                        <div class="col-md-10">
-                            <input 
-                                type="text" 
-                                class="form-control" 
-                                id="inputColor" 
-                                name="colorZapatilla" 
-                                aria-describedby="zapatillaHelpText"
-                            >
-                            <small id="zapatillaHelpText" class="form-text text-muted">
-                                Ej: Rojo.
-                            </small>
-                        </div>
-                    </div>
                     <!-- Input Precio -->
                     <div class="form-group row">
                         <label for="inputPrecio" class="col-md-2 col-form-label">Precio</label>
@@ -143,26 +127,7 @@ else $usuarioActual = null;
                             <?php } ?>
                         </div>
                     </div>
-                    <!-- Select talle -->
-                    <div class="form-group row">
-                        <label for="selectTalle" class="col-md-2 col-form-label">Talle</label>
-                        <div class="col-md-10">
-                            <select class="form-control" id="selectTalle" name="talleZapa" aria-describedby="talleHelpText">
-                                <option selected>36</option>
-                                <option>37</option>
-                                <option>38</option>
-                                <option>39</option>
-                                <option>40</option>
-                                <option>41</option>
-                                <option>42</option>
-                                <option>43</option>
-                                <option>44</option>
-                            </select>
-                            <small id="talleHelpText" class="form-text text-muted">
-                                Elija el talle adecuado para usted.
-                            </small>
-                        </div>
-                    </div>
+                    <!-- Submit -->
                     <div class="form-group row">
                         <div class="col-md-10">
                             <button type="submit" class="btn btn-primary" name="btnInsertZapa">Agregar</button>

@@ -62,7 +62,7 @@ else $usuarioActual = null;
                 <!-- Columna izquierda -->
                 <div class="col">
                     <p>
-                        Resultados: <i>x</i>
+                        Resultados: <i><?= count($zapas) ?></i>
                     </p>
                 </div>
                 <!-- Columna central-->
@@ -86,11 +86,13 @@ else $usuarioActual = null;
                     </form>
                 </div>
                 <!-- Columna Derecha -->
+                <?php if($usuarioActual != null) { ?>
                 <div class="col text-right">
-                    <a class="btn ml-auto" href="verCarro.php" title="Ver carro de compras">
+                    <a class="btn btn-outline ml-auto" href="verCarro.php" title="Ver carro de compras">
                         <i class="fas fa-cart-arrow-down"></i>
                     </a>
                 </div>
+                <?php } ?>
             </div>
 
             <!-- Cards de Productos -->

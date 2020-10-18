@@ -30,22 +30,43 @@ class CarroService extends ConnectionDB {
         return $carro;
     }
 
-    // Consulta que inserta un carro para guardar registro, una vez realizada la compra
-    function insertCarro($carro) 
+    /** Consulta que inserta un carro para guardar registro, una vez realizada la compra
+    *   @param CarroCompra $carro
+    *   @return null|int $idCarro
+    */
+    function insertCarro(CarroCompra $carroToAdd) 
     {
+        $idCarro = null;
+        
         try {
             // Armar query
-            $sql = "INSERT INTO `carro_compra`(subtotal, id_usuario) 
-            VALUES (?,?);";
-            // Armar statement
-            $stmt = $this->connect()->prepare($sql);
-            $stmt->bind_param(
-                "di",
-                $carro->get_subtotal(),
-                $carro->get_idUsuario()
-            );
+            $sqlPagoExist = "INSERT INTO `carro_compra`(total, id_usuario, forma_pago) VALUES (?,?,?);";
+            $sqlPagoNull = "INSERT INTO `carro_compra`(total, id_usuario) VALUES (?,?);";
+            // Fetch data to insert
+            $total = $carroToAdd->get_total_carro();
+            $userID = $carroToAdd->get_idUsuario();
+            $pago = $carroToAdd->get_formaPago();
+            // Armar statement dependiendo el pago
+            if(isset($pago)) {
+                $stmt = $this->connect()->prepare($sqlPagoExist);
+                $stmt->bind_param(
+                    "dii",
+                    $total,
+                    $userID,
+                    $pago
+                );
+            } else {
+                $stmt = $this->connect()->prepare($sqlPagoNull);
+                $stmt->bind_param(
+                    "di",
+                    $total,
+                    $userID
+                );
+            }
             // Ejecutar y guardar resultado
             $flag = $stmt->execute();
+            if($flag) $idCarro = $stmt->insert_id;
+            // die(var_dump($idCarro));
             // Cerrar prep
             $stmt->close();
             // Cerrar conexion
@@ -56,7 +77,7 @@ class CarroService extends ConnectionDB {
             die("Error al insertar carro Compra: " . $ex->getMessage());
         }
         // Devolver resultado
-        return $flag;
+        return $idCarro;
     }
 
 }

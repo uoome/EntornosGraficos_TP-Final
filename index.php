@@ -119,6 +119,9 @@ $muestra = $zapaService->getMuestra();
                             alt="Imagen modelo <?= $m['nombre'] ?>" 
                         />
                         <div class="card-body">
+                            <h5 class="card-title">
+                                <?= $m['nombre'] ?>
+                            </h5>
                             <p class="card-text">
                                 $ <?php if(empty($m['precio'])) echo "0.0"; else echo $m['precio']; ?>
                             </p>

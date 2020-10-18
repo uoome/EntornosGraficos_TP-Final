@@ -9,20 +9,16 @@ class UsuarioService extends ConnectionDB
 
     /* CONSULTAS */
 
-    // Consulta para manejo de login -> Agregar pass encriptadas
-    /**
+    /** Consulta para manejo de login -> Agregar pass encriptadas
      * @param string $user
      * @param string $pass
-     * @return null/Usuario
+     * @return null|Usuario
      */
     function login($user, $pass)
     {
-
         $usuarioLogueado = null;
-
-        $query = "SELECT * FROM `usuario` WHERE username = '$user' AND password = '$pass' ;";
-
         try {
+            $query = "SELECT * FROM `usuario` WHERE username = '$user' AND password = '$pass' ;";
             $data = $this->connect()->query($query);
 
             if ($data->num_rows > 0) {
@@ -47,6 +43,10 @@ class UsuarioService extends ConnectionDB
         return $usuarioLogueado;
     }
 
+    /** Consulta para manejo de login -> Agregar pass encriptadas
+     * @param int/string $id
+     * @return null|Usuario
+     */
     function getUser($id) {
         $usuario = null;
 
@@ -56,8 +56,20 @@ class UsuarioService extends ConnectionDB
             // Ejecutar query
             $data = $this->connect()->query($query);
             // Validar devolucion
-            if ($data->num_rows > 0)
-                $usuario = $data;
+            if ($data->num_rows > 0) {
+                $usuario = new Usuario();
+                while ($row = $data->fetch_assoc()) {
+                    $usuario->set_id($row["id_usuario"]);
+                    $usuario->set_nombre($row["nombre"]);
+                    $usuario->set_apellido($row["apellido"]);
+                    $usuario->set_username($row["username"]);
+                    $usuario->set_email($row["email"]);
+                    $usuario->set_telefono($row["telefono"]);
+                    $usuario->set_tipo($row["tipo_usuario"]);
+                    // Se omite password
+                }
+                
+            }
             // Cerrar conexion
             $this->closeConnection();
         } catch (mysqli_sql_exception $sqlEx) {
@@ -65,7 +77,7 @@ class UsuarioService extends ConnectionDB
         } catch (Exception $ex) {
             die("Error al traer datos del Usuario desde la DB: " . $sqlEx->getMessage());
         }
-        // Devolver resultado
+        // Devolver usuario
         return $usuario;
     }
 

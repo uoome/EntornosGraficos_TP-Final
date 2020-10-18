@@ -8,6 +8,10 @@ include(DAO_PATH."dao.zapatilla.php");
 // Iniciar/Retomar sesion
 session_start();
 
+// Fetch usuario
+$usuarioActual = new Usuario(); // No se si es necesario
+if (isset($_SESSION['usuarioActual'])) $usuarioActual = $_SESSION['usuarioActual'];
+else $usuarioActual = null;
 ?>
 
 <!DOCTYPE html>
@@ -61,6 +65,16 @@ session_start();
     <!-- Content -->
     <div class="container-fluid">
 
+        <!-- Mensaje alerta -->
+        <?php if ($usuarioActual == null) { ?>
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                Debe loguarse para realizar compras
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php } ?>
+
         <!-- Media del producto -->
         <div class="media">
             <!-- Imagen -->
@@ -84,10 +98,10 @@ session_start();
                 </p>
                 <hr />
                 <!-- Form -->
-                <form action="#" method="">
+                <form action="Forms/manejo.carro.php" method="POST">
                     <div class="form-group">
                         <label for="colorSelect">Color</label>
-                        <select class="form-control form-control-sm" id="colorSelect" required>
+                        <select class="form-control form-control-sm" id="colorSelect" name="colorSelect" required>
                             <option value="null" <?php if($data->get_color() == null) echo 'selected'?>>Seleccione color..</option>
                             <option value="Blanco" <?php if($data->get_color() == 'Blanco') echo 'selected'?>>Blanco</option>
                             <option value="Negro" <?php if($data->get_color() == 'Negro') echo 'selected'?>>Negro</option>
@@ -95,7 +109,7 @@ session_start();
                     </div>
                     <div class="form-group">
                         <label for="talleSelect">Talle</label>
-                        <select class="form-control form-control-sm" id="talleSelect" required>
+                        <select class="form-control form-control-sm" id="talleSelect" name="talleSelect" required>
                             <option value="0" <?php if($data->get_talle() == 0) echo 'selected'?>>Seleccione talle..</option>
                             <option value="36" <?php if($data->get_talle() == 36) echo 'selected'?>>36</option>
                             <option value="37" <?php if($data->get_talle() == 37) echo 'selected'?>>37</option>
@@ -109,12 +123,22 @@ session_start();
                             <option value="45" <?php if($data->get_talle() == 45) echo 'selected'?>>45</option>
                         </select>
                     </div>
+                    <div class="hidden">
+                        <input type="hidden" name="idProd" value="<?= $id ?>">
+                    </div>
                     <div class="form-row">
                         <div class="col col-sm-3">
-                            <input type="text" name="" id="inputCantidad" class="form-control form-control" value="1">
+                            <input type="number" name="inputCantidad" id="inputCantidad" class="form-control form-control" value="1">
                         </div>
                         <dov class="col col-sm-9">
-                            <button role="button" name="btnAddCarro" class="btn btn-info btn-block" value="Comprar">
+                            <button 
+                                role="submit" 
+                                name="btnAddCarro" 
+                                class="btn btn-info btn-block" 
+                                alt="Agregar producto '<?= $data->get_nombre() ?>' al carro"
+                                title="Agregar producto '<?= $data->get_nombre() ?>' al carro"
+                                <?php if(is_null($usuarioActual)) echo "disabled" ?>
+                            >
                                 <i class="fas fa-cart-arrow-down"></i>
                             </button>
                         </dov>

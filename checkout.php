@@ -12,7 +12,7 @@ include_once(DATA_PATH . "data.lineaCompra.php");
 include_once(DATA_PATH . "data.carro.compra.php");
 include_once(DAO_PATH . "dao.usuario.php");
 
-session_start();
+// session_start();
 
 // Fetch usuario
 if (isset($_SESSION['usuarioActual'])) $usuarioActual = $_SESSION['usuarioActual'];
@@ -24,7 +24,7 @@ $carro = new CarroCompra();
 if ($carro->total_items() <= 0) header("Location: index.php");
 
 // set customer ID in session
-$_SESSION['sessCustomerID'] = $usuarioActual->get_id();
+// $_SESSION['sessCustomerID'] = $usuarioActual->get_id();
 
 ?>
 
@@ -81,12 +81,12 @@ $_SESSION['sessCustomerID'] = $usuarioActual->get_id();
                                         </thead>
                                         <tbody>
                                             <?php
-                                            if ($cart->total_items() > 0) {
+                                            if ($carro->total_items() > 0) {
                                                 // echo "Cart";
                                                 // var_dump($cart);
                                                 //get cart items from session
                                                 // echo "Cart Items";
-                                                $cartItems = $cart->contents();
+                                                $cartItems = $carro->getContenidoCarro();
                                                 // var_dump($cartItems);
                                                 foreach ($cartItems as $item) {
                                                     $zapa = $item->get_zapatilla();
@@ -111,9 +111,9 @@ $_SESSION['sessCustomerID'] = $usuarioActual->get_id();
                                 <div class="w-100"></div>
                                 <!-- Abajo -->
                                 <div class="col">
-                                    <?php if ($cart->total_items() > 0) { ?>
+                                    <?php if ($carro->total_items() > 0) { ?>
                                         <div class="alert alert-secondary text-center ml-auto" role="alert">
-                                            <strong>Total <?php echo '$' . $cart->total(); ?></strong>
+                                            <strong>Total <?php echo '$' . $carro->total(); ?></strong>
                                         </div>
                                     <?php } ?>
                                 </div>
@@ -150,7 +150,7 @@ $_SESSION['sessCustomerID'] = $usuarioActual->get_id();
                             </a>
                         </div>
                         <div class="col-4">
-                            <a href="Forms/cartAction.php?action=placeOrder" class="btn btn-success btn-block">
+                            <a href="orderSuccess.php" class="btn btn-success btn-block">
                                 Place Order
                                 <i class="fas fa-check"></i>
                             </a>

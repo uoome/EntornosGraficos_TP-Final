@@ -11,6 +11,8 @@ class LineaCompra {
     private $id_carro;
     private $id_zapatilla;
     private $qty;
+    private $color;
+    private $talle;
     private $subtotal_linea;
 
     function _construct() {
@@ -42,6 +44,19 @@ class LineaCompra {
     }
     function set_qty($q) {
         $this->qty = $q;
+    } 
+
+    function get_color() {
+        return $this->color;
+    }
+    function set_color($col) {
+        $this->color = $col;
+    }
+    function get_talle() {
+        return $this->talle;
+    }
+    function set_talle($t) {
+        $this->talle = $t;
     }
 
     function get_subtotalLinea() {
@@ -52,7 +67,7 @@ class LineaCompra {
     }
 
     /** 
-    * Ver si va | Trae la zapatilla desde la DB, con id de zapatilla presente en la class
+    * Trae la zapatilla desde la DB, con id de zapatilla presente en la clase
     * @return null/Zapatilla 
     */
     function get_zapatilla() 

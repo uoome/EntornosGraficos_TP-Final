@@ -2,7 +2,6 @@
 include_once($_SERVER['DOCUMENT_ROOT'] . '/EntornosGraficos_TP-Final/rutas.php');
 include_once(DATA_PATH . "usertype.enum.php");
 
-
 function test_input($data)
 { // Funcion que limpia los datos enviados en el form
     $data = trim($data); // Quitar espacios
@@ -16,16 +15,19 @@ function validarDatosUsuario()
     $flag = true;
     global $nombre, $apellido, $username, $password, $email, $telefono, $type;
 
+    // Validar nombre
     if (empty($_POST["inputName"])) {
         $_SESSION['nombreErr'] = "El nombre es requerido";
         $flag = false;
     } else $nombre = test_input($_POST["inputName"]);
 
+    // Validar apellido
     if (empty($_POST["inputApellido"])) {
         $_SESSION['apeErr'] = "El apellido es requerido";
         $flag = false;
     } else $apellido = test_input($_POST["inputApellido"]);
 
+    // Validar email
     if (empty($_POST["inputEmail"])) {
         $_SESSION['emailErr'] = "El email es requerido";
         $flag = false;
@@ -37,6 +39,7 @@ function validarDatosUsuario()
         }
     }
 
+    // Validar usuario
     if (empty($_POST["inputUser"])) {
         $_SESSION['usernameErr'] = "El usuario es requerido";
         $flag = false;
@@ -49,6 +52,7 @@ function validarDatosUsuario()
         }
     }
 
+    // Validar password
     if (empty($_POST["inputPass"])) {
         $_SESSION['passErr'] = "La contraseña es requerida";
         $flag = false;
@@ -61,12 +65,14 @@ function validarDatosUsuario()
         }
     }
 
+    // Validar 'validarPass'
     $validarPass = test_input($_POST["inputValidarPass"]);
     if (strcmp($password, $validarPass) !== 0) {
         $_SESSION['validarPassErr'] = "La contraseña y su validacion deben coincidir";
         $flag = false;
     }
 
+    // Validar telefono
     if (!empty($_POST["inputTelefono"])) {
         $regexEnteros = "/^\d+$/"; // regex que valida solo numeros enteros | No funca
         $telefono = test_input($_POST["inputTelefono"]);
@@ -82,6 +88,7 @@ function validarDatosUsuario()
         }
     }
 
+    // Validar tipoUsuario
     if (!isset($_POST["adminCheck"]) || empty($_POST["adminCheck"])) {
         $type = UserTypeEnum::Client;
     } else $type = UserTypeEnum::Administrator;
@@ -93,17 +100,13 @@ function validarDatosZapatilla()
 {
     // Variables
     $flag = true;
-    global $nombre, $color, $precio, $descripcion, $img_path, $talle;
+    global $nombre, $precio, $descripcion, $img_path;
 
     /* Validar nombre (requerido) */
     if (empty($_POST['nombreZapatilla'])) {
         $_SESSION['modeloZapaErr'] = "El nombre/modelo es requerido";
         $flag = false;
     } else $nombre = test_input($_POST['nombreZapatilla']);
-
-    /* Validar color */
-    if (empty($_POST['colorZapatilla'])) $color = null;
-    else $color = test_input($_POST['colorZapatilla']);
 
     /* Validar precio (solo numeros enteros) */
     if (!empty($_POST["precioZapatilla"])) {
@@ -133,15 +136,10 @@ function validarDatosZapatilla()
         $descripcion = htmlspecialchars($descripcion); // Formatear caracteres especiales
     }
 
-    if(empty($_POST['talleZapa'])) $talle = null;
-    else $talle = $_POST['talleZapa'];
-
     /* Validar Imagen */
     // Guardar campo en variable local
     $image = $_FILES['fileZapa'];
     $uploadOk = 1; // Bandera
-
-    // $_SESSION['errorArray'] = $image['error'];
     // Si el error es 'UPLOAD_ERR_NO_FILE' -> No hay archivo cargado
     if ($image['error'] != UPLOAD_ERR_NO_FILE) {
         // Validar extension

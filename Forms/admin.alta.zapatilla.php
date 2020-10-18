@@ -12,18 +12,16 @@ session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Variables
-    $nombre = $color = $precio = $descripcion = $img_path = $talle = null;
+    $nombre = $precio = $descripcion = $img_path = null;
 
     if (validarDatosZapatilla()) {
         // Guardar datos
         $zapatillaService = new ZapatillaDataService(); // Servicio DAO
         $zapaToInsert = new Zapatilla(); // Data Class
         $zapaToInsert->set_nombre($nombre);
-        $zapaToInsert->set_color($color);
         $zapaToInsert->set_precio($precio);
         $zapaToInsert->set_descripcion($descripcion);
         $zapaToInsert->set_img_path($img_path);
-        $zapaToInsert->set_talle($talle);
         // Insert
         $result = $zapatillaService->insertZapa($zapaToInsert);
 

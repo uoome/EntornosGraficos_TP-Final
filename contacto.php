@@ -2,6 +2,9 @@
 include_once($_SERVER['DOCUMENT_ROOT'].'/EntornosGraficos_TP-Final/rutas.php');
 include_once(DAO_PATH."db.php");
 include_once(DATA_PATH."data.usuario.php"); // Necesario para que no crashee el navbar
+
+// Iniciar/Retomar sesion
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -24,13 +27,19 @@ include_once(DATA_PATH."data.usuario.php"); // Necesario para que no crashee el 
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">Contactenos</h5>
+                    <!-- Mensaje alerta -->
+                    <?php if (isset($_SESSION['mensaje'])) { ?>
+                        <div class="alert alert-<?= $_SESSION['tipo_mensaje'] ?>" role="alert">
+                            <?= $_SESSION['mensaje'] ?>
+                        </div>
+                    <?php } ?>
                     <form action="Forms/manejo.contacto.php" method="POST">
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <input type="text" class="form-control" name="nombre_contacto" placeholder="Nombre" required autofocus />
                             </div>
                             <div class="form-group col-md-6">
-                                <input type="text" class="form-control" name="email_contacto" placeholder="E-mail" required />
+                                <input type="email" class="form-control" name="email_contacto" placeholder="E-mail" required />
                             </div>
                         </div>
                         <div class="form-group">
@@ -46,6 +55,9 @@ include_once(DATA_PATH."data.usuario.php"); // Necesario para que no crashee el 
                 </div>
             </div>
         </div>
+
+        <!-- Limpiar mensajes -->
+        <?php if (isset($_SESSION['mensaje'])) unset($_SESSION['mensaje']); ?>
 
         <!-- Footer -->
         <?php include(INCLUDES_PATH."footer.html") ?>

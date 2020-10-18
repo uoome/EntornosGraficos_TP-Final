@@ -55,9 +55,7 @@ else $usuarioActual = null;
                                 <th scope="col">Acciones</th>
                                 <th scope="col">#</th>
                                 <th scope="col">Nombre</th>
-                                <th scope="col">Color</th>
                                 <th scope="col">Precio</th>
-                                <th scope="col">Talle</th>
                                 <th scope="col">Descripcion</th>
                                 <th scope="col">Imagen</th>
                             </tr>
@@ -72,7 +70,7 @@ else $usuarioActual = null;
                                 foreach($data as $zapa) {
                             ?>
                                 <tr>
-                                    <td>
+                                    <td class="text-center">
                                         <div class="btn-group btn-group-sm" role="group">
                                             <a 
                                                 href="Forms/admin.modificar.zapatilla.php?id=<?= $zapa["id_zapatilla"] ?>" 
@@ -91,25 +89,13 @@ else $usuarioActual = null;
                                         </div>
                                     </td>
                                     <td><?= $zapa["id_zapatilla"] ?></td>
-                                    <td><?= $zapa["nombre"] ?></td>
-                                    <td>
-                                        <?php
-                                        if(empty($zapa['color'])) echo "-";
-                                        else echo $zapa["color"];
-                                        ?>
-                                    </td>
+                                    <td><?= $zapa["nombre"] ?></td>                            
                                     <td>
                                         <?php
                                         if(empty($zapa["precio"])) echo "0.0";
                                         else echo $zapa["precio"];
                                         ?>
-                                    </td>
-                                    <td>
-                                        <?php
-                                        if(empty($zapa["talle"])) echo "-";
-                                        else echo $zapa["talle"];
-                                        ?>
-                                    </td>
+                                    </td>                                    
                                     <td>
                                         <?php
                                         if(empty($zapa["descripcion"])) echo "Sin Descrip";

@@ -1,6 +1,6 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'].'/EntornosGraficos_TP-Final/rutas.php');
-include_once(DATA_PATH."usertype.enum.php");
+include_once($_SERVER['DOCUMENT_ROOT'] . '/EntornosGraficos_TP-Final/rutas.php');
+include_once(DATA_PATH . "usertype.enum.php");
 
 class Usuario
 {
@@ -15,7 +15,9 @@ class Usuario
     private $tipo;
 
     // Constructor
-    function __construct() {}
+    function __construct()
+    {
+    }
 
     // Getters y Setters
 
@@ -48,7 +50,7 @@ class Usuario
     {
         $this->apellido = $apellido;
     }
-    
+
     function get_username()
     {
         return $this->username;
@@ -96,12 +98,13 @@ class Usuario
 
     function set_tipo($tipo)
     {
-        switch($tipo) {
-            case 1: 
+        switch ($tipo) {
+            case 1:
                 $this->tipo = UserTypeEnum::Administrator;
-            break;
+                break;
             case 2:
-                $this->tipo = UserTypeEnum::Client; 
+                $this->tipo = UserTypeEnum::Client;
+                break;
         }
     }
 }

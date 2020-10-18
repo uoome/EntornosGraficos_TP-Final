@@ -90,10 +90,8 @@ class ZapatillaDataService extends ConnectionDB
                 while($row = $data->fetch_assoc()){
                     $zapatilla->set_id($row['id_zapatilla']);
                     $zapatilla->set_nombre($row['nombre']);
-                    $zapatilla->set_color($row['color']);
                     $zapatilla->set_precio($row['precio']);
                     $zapatilla->set_descripcion($row['descripcion']);
-                    $zapatilla->set_talle($row['talle']);
                     $zapatilla->set_img_path($row['img_path']);
                 }
             // Cerrar conexion
@@ -108,7 +106,7 @@ class ZapatillaDataService extends ConnectionDB
     }
 
     // Consulta que inserta una nueva zapatilla
-    function insertZapa($newZapa)
+    function insertZapa(Zapatilla $newZapa)
     {
         try {
             // Armar query

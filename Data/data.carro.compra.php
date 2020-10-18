@@ -4,6 +4,7 @@ include_once(DAO_PATH . "db.php");
 include_once(DAO_PATH . "dao.usuario.php");
 include_once(DAO_PATH . "dao.zapatilla.php");
 include_once(DAO_PATH . "dao.lineaCompra.php");
+include_once(DATA_PATH . "forma.pago.php");
 
 session_start();
 
@@ -12,7 +13,8 @@ class CarroCompra
     private $id_carro;
     private $total_carro;
     private $id_usuario;
-
+    private $forma_pago;
+    
     protected $cart_contents = array(); // Array de lineas de compra
 
     function __construct()
@@ -62,9 +64,29 @@ class CarroCompra
         } else return null;
     }
 
+    function get_formaPago()
+    {
+        return $this->forma_pago;
+    }
+
+    function set_formaPago($fp)
+    {
+        switch ($fp) {
+            case 1:
+                $this->forma_pago = FormaPago::Efectivo;
+                break;
+            case 2:
+                $this->forma_pago = FormaPago::Debito;
+                break;
+            case 3:
+                $this->forma_pago = FormaPago::Credito;
+                break;
+        }
+    }
+
     /**
-     * Contenido Carro: Devuelve los elementos del carro de compras
-     * @return array $cart
+     * Contenido Carro: Devuelve las lineas de compra del carro
+     * @return array $lineas
      */
     public function getContenidoCarro()
     {

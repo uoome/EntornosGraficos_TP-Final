@@ -1,7 +1,7 @@
 <?php
 /*
-Esta página obtiene el contenido del carrito y muestra sus artículos con el precio total. 
-Además, el usuario podrá agregar más elementos al carrito mediante el botón Continue Shopping o finalizarlo mediante el botón Checkout. Este último botón redirige al usuario a la página checkout.php donde el usuario tendrá una vista previa del pedido.
+Esta página obtiene el contenido del carro y muestra sus artículos con el precio total. 
+Además, el usuario podrá agregar más elementos al carro mediante el botón Continue Shopping o finalizarlo mediante el botón Checkout. Este último botón redirige al usuario a la página checkout.php donde el usuario tendrá una vista previa del pedido.
 */
 
 // inicializar rutas
@@ -13,9 +13,15 @@ include_once(DATA_PATH . "data.lineaCompra.php");
 // Iniciar/Retomar sesion
 // session_start();
 
-// include 'Cart.php';
-$carro = new CarroCompra();
-var_dump($carro);
+// Fetch usuario
+$usuarioActual = new Usuario(); // No se si es necesario
+if (isset($_SESSION['usuarioActual'])) { 
+    $usuarioActual = $_SESSION['usuarioActual'];
+    // Si hay usuario, iniciar/traer carro
+    $carro = new CarroCompra();
+    var_dump($carro);
+} else $usuarioActual = null;
+
 ?>
 
 <!DOCTYPE html>
@@ -63,6 +69,8 @@ var_dump($carro);
     <!-- NavBar -->
     <?php include(INCLUDES_PATH . "navbar.php") ?>
 
+    <!-- Contenido solo visible para usuarios logueados -->
+    <?php if($usuarioActual != null) { ?>
     <div class="container-fluid">
         <div class="container">
             <h2>Carro de Compra</h2>
@@ -141,6 +149,15 @@ var_dump($carro);
         <!-- Footer -->
         <?php include(INCLUDES_PATH . "footer.html") ?>
     </div>
+
+    <!-- Mensaje de autorizacion -->
+    <?php } else { ?>
+    <div class="container mt-3">
+        <div class="alert alert-danger text-center" role="alert">
+            No esta autorizado a estar en esta seccion!
+        </div>
+    </div>
+    <?php } ?>
 
     <!-- Scripts -->
     <!-- Custom pq hubo que quitar el "jquery.slim" que venia de Bootstrap -->

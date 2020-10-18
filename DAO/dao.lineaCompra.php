@@ -7,6 +7,12 @@ include_once(DATA_PATH . "data.lineaCompra.php");
 
 class LineaCompraService extends ConnectionDB {
 
+    
+    /**
+     * Devuelve una linea de compra (si existe) acorde al ID de linea
+     * @param int $id_lineaC
+     * @return array|null $lineaCompra
+     */
     function getLineaCompra($id_lineaC) {
         $lineaCompra = null;
 
@@ -28,23 +34,40 @@ class LineaCompraService extends ConnectionDB {
         return $lineaCompra;
     }
 
-    function insertLieaCompra($lineaCompra) {
 
+    /**
+     * Inserta una Linea de Compra en DB
+     * @param LineaCompra $lineaCompra
+     * @return bool $flag
+     */
+    function insertLineaCompra(LineaCompra $lineaCompra) {
+
+        // die(var_dump($lineaCompra));
         try {
             // Armar query
-            $sql = "INSERT INTO `carro_zapatilla`(id_carro, id_zapatilla, cantidad, subtotal_linea) 
-            VALUES (?,?,?,?);";
+            $sql = "INSERT INTO `carro_zapatilla` (`id_carro`, `id_zapatilla`, `cantidad`, `subtotal_linea`, `color`, `talle`) VALUES (?,?,?,?,?,?);";
+            // Fetch values
+            $carro = $lineaCompra->get_idCarro();
+            $zapa = $lineaCompra->get_idZapatilla();
+            $cant = $lineaCompra->get_qty();
+            $subtot = $lineaCompra->get_subtotalLinea();
+            $color = $lineaCompra->get_color();
+            $talle = $lineaCompra->get_talle();
             // Armar statement
             $stmt = $this->connect()->prepare($sql);
             $stmt->bind_param(
-                "iiid",
-                $lineaCompra->get_idCarro(),
-                $lineaCompra->get_idZapatilla(),
-                $lineaCompra->get_qty(),
-                $lineaCompra->get_subtotalLinea()
+                "iiidsi",
+                $carro,
+                $zapa,
+                $cant,
+                $subtot,
+                $color,
+                $talle
             );
             // Ejecutar y guardar resultado
             $flag = $stmt->execute();
+            // echo "Linea zapa " . $lineaCompra->get_idZapatilla(); 
+            // die(var_dump($flag));
             // Cerrar prep
             $stmt->close();
             // Cerrar conexion
