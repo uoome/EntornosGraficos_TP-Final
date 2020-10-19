@@ -9,7 +9,10 @@ class ZapatillaDataService extends ConnectionDB
 
     /* CONSULTAS */
 
-    // Consulta que retorna un array de zapatillas
+    /**
+     * Consulta que retorna un array de zapatillas
+     * @return null|array $zapatillas
+     */
     function getZapatillas()
     {
         $zapatillas = null;
@@ -36,6 +39,75 @@ class ZapatillaDataService extends ConnectionDB
         }
         // Devolver data
         return $zapatillas;
+    }
+
+    /**
+     * Consulta que retorna un array de zapatillas
+     * @param int $criterio Criterio de filtro de busqueda
+     * @param int $inicio Registro de comienzo de busqueda
+     * @param int $cant Cantidad de elementos a devolver
+     * @return null|array $zapatillasTienda
+     */
+    function getTiendaZapatillas($criterio, $inicio, $cant)
+    {
+        $zapatillasTienda = null;
+        $query = "SELECT * FROM `zapatilla` LIMIT " . $inicio . "," . $cant .";";
+        // $query = "SELECT * FROM `zapatilla` ORDER BY id_zapatilla DESC LIMIT 10;";
+
+        try {
+            // Ejecutar query
+            $data = $this->connect()->query($query);
+            $numRows = $data->num_rows;
+            // Si hay datos devueltos
+            if ($numRows > 0) {
+                // Fetch data
+                while ($row = $data->fetch_assoc()) {
+                    $zapatillasTienda[] = $row;
+                }
+            }
+            // Cerrar conexion
+            $this->closeConnection();
+        } catch (mysqli_sql_exception $sqlEx) {
+            die("Error (SQL) en consulta 'getTiendaZapatillas': " . $sqlEx->getMessage());
+        } catch (Exception $ex) {
+            die("Error en consulta 'getTiendaZapatillas': " . $ex->getMessage());
+        }
+        // Devolver data
+        return $zapatillasTienda;
+    }
+
+
+    /**
+     * Consulta que retorna la cantidad de zapatillas en DB
+     * @return int $cant_registros;
+     */
+    function getTotalRegistrosZapas()
+    {
+
+        $cant_registros = 0;
+
+        try {
+            $query = "SELECT COUNT( `id_zapatilla` ) AS 'total_registros' FROM `zapatilla`;";
+            // Ejecutar query
+            $data = $this->connect()->query($query);
+            $numRows = $data->num_rows;
+            // Si hay datos devueltos
+            if ($numRows > 0) {
+                // Fetch data
+                while ($row = $data->fetch_assoc()) {
+                    // Convertir a int la cantidad de registros devueltos
+                    $cant_registros = intval($row['total_registros']);
+                }
+            }
+            // Cerrar conexion
+            $this->closeConnection();
+        } catch (mysqli_sql_exception $sqlEx) {
+            die("Error (SQL) en consulta 'getTotalRegistrosZapas': " . $sqlEx->getMessage());
+        } catch (Exception $ex) {
+            die("Error en consulta 'getTotalRegistrosZapas': " . $ex->getMessage());
+        }
+        // Devolver data
+        return $cant_registros;
     }
 
     /**
