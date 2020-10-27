@@ -1,4 +1,10 @@
 <?php
+/**
+ * Clase que se encarga de manejar la alta y modificacion de:
+ * - Usuario Administrador
+ * - Usuario Cliente
+ */
+
 include_once($_SERVER['DOCUMENT_ROOT'].'/EntornosGraficos_TP-Final/rutas.php');
 include_once(DAO_PATH."db.php");
 include_once(DAO_PATH."dao.usuario.php");
@@ -70,24 +76,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Redirect al formulario
                 header("Location: ../registro.cliente.php");
             }
-        } else {
-            // Mensaje error
-            $_SESSION['mensaje'] = "Error: Metodo no correspondiendo a Alta admin o client.";
-            $_SESSION['tipo_mensaje'] = "danger";
-            // Redirect al formulario
-            header("Location: ../registro.cliente.php");
+        } elseif(isset($_POST['update_user'])) {
+            // Fetch datos a modificar
+            $userToUpdate = new Usuario();
+            $userToUpdate->set_id($_POST['idUserToUpdate']); // Guardar ID de usuario a modificar
+            $userToUpdate->set_nombre($nombre);
+            $userToUpdate->set_apellido($apellido);
+            $userToUpdate->set_email($email);
+            $userToUpdate->set_username($username);
+            $userToUpdate->set_password($password);
+            $userToUpdate->set_telefono($telefono);
+            $userToUpdate->set_tipo($type);
+
+            // Update
+            if(isset($password)) $result = $usuarioService->updateUserWithPass($userToUpdate);
+            else $result = $usuarioService->updateUserWithoutPass($userToUpdate);
+            
+            // Mensajes 
+            if ($result) {
+                // Mensaje exito
+                $_SESSION['mensaje'] = "Usuario modificado con exito !";
+                $_SESSION['tipo_mensaje'] = "success";
+            } else {
+                // Mensaje error
+                $_SESSION['mensaje'] = "Error al modificar usuario.";
+                $_SESSION['tipo_mensaje'] = "danger";
+            }
+            // Redirect al panel de usuarios
+            header("Location: ../panel.usuarios.php");
         }
     } else {
         $_SESSION['mensaje'] = "<strong>Ups!</strong> Complete los datos correctamente";
         $_SESSION['tipo_mensaje'] = "warning";
+        // die(var_dump($_SERVER['HTTP_REFERER']));
+        header("Location: " . $_SERVER['HTTP_REFERER']);
         // Redirect al formulario
-        header("Location: ../registro.cliente.php");
+        // header("Location: ../registro.cliente.php");
     }
 } else {
     // Mensaje error
     $_SESSION['mensaje'] = "Error al enviar formulario por metodo POST.\n";
     $_SESSION['tipo_mensaje'] = "danger";
-    header("Location: ../registro.cliente.php");
+    header("Location: ../panel.usuarios.php");
 }
 
 ?>

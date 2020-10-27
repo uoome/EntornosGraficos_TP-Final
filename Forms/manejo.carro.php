@@ -47,7 +47,7 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
     } elseif ($_REQUEST['action'] == 'updateCartItem' && !empty($_REQUEST['id'])) {
         // Solo cantidad de un producto ya agregado
         $rowidToUpdate = $_REQUEST['id'];
-        $qtyToUpdate = $_REQUEST['qty'];
+        $qtyToUpdate = intval($_REQUEST['qty']);
         // die(var_dump($dataToUpdate));
         $updateItem = $carro->actualizarCarro($rowidToUpdate, $qtyToUpdate);
         echo $updateItem ? 'ok' : 'err';

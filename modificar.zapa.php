@@ -1,24 +1,73 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'] . '/EntornosGraficos_TP-Final/rutas.php');
-include(DAO_PATH . "db.php");
-include(DATA_PATH . "data.usuario.php");
 
-// Iniciar sesion
-session_start();
-// Fetch usuario
-$usuarioActual = new Usuario();
-if (isset($_SESSION['usuarioActual'])) $usuarioActual = $_SESSION['usuarioActual'];
-else $usuarioActual = null;
+include_once($_SERVER['DOCUMENT_ROOT'] . '/EntornosGraficos_TP-Final/rutas.php');
+include_once(DAO_PATH . "db.php"); // DB
+include_once(DAO_PATH . "dao.usuario.php"); // Usuario service
+include_once(DATA_PATH . "data.usuario.php"); // Usuario Data
+include_once(DAO_PATH . "dao.zapatilla.php"); // Zapatilla service
+include_once(DATA_PATH . "data.zapatilla.php"); // Zapatilla Data
+
+// Si hay ID
+if (isset($_GET['id'])) {
+    // Guardar ID
+    $id = $_GET['id'];
+
+    // Iniciar/Retomar sesion
+    session_start();
+
+    // Fetch usuario sesion
+    if (isset($_SESSION['usuarioActual'])) {
+        $usuarioActual = $_SESSION['usuarioActual'];
+        // Validar que existe el usuario
+        $zapaService = new ZapatillaDataService();
+        $zapatilla = $zapaService->getZapatilla($id);
+    } else $usuarioActual = null;
+} else {
+    // Mensaje error
+    $_SESSION['mensaje'] = "Error de request.";
+    $_SESSION['tipo_mensaje'] = "danger";
+    //Redireccionar al form
+    // header("Location: panel.zapatillas.php");
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <!-- Cabeceras -->
-    <?php include(INCLUDES_PATH."styles.links.php") ?>
+    <meta charset="utf-8">
+    <!-- Botstrap CSS -->
+    <link rel="stylesheet" href="CSS/Bootstrap/css/bootstrap.min.css" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="CSS/fontawesome-free-5.14.0-web/css/all.css" />
+    <!-- Icon -->
+    <link rel="shortcut icon" href="IMG/favicon.ico" type="image/x-icon">
+    <!-- Custom CSS -->
+    <style>
+        .container {
+            padding: 20px;
+        }
 
-    <title>Registro de Zapatilla | Tibbonzapas</title>
+        input[type="number"] {
+            width: 20%;
+        }
+    </style>
+    <!-- JavaScript -->
+    <script>
+        function enableIMG(checkbox) {
+            var imagFileInput = document.getElementById('inputImagen');
+
+            if(checkbox.checked) {
+                console.log("Habilitar cambio de imagen");
+                imagFileInput.disabled = false;
+            } else {
+                console.log("Deshabilitar cambio de pass");
+                imagFileInput.disabled = true;
+            }
+        }
+    </script>
+
+    <title>ABM Modificar Zapatilla | Tibbonzapas</title>
 </head>
 
 <body>
@@ -35,24 +84,29 @@ else $usuarioActual = null;
     ?>
 
         <div class="container mt-3">
-            <!-- Mensaje alerta -->
-            <?php if (isset($_SESSION['mensaje'])) { ?>
+            <div class="col justify-content-around">
+
+                <!-- Si hay zapatilla a modificar -->
+                <?php if ($zapatilla != null) { ?>
+
+                    <div class="jumbotron">
+                <h3 class="mb-3">
+                    <i class="fas fa-user-plus"></i>
+                    Modificar Zapatilla
+                </h3>
+                <hr />
+                <!-- Mensaje alerta -->
+                <?php if (isset($_SESSION['mensaje'])) { ?>
                 <div class="alert alert-<?= $_SESSION['tipo_mensaje'] ?> alert-dismissible fade show" role="alert">
                     <?= $_SESSION['mensaje'] ?>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-            <?php } ?>
-
-            <div class="jumbotron">
-                <h3 class="mb-3">
-                    <i class="fas fa-user-plus"></i>
-                    Complete datos de registro
-                </h3>
-                <hr />
+                <?php } ?>
                 <!-- Formulario -->
                 <form action="Forms/admin.alta.zapatilla.php" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="idZapaToUpdate" value="<?= $id ?>">
                     <!-- Input Modelo -->
                     <div class="form-group row">
                         <label for="inputNombre" class="col-md-2 col-form-label">Nombre/Modelo</label>
@@ -62,6 +116,7 @@ else $usuarioActual = null;
                                 class="form-control <?php if (isset($_SESSION['modeloZapaErr'])) { ?>is-invalid<?php } ?>" 
                                 id="inputNombre" 
                                 name="nombreZapatilla" 
+                                value="<?= $zapatilla->get_nombre() ?>"
                                 aria-describedby="nombreHelpText" 
                                 required 
                                 autofocus
@@ -83,6 +138,7 @@ else $usuarioActual = null;
                                 id="inputPrecio" 
                                 name="precioZapatilla" 
                                 aria-describedby="precioHelpText"
+                                value="<?= $zapatilla->get_precio() ?>"
                             >
                             <?php if (isset($_SESSION['precioZapaErr'])) { ?>
                                 <small class="invalid-feedback"><?= $_SESSION["precioZapaErr"] ?></small>
@@ -103,7 +159,7 @@ else $usuarioActual = null;
                                 name="descripcionZapatilla" 
                                 rows="3"
                                 aria-describedby="descripHelpText"
-                            ></textarea>
+                            ><?= $zapatilla->get_descripcion() ?></textarea>
                             <small id="descripHelpText" class="form-text text-muted">
                                 Ingrese una descripcion sobre el modelo.
                             </small>
@@ -111,19 +167,28 @@ else $usuarioActual = null;
                     </div>
                     <!-- Tipo -->
                     <div class="form-group row">
-                        <label for="selectTipo" class="col-md-2 col-form-label">TIpo</label>
+                        <label for="selectTipo" class="col-md-2 col-form-label">Tipo</label>
                         <div class="col-md-10">
                             <select class="form-control" id="selectTipo" name="selectTipo">
-                                <option value="U" selected>Unisex</option>
-                                <option value="H">Hombre</option>
-                                <option value="M">Mujer</option>
+                                <option 
+                                    value="U" 
+                                    <?php if($zapatilla->get_sexo() == null) echo 'selected' ?>
+                                >Unisex</option>
+                                <option 
+                                    value="H" 
+                                    <?php if($zapatilla->get_sexo() == 'H') echo 'selected' ?>
+                                >Hombre</option>
+                                <option 
+                                    value="M" 
+                                    <?php if($zapatilla->get_sexo() == 'M') echo 'selected' ?>
+                                >Mujer</option>
                             </select>
                         </div>
                     </div>
                     <!-- Input IMG -->
                     <div class="form-group row">
                         <label for="inputImagen" class="col-md-2 col-form-label">Cargue imagen</label>
-                        <div class="col-md-10">
+                        <div class="col-md-6">
                             <!-- MAX_FILE_SIZE debe preceder al campo de entrada del fichero -->
                             <!-- <input type="hidden" name="MAX_FILE_SIZE" value="500000" /> -->
                             <input 
@@ -132,6 +197,7 @@ else $usuarioActual = null;
                                 id="inputImagen" 
                                 name="fileZapa" 
                                 aria-describedby="imagenHelpText"
+                                disabled
                             >
                             <?php if (isset($_SESSION['imgErr'])) { ?>
                                 <small class="invalid-feedback"><?= $_SESSION["imgErr"] ?></small>
@@ -141,20 +207,44 @@ else $usuarioActual = null;
                                 </small>
                             <?php } ?>
                         </div>
+                        <div class="col-md-4 form-group form-check">
+                            <input type="hidden" name="checkIMG" value="off" />
+                            <input 
+                                type="checkbox" 
+                                class="form-check-input" 
+                                id="checkIMG" 
+                                name="checkIMG" 
+                                value="on"
+                                onclick="enableIMG(this)"
+                            >
+                            <label class="form-check-label" for="checkIMG">Cambiar imagen</label>
+                            <small id="checkIMGHelpText" class="form-text text-muted">
+                                Checkear para cambiar imagen
+                            </small>
+                        </div>
                     </div>
                     <!-- Submit -->
                     <div class="form-group row">
                         <div class="col-md-10">
-                            <button type="submit" class="btn btn-primary" name="insert_zapa">Agregar</button>
+                            <button type="submit" class="btn btn-primary" name="update_zapa">Modificar</button>
                         </div>
                     </div>
                 </form>
                 <!-- Limpiar mensajes de error -->
                 <?php
-                    if(isset($_SESSION['modeloZapaErr'])) unset($_SESSION['modeloZapaErr']);
-                    if(isset($_SESSION['precioZapaErr'])) unset($_SESSION['precioZapaErr']);
-                    if(isset($_SESSION['imgErr'])) unset($_SESSION['imgErr']);
+                    if(isset($_SESSION['modeloZapaErr'])) unset($_SESSION['modeloZapaErr']); 
+                    if(isset($_SESSION['precioZapaErr'])) unset($_SESSION['precioZapaErr']); 
+                    if(isset($_SESSION['imgErr'])) unset($_SESSION['imgErr']); 
                 ?>
+            </div>
+
+                    <!-- Si no hay zapatilla a modificar -->
+                <?php } else {
+                    $_SESSION['mensaje'] = "El registro a modificar no existe.";
+                    $_SESSION['tipo_mensaje'] = "danger";
+                    //Redireccionar al form
+                    header("Location: panel.zapatillas.php");
+                } ?>
             </div>
         </div>
 
@@ -174,7 +264,7 @@ else $usuarioActual = null;
     ?>
 
     <!-- Scripts -->
-    <?php include(INCLUDES_PATH . "scripts.php"); ?>
+    <?php include(INCLUDES_PATH . "scripts.php") ?>
 
 </body>
 

@@ -170,8 +170,10 @@ class CarroCompra
             // echo $key . " -> "; var_dump($val); echo "<br>";
             // Si es LineaCompra, actualizar carro
             if ($val instanceof LineaCompra) {
-                $this->cart_contents['cart_total'] += $val->get_subtotalLinea();
-                $this->cart_contents['total_items'] += $val->get_qty(); 
+                // var_dump(intval($val->get_qty()));
+                // die(var_dump(doubleval($val->get_subtotalLinea())));
+                $this->cart_contents['cart_total'] += doubleval($val->get_subtotalLinea());
+                $this->cart_contents['total_items'] += intval($val->get_qty()); 
             }
         }
         // var_dump($this->cart_contents); echo "<br>";
@@ -206,8 +208,12 @@ class CarroCompra
                 // Actualizar cantidad
                 $element = $this->cart_contents[$ri];
                 if ($element instanceof LineaCompra) {
+                    // Traer precio zapatilla
+                    $zapaLinea = $element->get_zapatilla();
+                    $subtot = doubleval($zapaLinea->get_precio());
+                    // Actualizar subtotal linea
                     $element->set_qty($q);
-                    $element->set_subtotalLinea($q * $element->get_subtotalLinea());
+                    $element->set_subtotalLinea($q * $subtot);
                     // Actualizar carro
                     return $this->saveCarro();
                 } else return FALSE;

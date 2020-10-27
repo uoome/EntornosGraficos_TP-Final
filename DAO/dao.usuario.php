@@ -45,7 +45,7 @@ class UsuarioService extends ConnectionDB
 
     /** Consulta para manejo de login -> Agregar pass encriptadas
      * @param int/string $id
-     * @return null|Usuario
+     * @return null|Usuario $usuario
      */
     function getUser($id) {
         $usuario = null;
@@ -81,7 +81,10 @@ class UsuarioService extends ConnectionDB
         return $usuario;
     }
 
-    // Consulta que retorna un array de usuarios
+    /**
+     * Consulta que retorna un array de usuarios
+     * @return null|array $usuarios
+     */
     function getUsuarios()
     {
         $usuarios = null;
@@ -175,6 +178,83 @@ class UsuarioService extends ConnectionDB
         return $flag;
     }
 
+    /** Consulta que actualiza los datos de un usuario, incluso password
+     * @param Usuario $userToUpdate
+     * @return bool
+     */
+    function updateUserWithPass($userToUpdate) 
+    {
+        try {
+        $sql = "UPDATE `usuario` 
+            SET `nombre`= ?, `apellido`= ?, `username`= ?, `password`= ?, `email`= ?,`telefono`= ?,
+            `tipo_usuario`= ? WHERE `id_usuario`= ? ;";
+
+            // Armar statement
+            $stmt = $this->connect()->prepare($sql);
+            $stmt->bind_param(
+                "sssssiii",
+                $userToUpdate->get_nombre(),
+                $userToUpdate->get_apellido(),
+                $userToUpdate->get_username(),
+                $userToUpdate->get_password(),
+                $userToUpdate->get_email(),
+                $userToUpdate->get_telefono(),
+                $userToUpdate->get_tipo(),
+                $userToUpdate->get_id()
+            );
+            // Ejecutar y guardar resultado
+            $flag = $stmt->execute();
+            // Cerrar prep
+            $stmt->close();
+            // Cerrar conexion
+            $this->closeConnection();
+        } catch (mysqli_sql_exception $sqlEx) {
+            die("Error (SQL) al actualizar un usuario en DB: " . $sqlEx->getMessage());
+        } catch (Exception $ex) {
+            die("Error al actualizar un usuario en DB: " . $ex->getMessage());
+        }
+        // Devolver resultado
+        return $flag;
+    }
+
+    /** Consulta que actualiza los datos de un usuario, sin incluir password
+     * @param Usuario $userToUpdate
+     * @return bool
+     */
+    function updateUserWithoutPass($userToUpdate) 
+    {
+        try {
+        $sql = "UPDATE `usuario` 
+            SET `nombre`= ?, `apellido`= ?, `username`= ?, `email`= ?,`telefono`= ?,
+            `tipo_usuario`= ? WHERE `id_usuario`= ? ;";
+
+            // Armar statement
+            $stmt = $this->connect()->prepare($sql);
+            $stmt->bind_param(
+                "ssssiii",
+                $userToUpdate->get_nombre(),
+                $userToUpdate->get_apellido(),
+                $userToUpdate->get_username(),
+                $userToUpdate->get_email(),
+                $userToUpdate->get_telefono(),
+                $userToUpdate->get_tipo(),
+                $userToUpdate->get_id()
+            );
+            // Ejecutar y guardar resultado
+            $flag = $stmt->execute();
+            // Cerrar prep
+            $stmt->close();
+            // Cerrar conexion
+            $this->closeConnection();
+        } catch (mysqli_sql_exception $sqlEx) {
+            die("Error (SQL) al actualizar un usuario en DB: " . $sqlEx->getMessage());
+        } catch (Exception $ex) {
+            die("Error al actualizar un usuario en DB: " . $ex->getMessage());
+        }
+        // Devolver resultado
+        return $flag;
+    }
+
     // Consulta elimina una zapatilla
     function deleteUsuario($id)
     {
@@ -222,5 +302,3 @@ class UsuarioService extends ConnectionDB
         return $idValido;
     }
 }
-
-?>

@@ -14,8 +14,12 @@ else $usuarioActual = null;
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Cabeceras -->
-<?php include(INCLUDES_PATH."header.php"); ?>
+<head>
+    <!-- Cabeceras -->
+    <?php include(INCLUDES_PATH."styles.links.php") ?>
+
+    <title>Panel de Zapatillas | Tibbonzapas</title>
+</head>
 
 <body>
     <!-- NavBar -->
@@ -57,6 +61,7 @@ else $usuarioActual = null;
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Precio</th>
                                 <th scope="col">Descripcion</th>
+                                <th scope="col">Tipo</th>
                                 <th scope="col">Imagen</th>
                             </tr>
                         </thead>
@@ -73,7 +78,7 @@ else $usuarioActual = null;
                                     <td class="text-center">
                                         <div class="btn-group btn-group-sm" role="group">
                                             <a 
-                                                href="Forms/admin.modificar.zapatilla.php?id=<?= $zapa["id_zapatilla"] ?>" 
+                                                href="modificar.zapa.php?id=<?= $zapa["id_zapatilla"] ?>" 
                                                 class="btn btn-info" 
                                                 title="Modificar Zapatilla"
                                             >
@@ -100,6 +105,12 @@ else $usuarioActual = null;
                                         <?php
                                         if(empty($zapa["descripcion"])) echo "Sin Descrip";
                                         else echo $zapa["descripcion"];
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        if(empty($zapa["tipo"])) echo "Unisex";
+                                        else echo $zapa["tipo"];
                                         ?>
                                     </td>
                                     <td>

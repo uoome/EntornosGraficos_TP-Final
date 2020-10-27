@@ -28,23 +28,34 @@ if(isset($_GET['pagina'])) {
 // Fecth zapatillas
 $zapatillaService = new ZapatillaDataService();
 
-// Guardar cantidad de productos
-$cant_prod = $zapatillaService->getTotalRegistrosZapas();
+// Fetch zapas
+// Si hay POST y tiene criterio
+if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['criterioSelect'] != 'N') {
+    $criterio = "WHERE tipo = '" . $_POST['criterioSelect'] ."'";
+    $zapas = $zapatillaService->getTiendaZapatillasCriterio($criterio, $inicio, $TAMANIO_PAGINA);
+    // Guardar cantidad de productos
+    $cant_prod = count($zapas);
+} else { // Sino, busqueda sin criterio
+    // Guardar cantidad de productos
+    $cant_prod = $zapatillaService->getTotalRegistrosZapas();
+    $zapas = $zapatillaService->getTiendaZapatillas($inicio, $TAMANIO_PAGINA); 
+}
+
 // Calcular cantidad de paginas a formar (redondeadas hacia arriba)
 $total_paginas  = ceil($cant_prod / $TAMANIO_PAGINA);
-
-// Fetch zapas
-$zapas = $zapatillaService->getTiendaZapatillas('', $inicio, $TAMANIO_PAGINA);
-
-echo "pagina: " . $pagina . " de " . $total_paginas . " paginas";
+// echo "pagina: " . $pagina . " de " . $total_paginas . " paginas";
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Cabeceras -->
-<?php include(INCLUDES_PATH . "header.php") ?>
+<head>
+    <!-- Cabeceras -->
+    <?php include(INCLUDES_PATH."styles.links.php") ?>
+
+    <title>Tienda | Tibbonzapas</title>
+</head>
 
 <body>
     <!-- NavBar -->
@@ -90,20 +101,23 @@ echo "pagina: " . $pagina . " de " . $total_paginas . " paginas";
                     </div>
                     <!-- Columna central-->
                     <div class="col">
-                        <form>
+                        <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <!-- Boton buscar | Agregar filtros -->
-                                    <button class="btn btn-outline-secondary" type="button" name="btnBuscar" value="">
+                                    <button type="submit" class="btn btn-outline-secondary" name="btnBuscar" title="Buscar">
                                         <i class="fas fa-search"></i>
                                     </button>
                                 </div>
-                                <select class="custom-select" id="selectFilter" aria-label="Selector de opciones de filtro">
-                                    <option value="">Elija...</option>
-                                    <option value="">Ofertas</option>
-                                    <option value="">Nuevos Modelos</option>
-                                    <option value="">Modelos Hombres</option>
-                                    <option value="">Modelos Mujeres</option>
+                                <select 
+                                    class="custom-select" 
+                                    id="selectFilter"
+                                    name="criterioSelect" 
+                                    aria-label="Selector de opciones de filtro"
+                                >
+                                    <option value="N">Elija...</option>
+                                    <option value="H">Modelos Hombres</option>
+                                    <option value="M">Modelos Mujeres</option>
                                 </select>
                             </div>
                         </form>

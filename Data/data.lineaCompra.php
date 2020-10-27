@@ -68,7 +68,7 @@ class LineaCompra {
 
     /** 
     * Trae la zapatilla desde la DB, con id de zapatilla presente en la clase
-    * @return null/Zapatilla 
+    * @return null|Zapatilla 
     */
     function get_zapatilla() 
     {

@@ -15,8 +15,12 @@ else $usuarioActual = null;
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Cabeceras -->
-<?php include(INCLUDES_PATH."header.php"); ?>
+<head>
+    <!-- Cabeceras -->
+    <?php include(INCLUDES_PATH."styles.links.php") ?>
+
+    <title>Panel de Usuarios | Tibbonzapas</title>
+</head>
 
 <body>
     <!-- NavBar -->
@@ -30,6 +34,7 @@ else $usuarioActual = null;
         $usuarioActual->get_tipo() == UserTypeEnum::Administrator
     ) {
     ?>
+    
 
     <div class="container mt-3">
         <div class="card bg-light">
@@ -69,6 +74,7 @@ else $usuarioActual = null;
                         // Traer usuarios
                         $usuarioService = new UsuarioService();
                         $data = $usuarioService->getUsuarios();
+                        // var_dump($data);
                         // Si hay datos
                         if ($data != null) {
                             foreach($data as $user) {
@@ -76,10 +82,18 @@ else $usuarioActual = null;
                             <tr>
                                 <td class="text-center">
                                     <div class="btn-group btn-group-sm" role="group">
-                                        <a href="Forms/admin-modificar-usuario.php?id=<?= $user["id_usuario"] ?>" class="btn btn-info" title="Modificar Usuario">
+                                        <a 
+                                            href="modificar.usuario.php?id=<?= $user["id_usuario"] ?>" 
+                                            class="btn btn-info" 
+                                            title="Modificar Usuario"
+                                        >
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a href="Forms/admin.delete.usuario.php?id=<?= $user["id_usuario"] ?>" class="btn btn-danger" title="Eliminar Usuario">
+                                        <a 
+                                            href="Forms/admin.delete.usuario.php?id=<?= $user["id_usuario"] ?>" 
+                                            class="btn btn-danger" 
+                                            title="Eliminar Usuario"
+                                        >
                                             <i class="fas fa-trash"></i>
                                         </a>
                                     </div>

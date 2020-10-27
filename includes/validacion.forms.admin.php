@@ -1,4 +1,10 @@
 <?php
+/**
+ * Archivo que contiene:
+ *  Metodos para el manejo de datos procedentes de formularios.
+ *  Metodos para validacion de datos de formularios.
+ */
+
 include_once($_SERVER['DOCUMENT_ROOT'] . '/EntornosGraficos_TP-Final/rutas.php');
 include_once(DATA_PATH . "usertype.enum.php");
 
@@ -10,6 +16,10 @@ function test_input($data)
     return $data;
 }
 
+/**
+ * Funcion que valida los datos de un formulario de usuario
+ * @return bool
+ */
 function validarDatosUsuario()
 {
     $flag = true;
@@ -52,27 +62,61 @@ function validarDatosUsuario()
         }
     }
 
-    // Validar password
-    if (empty($_POST["inputPass"])) {
-        $_SESSION['passErr'] = "La contraseña es requerida";
-        $flag = false;
-    } else {
-        $password = test_input($_POST["inputPass"]);
-        $longitudPass = strlen($password);
-        if ($longitudPass < 4 || $longitudPass > 10) {
-            $_SESSION['passErr'] = "La contraseña debe tener entre 4 y 10 caracteres";
+
+    /* Validar checkbox 'passCheck' */
+    // Si esta -> Update user, password no requerida
+    if(isset($_POST['passCheck'])) {
+        // Si checked -> Password requerida
+        if($_POST['passCheck'] == 'on') {
+            // Validar 'inputPass'
+            if (empty($_POST["inputPass"])) {
+                $_SESSION['passErr'] = "La contraseña es requerida";
+                $flag = false;
+            } else {
+                $password = test_input($_POST["inputPass"]);
+                $longitudPass = strlen($password);
+                if ($longitudPass < 4 || $longitudPass > 10) {
+                    $_SESSION['passErr'] = "La contraseña debe tener entre 4 y 10 caracteres";
+                    $flag = false;
+                }
+            }
+
+            // Validar 'validarPass'
+            $validarPass = test_input($_POST["inputValidarPass"]);
+            if (strcmp($password, $validarPass) !== 0) {
+                $_SESSION['validarPassErr'] = "La contraseña y su validacion deben coincidir";
+                $flag = false;
+            }
+        } elseif($_POST['passCheck'] == 'off')  // Si unchecked -> Password no requerida
+            $password = null;
+        else 
+            die("Valor erroneo en passCheck");
+
+    } else { // Sino -> Insert User -> password requerida
+        // Validar password
+        if (empty($_POST["inputPass"])) {
+            $_SESSION['passErr'] = "La contraseña es requerida";
+            $flag = false;
+        } else {
+            $password = test_input($_POST["inputPass"]);
+            $longitudPass = strlen($password);
+            if ($longitudPass < 4 || $longitudPass > 10) {
+                $_SESSION['passErr'] = "La contraseña debe tener entre 4 y 10 caracteres";
+                $flag = false;
+            }
+        }
+
+        // Validar 'validarPass'
+        $validarPass = test_input($_POST["inputValidarPass"]);
+        if (strcmp($password, $validarPass) !== 0) {
+            $_SESSION['validarPassErr'] = "La contraseña y su validacion deben coincidir";
             $flag = false;
         }
     }
+    
 
-    // Validar 'validarPass'
-    $validarPass = test_input($_POST["inputValidarPass"]);
-    if (strcmp($password, $validarPass) !== 0) {
-        $_SESSION['validarPassErr'] = "La contraseña y su validacion deben coincidir";
-        $flag = false;
-    }
-
-    // Validar telefono
+    // Validar telefono | No funca la regex
+    /*
     if (!empty($_POST["inputTelefono"])) {
         $regexEnteros = "/^\d+$/"; // regex que valida solo numeros enteros | No funca
         $telefono = test_input($_POST["inputTelefono"]);
@@ -87,6 +131,7 @@ function validarDatosUsuario()
             $flag = false;
         }
     }
+    */
 
     // Validar tipoUsuario
     if (!isset($_POST["adminCheck"]) || empty($_POST["adminCheck"])) {
@@ -96,11 +141,15 @@ function validarDatosUsuario()
     return $flag;
 }
 
+/**
+ * Funcion que valida los datos de un formulario de zapatilla
+ * @return bool
+ */
 function validarDatosZapatilla()
 {
     // Variables
     $flag = true;
-    global $nombre, $precio, $descripcion, $img_path;
+    global $id, $nombre, $precio, $descripcion, $img_path, $sexo;
 
     /* Validar nombre (requerido) */
     if (empty($_POST['nombreZapatilla'])) {
@@ -113,6 +162,7 @@ function validarDatosZapatilla()
         $regexDecimal = "/^\d*[.,]?\d*$/"; // regex que valida numero entero o decimal
         $precio = test_input($_POST["precioZapatilla"]);
         $valor = preg_match($regexDecimal, $precio);
+
         if ($valor === FALSE) {
             // preg_match = FALSE -> Error
             $_SESSION['precioZapaErr'] = "Error regex.";
@@ -121,6 +171,7 @@ function validarDatosZapatilla()
             // preg_match = 1 -> Encontro patron
             // Formatear ',' por '.'
             $precio = str_replace(",", ".", $precio);
+            // die(var_dump($precio));
             // $precio = preg_replace("/,/", "/./", $_POST['precioZapatilla']);
         } elseif ($valor === 0) {
             // preg_match = 0 -> No encontro patron -> Error
@@ -136,49 +187,62 @@ function validarDatosZapatilla()
         $descripcion = htmlspecialchars($descripcion); // Formatear caracteres especiales
     }
 
+    /* Validar Tipo */
+    if(isset($_POST['selectTipo'])) 
+        if($_POST['selectTipo'] == "U") $sexo = null; 
+        else $sexo = $_POST['selectTipo'];
+
     /* Validar Imagen */
-    // Guardar campo en variable local
-    $image = $_FILES['fileZapa'];
-    $uploadOk = 1; // Bandera
-    // Si el error es 'UPLOAD_ERR_NO_FILE' -> No hay archivo cargado
-    if ($image['error'] != UPLOAD_ERR_NO_FILE) {
-        // Validar extension
-        $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/jpg']; // Permitidas
-        $mimeType = $image['type'];
-        if (!in_array($mimeType, $allowedMimeTypes)) {
-            $_SESSION['imgErr'] .= "Solo son validos archivos con formato JPG, JPEG y PNG.\n";
-            $uploadOk = 0;
-        }
+    if(isset($_POST['checkIMG'])) {
+        // Si checked -> Guardar imagen
+        if($_POST['checkIMG'] == 'on') {
+            // Guardar campo en variable local
+            $image = $_FILES['fileZapa'];
+            // die(var_dump($image));
+            $uploadOk = 1; // Bandera
+            // Si el error es 'UPLOAD_ERR_NO_FILE' -> No hay archivo cargado
+            if ($image['error'] != UPLOAD_ERR_NO_FILE) {
+                // Validar extension
+                $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/jpg']; // Permitidas
+                $mimeType = $image['type'];
+                if (!in_array($mimeType, $allowedMimeTypes)) {
+                    $_SESSION['imgErr'] .= "Solo son validos archivos con formato JPG, JPEG y PNG.\n";
+                    $uploadOk = 0;
+                }
 
-        // Validar size
-        $maxFileSize = 500000; // 500KB
-        if ($image['size'] > $maxFileSize) {
-            $_SESSION['imgErr'] .= "El archivo pesa mas de 500KB.\n";
-            $uploadOk = 0;
-        }
+                // Validar size
+                $maxFileSize = 500000; // 500KB
+                if ($image['size'] > $maxFileSize) {
+                    $_SESSION['imgErr'] .= "El archivo pesa mas de 500KB.\n";
+                    $uploadOk = 0;
+                }
 
-        // Validar si ya existe imagen
-        if (file_exists(basename($image['name']))) {
-            $_SESSION['imgErr'] .=  "El archivo que desea subir ya existe.\n";
-            $uploadOk = 0;
-        }
+                // Validar si ya existe imagen
+                if (file_exists(basename($image['name']))) {
+                    $_SESSION['imgErr'] .=  "El archivo que desea subir ya existe.\n";
+                    $uploadOk = 0;
+                }
 
-        // Si todo ok -> Guardar img en server
-        if ($uploadOk !== 0 && $flag == TRUE) {
-            $img_path = basename($image['name']); // Path que se guarda en la DB
-            $directiorio_final = UPLOADS_PATH . basename($image['name']);
-
-            if (move_uploaded_file($image['tmp_name'], $directiorio_final)) {
-                $_SESSION['llego'] .= "El fichero es válido y se subió con éxito.";
-            } else {
-                $_SESSION['imgErr'] .= "Hubo un error al subir el archivo. \n" . $image['error'];
-                $flag = false;
+                // Si todo ok -> Guardar img en server
+                if ($uploadOk !== 0 && $flag == TRUE) {
+                    $img_path = "Uploads/" . basename($image['name']); // Path que se guarda en la DB
+                    $directiorio_final = UPLOADS_PATH . basename($image['name']);
+                    
+                    // Si hay error al subir el archivo -> Mensaje error
+                    if (!move_uploaded_file($image['tmp_name'], $directiorio_final)) {
+                        $_SESSION['imgErr'] .= "Hubo un error al subir el archivo. \n" . $image['error'];
+                        $flag = false;
+                    } 
+                } else { // Sino, error en carga de datos -> no subir archivo
+                    $_SESSION['imgErr'] .= "El archivo no fue subido.";
+                    $flag = false;
+                }
             }
-        } else {
-            $_SESSION['imgErr'] .= "El archivo no fue subido.";
+        } elseif($_POST['checkIMG'] == 'off') {
+            $img_path = null;
             $flag = false;
-        }
-    } // No requerida, asi que no hay 'else'
+        } 
+    }
 
     return $flag;
 }

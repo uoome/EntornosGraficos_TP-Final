@@ -14,8 +14,12 @@ $muestra = $zapaService->getMuestra();
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Cabeceras -->
-<?php include(INCLUDES_PATH."header.php") ?>
+<head>
+    <!-- Cabeceras -->
+    <?php include(INCLUDES_PATH."styles.links.php") ?>
+
+    <title>Index | Tibbonzapas</title>
+</head>
 
 <body>
     <!-- NavBar -->

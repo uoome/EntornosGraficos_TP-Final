@@ -4,12 +4,10 @@ class Zapatilla
 {
     private $id_zapatilla;
     private $nombre;
-    private $color;
     private $descripcion;
     private $precio;
     private $img_path;
-    private $talle;
-    private $qty;
+    private $sexo;
 
     // Constructor
     function __construct() {}
@@ -35,16 +33,6 @@ class Zapatilla
         $this->nombre = $nombre;
     }
 
-    function get_color()
-    {
-        return $this->color;
-    }
-
-    function set_color($color)
-    {
-        $this->color = $color;
-    }
-
     function get_descripcion()
     {
         return $this->descripcion;
@@ -60,9 +48,9 @@ class Zapatilla
         return $this->precio;
     }
 
-    function set_precio($precio)
+    function set_precio($p)
     {
-        $this->precio = $precio;
+        $this->precio = $p;
     }
 
     function get_img_path()
@@ -75,24 +63,14 @@ class Zapatilla
         $this->img_path = $path;
     }
 
-    function get_talle()
+    function get_sexo()
     {
-        return $this->talle;
+        return $this->sexo;
     }
 
-    function set_talle($t)
+    function set_sexo($s)
     {
-        $this->talle = $t;
-    }
-
-    function get_qty()
-    {
-        return $this->qty;
-    }
-
-    function set_qty($q)
-    {
-        $this->qty = $q;
+        $this->sexo = $s;
     }
 
 }

@@ -28,7 +28,6 @@ if (isset($_SESSION['usuarioActual'])) {
 <html lang="en">
 
 <head>
-    <title>View Cart - PHP Shopping Cart Tutorial</title>
     <meta charset="utf-8">
     <!-- Botstrap CSS -->
     <link rel="stylesheet" href="CSS/Bootstrap/css/bootstrap.min.css" />
@@ -36,7 +35,7 @@ if (isset($_SESSION['usuarioActual'])) {
     <link rel="stylesheet" href="CSS/fontawesome-free-5.14.0-web/css/all.css" />
     <!-- Icon -->
     <link rel="shortcut icon" href="IMG/favicon.ico" type="image/x-icon">
-
+    <!-- Custom CSS -->
     <style>
         .container {
             padding: 20px;
@@ -46,6 +45,7 @@ if (isset($_SESSION['usuarioActual'])) {
             width: 20%;
         }
     </style>
+    <!-- JavaScript -->
     <script>
         function updateCartItem(qty, id) {
             console.log("Update:", qty, id);
@@ -60,9 +60,11 @@ if (isset($_SESSION['usuarioActual'])) {
                     } else {
                         alert('Cart update failed, please try again.');
                     }
-                });
-            }
+                }
+            );
+        }
     </script>
+    <title>Carro de Compra | Tibbonzapas</title>
 </head>
 
 <body>
@@ -108,7 +110,12 @@ if (isset($_SESSION['usuarioActual'])) {
                                     <td>$ <?php $item->get_precio() != null ? print $item->get_precio() : print("0"); ?>
                                     </td>
                                     <td>
-                                        <input type="number" class="form-control" value="<?= $linea->get_qty() ?>" onchange="updateCartItem(this.value,'<?= $key ?>')">
+                                        <input 
+                                            type="number" 
+                                            class="form-control" 
+                                            value="<?= $linea->get_qty() ?>" 
+                                            onchange="updateCartItem(this.value,'<?= $key ?>')"
+                                        >
                                     </td>
                                     <td>$ <?= $linea->get_subtotalLinea() ?></td>
                                     <td class="text-center">

@@ -27,7 +27,6 @@ $carro = new CarroCompra();
 <html lang="en">
 
 <head>
-    <title>Order Confirm | Tibbonzapas</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Botstrap CSS -->
@@ -36,12 +35,16 @@ $carro = new CarroCompra();
     <link rel="stylesheet" href="CSS/fontawesome-free-5.14.0-web/css/all.css" />
     <!-- Icon -->
     <link rel="shortcut icon" href="IMG/favicon.ico" type="image/x-icon">
+    <!-- Custom CSS -->
     <style>
         .container {
             width: 100%;
             padding: 50px;
         }
     </style>
+
+    <title>Confirmacion de Compra | Tibbonzapas</title>
+
 </head>
 
 <body>

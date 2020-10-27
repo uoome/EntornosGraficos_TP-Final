@@ -33,8 +33,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Cabeceras -->
-<?php include(INCLUDES_PATH . "header.php") ?>
+<head>
+    <!-- Cabeceras -->
+    <?php include(INCLUDES_PATH."styles.links.php") ?>
+
+    <title>LogIn | Tibbonzapas</title>
+</head>
 
 <body>
     <!-- NavBar -->

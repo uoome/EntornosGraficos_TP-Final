@@ -43,15 +43,47 @@ class ZapatillaDataService extends ConnectionDB
 
     /**
      * Consulta que retorna un array de zapatillas
-     * @param int $criterio Criterio de filtro de busqueda
      * @param int $inicio Registro de comienzo de busqueda
      * @param int $cant Cantidad de elementos a devolver
      * @return null|array $zapatillasTienda
      */
-    function getTiendaZapatillas($criterio, $inicio, $cant)
+    function getTiendaZapatillas($inicio, $cant)
     {
         $zapatillasTienda = null;
         $query = "SELECT * FROM `zapatilla` LIMIT " . $inicio . "," . $cant .";";
+
+        try {
+            // Ejecutar query
+            $data = $this->connect()->query($query);
+            $numRows = $data->num_rows;
+            // Si hay datos devueltos
+            if ($numRows > 0) {
+                // Fetch data
+                while ($row = $data->fetch_assoc()) {
+                    $zapatillasTienda[] = $row;
+                }
+            }
+            // Cerrar conexion
+            $this->closeConnection();
+        } catch (mysqli_sql_exception $sqlEx) {
+            die("Error (SQL) en consulta 'getTiendaZapatillas': " . $sqlEx->getMessage());
+        } catch (Exception $ex) {
+            die("Error en consulta 'getTiendaZapatillas': " . $ex->getMessage());
+        }
+        // Devolver data
+        return $zapatillasTienda;
+    }
+    /**
+     * Consulta que retorna un array de zapatillas
+     * @param string $criterio Criterio de filtro de busqueda
+     * @param int $inicio Registro de comienzo de busqueda
+     * @param int $cant Cantidad de elementos a devolver
+     * @return null|array $zapatillasTienda
+     */
+    function getTiendaZapatillasCriterio($criterio, $inicio, $cant)
+    {
+        $zapatillasTienda = null;
+        $query = "SELECT * FROM `zapatilla` " . $criterio . " LIMIT " . $inicio . "," . $cant .";";
         // $query = "SELECT * FROM `zapatilla` ORDER BY id_zapatilla DESC LIMIT 10;";
 
         try {
@@ -144,7 +176,7 @@ class ZapatillaDataService extends ConnectionDB
     /**
      * Consulta que retorna datos de una zapatilla
      * @param int $id
-     * @return null/Zapatilla
+     * @return null|Zapatilla
      */
     function getZapatilla($id) 
     {
@@ -182,18 +214,17 @@ class ZapatillaDataService extends ConnectionDB
     {
         try {
             // Armar query
-            $sql = "INSERT INTO `zapatilla`(nombre, color, precio, descripcion, img_path, talle) 
-            VALUES (?,?,?,?,?,?);";
+            $sql = "INSERT INTO `zapatilla`(nombre, precio, descripcion, img_path, tipo) 
+            VALUES (?,?,?,?,?);";
             // Armar statement
             $stmt = $this->connect()->prepare($sql);
             $stmt->bind_param(
-                "ssdssi",
+                "sdsss",
                 $newZapa->get_nombre(),
-                $newZapa->get_color(),
                 $newZapa->get_precio(),
                 $newZapa->get_descripcion(),
                 $newZapa->get_img_path(),
-                $newZapa->get_talle()
+                $newZapa->get_sexo()
             );
             // Ejecutar y guardar resultado
             $flag = $stmt->execute();
@@ -205,6 +236,81 @@ class ZapatillaDataService extends ConnectionDB
             die("Error (SQL) al insertar nueva zapatilla: " . $sqlEx->getMessage());
         } catch (Exception $ex) {
             die("Error al insertar nueva zapatilla: " . $sqlEx->getMessage());
+        }
+        // Devolver resultado
+        return $flag;
+    }
+
+
+    /**
+     * Metodo que actualiza los datos de la zapatilla, modificando la imagen.
+     * @param Zapatilla $zapaToUpdate
+     * @return bool
+     */
+    function updateZapaWithImage(Zapatilla $zapaToUpdate){
+        
+        try {
+            $sql = "UPDATE `zapatilla` 
+                SET `nombre`=?, `precio`=?, `descripcion`=?, `img_path`=?, `tipo`=? 
+                WHERE `id_zapatilla` = ? ;";
+
+            // Armar statement
+            $stmt = $this->connect()->prepare($sql);
+            $stmt->bind_param(
+                "sdsssi",
+                $zapaToUpdate->get_nombre(),
+                $zapaToUpdate->get_precio(),
+                $zapaToUpdate->get_descripcion(),
+                $zapaToUpdate->get_img_path(),
+                $zapaToUpdate->get_sexo(),
+                $zapaToUpdate->get_id()
+            );
+            // Ejecutar y guardar resultado
+            $flag = $stmt->execute();
+            // Cerrar prep
+            $stmt->close();
+            // Cerrar conexion
+            $this->closeConnection();
+        } catch (mysqli_sql_exception $sqlEx) {
+            die("Error (SQL) al actualizar un usuario en DB: " . $sqlEx->getMessage());
+        } catch (Exception $ex) {
+            die("Error al actualizar un usuario en DB: " . $ex->getMessage());
+        }
+        // Devolver resultado
+        return $flag;
+    }
+
+    /**
+     * Metodo que actualiza los datos de la zapatilla, sin modifcar la imagen.
+     * @param Zapatilla $zapaToUpdate
+     * @return bool
+     */
+    function updateZapaWithoutImage(Zapatilla $zapaToUpdate){
+        try {
+            $sql = "UPDATE `zapatilla` 
+                SET `nombre`=?, `precio`=?, `descripcion`=?, `tipo`=? 
+                WHERE `id_zapatilla` = ? ;";
+
+            // Armar statement
+            $stmt = $this->connect()->prepare($sql);
+            $stmt->bind_param(
+                "sdssi",
+                $zapaToUpdate->get_nombre(),
+                $zapaToUpdate->get_precio(),
+                $zapaToUpdate->get_descripcion(),
+                $zapaToUpdate->get_sexo(),
+                $zapaToUpdate->get_id()
+            );
+            // Ejecutar y guardar resultado
+            $flag = $stmt->execute();
+            // Cerrar prep
+            $stmt->close();
+            // Cerrar conexion
+            $this->closeConnection();
+        } catch (mysqli_sql_exception $sqlEx) {
+            die("Error (SQL) al actualizar un usuario en DB: " . $sqlEx->getMessage());
+        } catch (Exception $ex) {
+            die("Error al actualizar un usuario en DB: " . $ex->getMessage());
         }
         // Devolver resultado
         return $flag;
@@ -234,6 +340,12 @@ class ZapatillaDataService extends ConnectionDB
         return $flag;
     }
 
+
+    /**
+     * Metodo que valida la existencia de un registro Zapatilla en DB.
+     * @param int $id
+     * @return bool
+     */
     function validarExistenciaDeZapatilla($id)
     {
         $idValido = false;

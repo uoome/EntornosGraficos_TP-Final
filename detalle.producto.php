@@ -12,13 +12,18 @@ session_start();
 $usuarioActual = new Usuario(); // No se si es necesario
 if (isset($_SESSION['usuarioActual'])) $usuarioActual = $_SESSION['usuarioActual'];
 else $usuarioActual = null;
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Cabeceras -->
-<?php include(INCLUDES_PATH."header.php") ?>
+<head>
+    <!-- Cabeceras -->
+    <?php include(INCLUDES_PATH."styles.links.php") ?>
+
+    <title>Detalle Producto | Tibbonzapas</title>
+</head>
 
 <body>
     <!-- NavBar -->
@@ -102,25 +107,25 @@ else $usuarioActual = null;
                     <div class="form-group">
                         <label for="colorSelect">Color</label>
                         <select class="form-control form-control-sm" id="colorSelect" name="colorSelect" required>
-                            <option value="null" <?php if($data->get_color() == null) echo 'selected'?>>Seleccione color..</option>
-                            <option value="Blanco" <?php if($data->get_color() == 'Blanco') echo 'selected'?>>Blanco</option>
-                            <option value="Negro" <?php if($data->get_color() == 'Negro') echo 'selected'?>>Negro</option>
+                            <option value="null" selected>Seleccione color..</option>
+                            <option value="Blanco">Blanco</option>
+                            <option value="Negro" >Negro</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="talleSelect">Talle</label>
                         <select class="form-control form-control-sm" id="talleSelect" name="talleSelect" required>
-                            <option value="0" <?php if($data->get_talle() == 0) echo 'selected'?>>Seleccione talle..</option>
-                            <option value="36" <?php if($data->get_talle() == 36) echo 'selected'?>>36</option>
-                            <option value="37" <?php if($data->get_talle() == 37) echo 'selected'?>>37</option>
-                            <option value="38" <?php if($data->get_talle() == 38) echo 'selected'?>>38</option>
-                            <option value="39" <?php if($data->get_talle() == 39) echo 'selected'?>>39</option>
-                            <option value="40" <?php if($data->get_talle() == 40) echo 'selected'?>>40</option>
-                            <option value="41" <?php if($data->get_talle() == 41) echo 'selected'?>>41</option>
-                            <option value="42" <?php if($data->get_talle() == 42) echo 'selected'?>>42</option>
-                            <option value="43" <?php if($data->get_talle() == 43) echo 'selected'?>>43</option>
-                            <option value="44" <?php if($data->get_talle() == 44) echo 'selected'?>>44</option>
-                            <option value="45" <?php if($data->get_talle() == 45) echo 'selected'?>>45</option>
+                            <option value="0" selected>Seleccione talle..</option>
+                            <option value="36">36</option>
+                            <option value="37">37</option>
+                            <option value="38">38</option>
+                            <option value="39">39</option>
+                            <option value="40">40</option>
+                            <option value="41">41</option>
+                            <option value="42">42</option>
+                            <option value="43">43</option>
+                            <option value="44">44</option>
+                            <option value="45">45</option>
                         </select>
                     </div>
                     <div class="hidden">

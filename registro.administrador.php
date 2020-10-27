@@ -3,10 +3,10 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/EntornosGraficos_TP-Final/rutas.php')
 include(DAO_PATH . "db.php");
 include(DATA_PATH . "data.usuario.php");
 
-// Iniciar sesion
+// Iniciar/Retomar sesion
 session_start();
-// Fetch usuario
-$usuarioActual = new Usuario();
+
+// Fetch usuario de sesion
 if (isset($_SESSION['usuarioActual'])) $usuarioActual = $_SESSION['usuarioActual'];
 else $usuarioActual = null;
 ?>
@@ -14,8 +14,12 @@ else $usuarioActual = null;
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Cabeceras -->
-<?php include(INCLUDES_PATH."header.php"); ?>
+<head>
+    <!-- Cabeceras -->
+    <?php include(INCLUDES_PATH."styles.links.php") ?>
+
+    <title>Registro de Administrador | Tibbonzapas</title>
+</head>
 
 <body>
     <!-- NavBar -->
@@ -24,10 +28,8 @@ else $usuarioActual = null;
     <!-- Content | Solo visible para usuario administrador -->
     <?php
     // Si hay usuario loggeado y es administrador
-    if (
-        $usuarioActual != null &&
-        $usuarioActual->get_tipo() == UserTypeEnum::Administrator
-    ) {
+    if ( $usuarioActual != null &&
+        $usuarioActual->get_tipo() == UserTypeEnum::Administrator) {
     ?>
 
     <div class="container mt-3">
@@ -50,7 +52,7 @@ else $usuarioActual = null;
                 </h3>
                 
                 <!-- Formulario -->
-                <form action="Forms/admin.alta.usuario.php" method="POST">
+                <form action="Forms/manejo.abm.usuarios.php" method="POST">
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputName">Nombre:</label>
@@ -186,6 +188,7 @@ else $usuarioActual = null;
                     <!-- Limpiar mensajes de error -->
                     <?php 
                         if(isset($_SESSION['mensaje'])) unset($_SESSION['mensaje']); 
+                        if(isset($_SESSION['tipo_mensaje'])) unset($_SESSION['tipo_mensaje']);        
                         if(isset($_SESSION['nombreErr'])) unset($_SESSION['nombreErr']); 
                         if(isset($_SESSION['apeErr'])) unset($_SESSION['apeErr']); 
                         if(isset($_SESSION['emailErr'])) unset($_SESSION['emailErr']); 

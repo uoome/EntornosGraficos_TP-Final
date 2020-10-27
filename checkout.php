@@ -28,11 +28,12 @@ if ($carro->total_items() <= 0) header("Location: index.php");
 
 ?>
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Checkout | Tibbonzapas</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Botstrap CSS -->
@@ -47,6 +48,8 @@ if ($carro->total_items() <= 0) header("Location: index.php");
             float: right;
         }
     </style>
+
+    <title>Checkout | Tibbonzapas</title>
 </head>
 
 <body>

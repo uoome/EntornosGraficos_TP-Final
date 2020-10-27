@@ -11,8 +11,12 @@ session_start();
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Cabeceras -->
-<?php include(INCLUDES_PATH."header.php") ?>
+<head>
+    <!-- Cabeceras -->
+    <?php include(INCLUDES_PATH."styles.links.php") ?>
+
+    <title>Registro de Cliente | Tibbonzapas</title>
+</head>
 
 <body>
     <!-- NavBar -->
@@ -37,7 +41,7 @@ session_start();
                     Complete datos de registro
                 </h3>
                 <!-- Formulario -->
-                <form action="Forms/admin.alta.usuario.php" method="POST">
+                <form action="Forms/manejo.abm.usuarios.php" method="POST">
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputName">Nombre:</label>

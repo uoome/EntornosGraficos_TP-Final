@@ -10,8 +10,12 @@ session_start();
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Cabeceras -->
-<?php include(INCLUDES_PATH."header.php") ?>
+<head>
+    <!-- Cabeceras -->
+    <?php include(INCLUDES_PATH."styles.links.php") ?>
+
+    <title>Contacto | Tibbonzapas</title>
+</head>
 
 <body>
     <!-- NavBar -->
