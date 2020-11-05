@@ -144,18 +144,14 @@ session_start();
                             <?php } ?>    
                         </div>
                     </div>
-                    <div class="form-group col">
-                        <button type="submit" name="save_client" class="btn btn-success btn-block">
-                            <i class="far fa-check-circle"></i>
-                            Registrarse
-                        </button>
-                    </div>
-                    <div class="form-group col">
-                        <button type="reset" name="reset" class="btn btn-primary btn-block">
-                            <i class="fas fa-eraser"></i>
-                            Borrar
-                        </button>
-                    </div>
+                    <button type="submit" name="save_client" class="mx-auto col-md-4 btn btn-lg btn-success btn-block" >
+                        <i class="far fa-check-circle"></i>
+                        Registrarse
+                    </button>                    
+                    <button type="reset" name="reset" class="mx-auto col-md-2 btn btn-secondary btn-block">
+                        <i class="fas fa-eraser"></i>
+                        Borrar
+                    </button>
                 </form>
 
                 <!-- Limpiar mensajes -->

@@ -8,8 +8,13 @@
 include_once($_SERVER['DOCUMENT_ROOT'] . '/EntornosGraficos_TP-Final/rutas.php');
 include_once(DATA_PATH . "usertype.enum.php");
 
+/**
+ * Funcion que limpia los datos enviados en el form
+ * @param mixed $data
+ * @return string $data
+ */
 function test_input($data)
-{ // Funcion que limpia los datos enviados en el form
+{ 
     $data = trim($data); // Quitar espacios
     $data = stripslashes($data); // Quitar '\'
     $data = htmlspecialchars($data); // Formatear caracteres especiales
@@ -116,22 +121,22 @@ function validarDatosUsuario()
     
 
     // Validar telefono | No funca la regex
-    /*
+    
     if (!empty($_POST["inputTelefono"])) {
         $regexEnteros = "/^\d+$/"; // regex que valida solo numeros enteros | No funca
-        $telefono = test_input($_POST["inputTelefono"]);
-        $pregMatchValue = preg_match($telefono, $regexEnteros);
+        $telefono = $_POST["inputTelefono"];
+        $pregMatchValue = preg_match($regexEnteros, $telefono);
 
         if ($pregMatchValue == FALSE) {
-            $_SESSION['telefErr'] = "Regex error.";
+            $_SESSION['telefErr'] = "Regex error. Contacte al equipo de soporte.";
             $flag = false;
-        } elseif ($pregMatchValue == 0) {
-            // Si = 0 -> No es numero entero
+        } elseif ($pregMatchValue != 1) {
+            // Si != 1 -> No es numero entero
             $_SESSION['telefErr'] = "El telefono debe contener unicamente digitos enteros.";
             $flag = false;
         }
     }
-    */
+    
 
     // Validar tipoUsuario
     if (!isset($_POST["adminCheck"]) || empty($_POST["adminCheck"])) {

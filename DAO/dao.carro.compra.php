@@ -30,7 +30,39 @@ class CarroService extends ConnectionDB {
         return $carro;
     }
 
-    /** Consulta que inserta un carro para guardar registro, una vez realizada la compra
+    /** Consulta que trae los datos de un Carro.
+    *   @param int $idCarro
+    *   @return null|CarroCompra $carro
+    */
+    function getDatosCarro($idCarro) {
+        $carro = null;
+        $query = "SELECT * FROM `carro_compra`WHERE `id_carro` = '$idCarro';";
+
+        try {
+            // Ejecutar query
+            $data = $this->connect()->query($query);
+            // Si hay datos devueltos -> Fetch data
+            if ($data->num_rows > 0) 
+                // Guadar datos
+                while($row = $data->fetch_assoc()) {
+                    // Crear Carro
+                    $carro = new CarroCompra();
+                    $carro->set_id($row['id_carro']);
+                    $carro->set_total_carro($row['total']);
+                    $carro->set_idUsuario($row['id_usuario']);
+                }
+            // Cerrar conexion
+            $this->closeConnection();
+        } catch (mysqli_sql_exception $sqlEx) {
+            die("Error (SQL) en consulta 'getCompra': " . $sqlEx->getMessage());
+        } catch (Exception $ex) {
+            die("Error en consulta 'getCompra': " . $ex->getMessage());
+        }
+        // Devolver data
+        return $carro;
+    }
+
+    /** Consulta que inserta un carro para guardar registro. Devuelve el ID del carro generado.
     *   @param CarroCompra $carro
     *   @return null|int $idCarro
     */
@@ -40,33 +72,20 @@ class CarroService extends ConnectionDB {
         
         try {
             // Armar query
-            $sqlPagoExist = "INSERT INTO `carro_compra`(total, id_usuario, forma_pago) VALUES (?,?,?);";
-            $sqlPagoNull = "INSERT INTO `carro_compra`(total, id_usuario) VALUES (?,?);";
+            $sql = "INSERT INTO `carro_compra` (total, id_usuario) VALUES (?,?);";
             // Fetch data to insert
             $total = $carroToAdd->get_total_carro();
             $userID = $carroToAdd->get_idUsuario();
-            $pago = $carroToAdd->get_formaPago();
             // Armar statement dependiendo el pago
-            if(isset($pago)) {
-                $stmt = $this->connect()->prepare($sqlPagoExist);
-                $stmt->bind_param(
-                    "dii",
-                    $total,
-                    $userID,
-                    $pago
-                );
-            } else {
-                $stmt = $this->connect()->prepare($sqlPagoNull);
-                $stmt->bind_param(
-                    "di",
-                    $total,
-                    $userID
-                );
-            }
+            $stmt = $this->connect()->prepare($sql);
+            $stmt->bind_param(
+                "di",
+                $total,
+                $userID
+            );
             // Ejecutar y guardar resultado
             $flag = $stmt->execute();
             if($flag) $idCarro = $stmt->insert_id;
-            // die(var_dump($idCarro));
             // Cerrar prep
             $stmt->close();
             // Cerrar conexion

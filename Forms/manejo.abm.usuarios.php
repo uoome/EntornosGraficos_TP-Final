@@ -86,6 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $userToUpdate->set_username($username);
             $userToUpdate->set_password($password);
             $userToUpdate->set_telefono($telefono);
+            // die(var_dump($userToUpdate->get_telefono()));
             $userToUpdate->set_tipo($type);
 
             // Update

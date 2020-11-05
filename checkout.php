@@ -34,7 +34,7 @@ if ($carro->total_items() <= 0) header("Location: index.php");
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Botstrap CSS -->
     <link rel="stylesheet" href="CSS/Bootstrap/css/bootstrap.min.css" />
@@ -42,12 +42,70 @@ if ($carro->total_items() <= 0) header("Location: index.php");
     <link rel="stylesheet" href="CSS/fontawesome-free-5.14.0-web/css/all.css" />
     <!-- Icon -->
     <link rel="shortcut icon" href="IMG/favicon.ico" type="image/x-icon">
+
+    <link
+        rel="canonical"
+        href="https://getbootstrap.com/docs/4.5/examples/checkout/"
+    />
+
     <!-- CSS -->
     <style>
         .right {
             float: right;
         }
+
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+            }
+        }
+
+        .container {
+        max-width: 960px;
+        }
+
+        .lh-condensed { line-height: 1.25; }
     </style>
+
+    <script>
+        function enableTarjeta() {
+            var efectivo = document.getElementById('efectivo');
+            var nombreTarjeta = document.getElementById('cc-name');
+            var nroTarjeta = document.getElementById('cc-number');
+            var cvv = document.getElementById('cc-cvv');
+            var mesExp = document.getElementById('cc-month');
+            var anioExp = document.getElementById('cc-year');
+            
+
+            if(efectivo.checked) {
+                console.log("Deshabilitar carga de tarjeta");
+                nombreTarjeta.disabled = true;
+                nroTarjeta.disabled = true;
+                cvv.disabled = true;
+                mesExp.disabled = true;
+                anioExp.disabled = true;
+            } else {
+                console.log("Habilitar carga tarjeta");
+                nombreTarjeta.disabled = false;
+                nroTarjeta.disabled = false;
+                cvv.disabled = false;
+                mesExp.disabled = false;
+                anioExp.disabled = false;
+            }
+        }
+    </script>
+    
+    <!-- Custom styles for this template -->
+    <!-- <link href="form-validation.css" rel="stylesheet" /> -->
 
     <title>Checkout | Tibbonzapas</title>
 </head>
@@ -57,125 +115,384 @@ if ($carro->total_items() <= 0) header("Location: index.php");
     <?php include(INCLUDES_PATH . "navbar.php") ?>
 
     <!-- Contenido solo visible para usuarios logueados -->
-    <?php if($usuarioActual != null) { ?>
-    <div class="container-fluid">
-        <!-- Preview -->
-        <div class="container mt-2">
-            <!-- Card -->
-            <div class="card">
-                <div class="card-header">
-                    <p class="h2">Order Preview</p>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <!-- Col Left -->
-                        <div class="col-md-8">
+    <?php if ($usuarioActual != null) { ?>
+        <div class="container-fluid">
+            <!-- Preview -->
+            <div class="container mt-2">
+                <!-- Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <p class="h1">Checkout</p>
+                    </div>
+                    
+                        <div class="card-body">
+                            <!-- Mensaje alerta -->
+                            <?php if (isset($_SESSION['mensaje'])) { ?>
+                            <div class="alert alert-<?= $_SESSION['tipo_mensaje'] ?> alert-dismissible fade show" role="alert">
+                                <?= $_SESSION['mensaje'] ?>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <?php } ?>
+                            <!-- Nuevo -->
                             <div class="row">
-                                <!-- Arriba -->
-                                <div class="col">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Producto</th>
-                                                <th scope="col">Precio</th>
-                                                <th scope="col">Cantidad</th>
-                                                <th scope="col">Subtotal</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            if ($carro->total_items() > 0) {
-                                                // echo "Cart";
-                                                // var_dump($cart);
-                                                //get cart items from session
-                                                // echo "Cart Items";
-                                                $cartItems = $carro->getContenidoCarro();
-                                                // var_dump($cartItems);
-                                                foreach ($cartItems as $item) {
-                                                    $zapa = $item->get_zapatilla();
-                                            ?>
-                                                    <tr>
-                                                        <td><?php echo $zapa->get_nombre(); ?></td>
-                                                        <td><?php echo '$' . $zapa->get_precio(); ?></td>
-                                                        <td><?php echo $item->get_qty(); ?></td>
-                                                        <td><?php echo '$' . $item->get_subtotalLinea(); ?></td>
-                                                    </tr>
-                                                <?php }
-                                            } else { ?>
-                                                <tr>
-                                                    <td colspan="4">
-                                                        <p>No hay items en tu carro....</p>
-                                                    </td>
-                                                <?php } ?>
-                                        </tbody>
-                                    </table>
+                                <!-- Resumen Carro -->
+                                <div class="col-md-4 order-md-2 mb-4">
+                                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                                        <span class="text-muted">Tu Carro</span>
+                                        <span class="badge badge-primary badge-pill">
+                                            <?= $carro->total_items() ?>
+                                        </span>
+                                    </h4>
+                                    <ul class="list-group mb-3">
+                                        <?php
+                                        if ($carro->total_items() > 0) {
+                                            $cartItems = $carro->getContenidoCarro();
+                                            // var_dump($cartItems);
+                                            foreach ($cartItems as $item) {
+                                                $zapa = $item->get_zapatilla();
+                                        ?>
+                                        <li class="list-group-item list-group-item-light d-flex justify-content-between lh-condensed">
+                                            <div>
+                                                <h6 class="my-0">
+                                                    <?php echo $zapa->get_nombre(); ?>
+                                                </h6>
+                                                <span>
+                                                    x<?php echo $item->get_qty(); ?>
+                                                </span>
+                                                <small class="text-muted"><?php echo $zapa->get_descripcion(); ?></small>
+                                            </div>
+                                            <span class="text-muted">
+                                                $<?php echo number_format($item->get_subtotalLinea(), 2, ',', '.'); ?>
+                                            </span>
+                                        </li>
+                                        <?php } } else { ?>
+                                            <li>No hay items en tu carro</li>
+                                        <?php } ?>
+                                        <li class="list-group-item list-group-item-dark d-flex justify-content-between ">
+                                            <span>Total (ARS)</span>
+                                            <strong>$<?php echo number_format($carro->total(), 2, ',', '.'); ?></strong>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <!-- Force next columns to break to new line -->
-                                <div class="w-100"></div>
-                                <!-- Abajo -->
-                                <div class="col">
-                                    <?php if ($carro->total_items() > 0) { ?>
-                                        <div class="alert alert-secondary text-center ml-auto" role="alert">
-                                            <strong>Total <?php echo '$' . $carro->total(); ?></strong>
+                                <!-- Form entrega -->
+                                <div class="col-md-8 order-md-1">
+                                    <h4 class="mb-3">Direccion de Entrega</h4>
+                                    <form action="Forms/manejo.checkout.php" method="POST" class="needs-validation" novalidate>
+                                        <!-- Nombre y Apellido -->
+                                        <div class="row">
+                                            <input type="hidden" name="idUser" value="<?php if ($usuarioActual != null) echo $usuarioActual->get_id(); ?>">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="firstName">Nombre</label>
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control" 
+                                                    id="firstName" 
+                                                    placeholder="<?php if ($usuarioActual != null) echo $usuarioActual->get_nombre(); ?>" 
+                                                    readonly
+                                                />
+                                                <div class="invalid-feedback">
+                                                    El nombre es requerido.
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="lastName">Apellido</label>
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control" 
+                                                    id="lastName" 
+                                                    placeholder="<?php if ($usuarioActual != null) echo $usuarioActual->get_apellido(); ?>" 
+                                                    readonly                                                    
+                                                />
+                                                <div class="invalid-feedback">El apellido es requerido.</div>
+                                            </div>
                                         </div>
-                                    <?php } ?>
+                                        <!-- Usuario -->
+                                        <div class="mb-3">
+                                            <label for="username">Usuario</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">@</span>
+                                                </div>
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control" 
+                                                    id="username" 
+                                                    name="username" 
+                                                    placeholder="<?php if ($usuarioActual != null) echo $usuarioActual->get_username(); ?>" 
+                                                    readonly
+                                                />
+                                                <div class="invalid-feedback" style="width: 100%">
+                                                    El nombre de usuario es requerido.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Email -->
+                                        <div class="mb-3">
+                                            <label for="email">Email</label>
+                                            <input 
+                                                type="email" 
+                                                class="form-control" 
+                                                id="email" 
+                                                name="emailInput" 
+                                                placeholder="tu@ejemplo.com" 
+                                                value="<?php if ($usuarioActual != null) echo $usuarioActual->get_email(); ?>"
+                                                required
+                                            />
+                                            <div class="invalid-feedback">
+                                                <?php if (isset($_SESSION['emailErr'])) echo $_SESSION["emailErr"]; else { ?>
+                                                    Por favor ingrese una direccion de email valida.
+                                                <?php } ?>  
+                                            </div>
+                                        </div>
+                                        <!-- Direccion (opcional)-->
+                                        <div class="mb-3">
+                                            <label for="address">Direccion <span class="text-muted">(opcional)</span></label>
+                                            <input 
+                                                type="text" 
+                                                class="form-control" 
+                                                id="address" 
+                                                name="address" 
+                                                placeholder="Zeballos 1341"  
+                                            />
+                                            <div class="invalid-feedback">
+                                                Por favor ingrese su direccion de entrega.
+                                            </div>
+                                        </div>
+                                        <!-- Telefono (opcional) -->
+                                        <div class="mb-3">
+                                            <label for="telefono">Telefono <span class="text-muted">(opcional)</span></label>
+                                            <input 
+                                                type="text" 
+                                                class="form-control <?php if (isset($_SESSION['telefErr'])) { ?>is-invalid<?php } ?>" 
+                                                id="telefono" 
+                                                name="telefono" 
+                                                placeholder="3413595959"  
+                                                value="<?php if ($usuarioActual != null) echo $usuarioActual->get_telefono(); ?>"
+                                            />
+                                            <small id="telefonoHelp" class="form-text text-muted">Solo numeros enteros.</small>
+                                            <?php if (isset($_SESSION['telefErr'])) { ?>
+                                                <div class="invalid-feedback">
+                                                    <?= $_SESSION["telefErr"] ?>
+                                                </div>
+                                            <?php } ?>  
+                                        </div>
+                                        <hr class="mb-3" />
+                                        <h4 class="mb-3">Forma de pago</h4>
+                                        <!-- Radio Forma Pago -->
+                                        <div class="d-block my-3">
+                                            <div class="custom-control custom-radio">
+                                                <input 
+                                                    id="efectivo" 
+                                                    name="formaPago" 
+                                                    type="radio" 
+                                                    value="1"
+                                                    class="custom-control-input" 
+                                                    checked 
+                                                    required 
+                                                    onclick="enableTarjeta()"
+                                                />
+                                                <label class="custom-control-label" for="efectivo">Efectivo</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input 
+                                                    id="debito" 
+                                                    name="formaPago" 
+                                                    type="radio" 
+                                                    value="2"
+                                                    class="custom-control-input" 
+                                                    required 
+                                                    onclick="enableTarjeta()"
+                                                />
+                                                <label class="custom-control-label" for="debito">Debito</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input 
+                                                    id="credito" 
+                                                    name="formaPago" 
+                                                    type="radio" 
+                                                    value="3"
+                                                    class="custom-control-input" 
+                                                    required 
+                                                    onclick="enableTarjeta()"
+                                                />
+                                                <label class="custom-control-label" for="credito">Credito</label>
+                                            </div>
+                                        </div>
+                                        <!-- Detalles Tarjeta (de ser requerido) -->
+                                        <div class="row">
+                                            <!-- Nombre en Tarjeta -->
+                                            <div class="col-md-6 mb-3">
+                                                <label for="cc-name">Nombre en tarjeta</label>
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control" 
+                                                    id="cc-name" 
+                                                    name="cc-name"  
+                                                    required 
+                                                    disabled
+                                                />
+                                                <small class="text-muted">Nombre completo como aparece en la tarjeta.</small>
+                                                <div class="invalid-feedback">El nombre en tarjeta es requerido.</div>
+                                            </div>
+                                            <!-- Nro Tarjeta -->
+                                            <div class="col-md-6 mb-3">
+                                                <label for="cc-number">Nro de tarjeta</label>
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control <?php if (isset($_SESSION['cc-numberErr'])) { ?>is-invalid<?php } ?>" 
+                                                    id="cc-number" 
+                                                    name="cc-number" 
+                                                    minlength="16"
+                                                    maxlength="16"
+                                                    required 
+                                                    disabled
+                                                />
+                                                <small id="nroTarjetaHelp" class="form-text text-muted">Numero entero de 12 digitos.</small>
+                                                <div class="invalid-feedback">
+                                                    <?php if (isset($_SESSION['cc-numberErr'])) echo $_SESSION["cc-numberErr"]; else { ?>
+                                                        El numero de tarjeta es requerido.
+                                                    <?php } ?> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-row">
+                                            <!-- Fecha Vencimiento -->
+                                            <!-- <div class="col-md-4 mb-3">
+                                                <label for="cc-expiration">Fecha de Vencimiento</label>
+                                                <input
+                                                    type="month"
+                                                    class="form-control"
+                                                    id="cc-expiration"
+                                                    placeholder="MM/YY"
+                                                    required
+                                                    disabled
+                                                />
+                                                <div class="invalid-feedback">Ingrese la fecha de vencimiento</div>
+                                            </div> -->
+                                            
+                                            <div class="col-md-3 mb-3">   
+                                                <label for="cc-month">Fecha Vencimiento</label>
+                                                <!-- Mes -->
+                                                <select
+                                                    class="custom-select"
+                                                    id="cc-month"
+                                                    name="cc-month"
+                                                    required
+                                                    disabled
+                                                >
+                                                    <option value="">MM</option>
+                                                    <option value="01">01</option>
+                                                    <option value="02">02</option>
+                                                    <option value="03">03</option>
+                                                    <option value="04">04</option>
+                                                    <option value="05">05</option>
+                                                    <option value="06">06</option>
+                                                    <option value="07">07</option>
+                                                    <option value="08">08</option>
+                                                    <option value="09">09</option>
+                                                    <option value="10">10</option>
+                                                    <option value="11">11</option>
+                                                    <option value="12">12</option>
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    Por favor ingrese el mes de vencimiento.
+                                                </div>                                                                                          
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <!-- Año -->
+                                                <label for="">
+                                                    <small class="text-muted">MM/YY</small>
+                                                </label>
+                                                <select
+                                                    class="custom-select"
+                                                    id="cc-year"
+                                                    name="cc-year"
+                                                    required
+                                                    disabled
+                                                >
+                                                    <option value="">YY</option>
+                                                    <?php for($i=20; $i <= 30; $i++) { ?>
+                                                        <option value="<?= $i ?>"><?= $i ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    Por favor ingrese el año de vencimiento.
+                                                </div>   
+                                            </div>
+                                            <!-- CVV -->
+                                            <div class="col-md-6 mb-3">
+                                                <label for="cc-cvv">CVV</label>
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control col-md-3 <?php if (isset($_SESSION['cc-cvvErr'])) { ?>is-invalid<?php } ?>" 
+                                                    id="cc-cvv" 
+                                                    name="cc-cvv" 
+                                                    minlength="3" 
+                                                    maxlength="3" 
+                                                    required 
+                                                    disabled
+                                                />
+                                                <small id="cvvHelp" class="form-text text-muted">Numero entero de 3 digitos.</small>
+                                                <div class="invalid-feedback">
+                                                    <?php if (isset($_SESSION['cc-cvvErr'])) echo $_SESSION["cc-cvvErr"]; else { ?>
+                                                        El codigo de seguridad es requerido.
+                                                    <?php } ?> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr class="mb-4" />
+                                        <!-- Botones -->
+                                        <div class="row justify-content-around">
+                                            <div class="col">
+                                                <a href="tienda.php" class="btn btn-info btn-block">
+                                                    <i class="fas fa-angle-left"></i>
+                                                    Continue Shopping
+                                                </a>
+                                            </div>
+                                            <div class="col">
+                                                <button type="submit" class="btn btn-success btn-block" name="confirmar_compra">
+                                                    Confirmar Orden
+                                                    <i class="fas fa-check"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
-                        </div>
-                        <!-- Col right -->
-                        <div class="col-md-4">
-                            <h4>Detalles de envio</h4>
-                            <?php if ($usuarioActual != null) { ?>
-                                <p>
-                                    <strong>Nombre: </strong><?php echo $usuarioActual->get_nombre(); ?>
-                                </p>
-                                <p>
-                                    <strong>Apellido: </strong><?php echo $usuarioActual->get_apellido(); ?>
-                                </p>
-                                <p>
-                                    <strong>Telefono: </strong><?php echo $usuarioActual->get_telefono(); ?>
-                                </p>
-                                <p>
-                                    <strong>Email: </strong><?php echo $usuarioActual->get_email(); ?>
-                                </p>
-                            <?php } else { ?>
-                                <p> Error al cargar datos del usuario </p>
-                            <?php } ?>
-                        </div>
-                    </div>
+                        </div>                    
                 </div>
-                <div class="card-footer">
-                    <div class="row justify-content-around">
-                        <div class="col-4">
-                            <a href="tienda.php" class="btn btn-info btn-block">
-                                <i class="fas fa-angle-left"></i>
-                                Continue Shopping
-                            </a>
-                        </div>
-                        <div class="col-4">
-                            <a href="orderSuccess.php" class="btn btn-success btn-block">
-                                Place Order
-                                <i class="fas fa-check"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+            </div>    
+            
+            <!-- Footer -->
+            <?php include(INCLUDES_PATH . "footer.html") ?>
+        </div>
+        <!-- Mensaje de autorizacion -->
+    <?php } else { ?>
+        <div class="container mt-3">
+            <div class="alert alert-danger text-center" role="alert">
+                No esta autorizado a estar en esta seccion!
             </div>
         </div>
-    </div>
-
-    <!-- Mensaje de autorizacion -->
-    <?php } else { ?>
-    <div class="container mt-3">
-        <div class="alert alert-danger text-center" role="alert">
-            No esta autorizado a estar en esta seccion!
-        </div>
-    </div>
     <?php } ?>
+
+    <!-- Limpiar mensajes de sesion -->
+    <?php 
+        if(isset($_SESSION['emailErr'])) unset($_SESSION['emailErr']); 
+        if(isset($_SESSION['telefErr'])) unset($_SESSION['telefErr']); 
+        if(isset($_SESSION['cc-numberErr'])) unset($_SESSION['cc-numberErr']); 
+        if(isset($_SESSION['cc-cvvErr'])) unset($_SESSION['cc-cvvErr']); 
+        if(isset($_SESSION['mensaje'])) unset($_SESSION['mensaje']); 
+        if(isset($_SESSION['tipo_mensaje'])) unset($_SESSION['tipo_mensaje']); 
+    ?>
 
     <!-- Scripts -->
     <?php include(INCLUDES_PATH . "scripts.php") ?>
 
+    <!-- Checkout Validation -->
+    <script src="Includes/checkout-validation.js"></script>
 </body>
 
 </html>

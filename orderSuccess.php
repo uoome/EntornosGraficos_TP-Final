@@ -66,7 +66,9 @@ $carro = new CarroCompra();
                     <form action="Forms/manejo.carro.php" class="form-inline" method="POST">
                         <!-- Total -->
                         <label class="my-1 mr-2" for="totalCarro">
-                            Total: <strong> $<?= $carro->total() ?></strong>
+                            Total: <strong> $
+                                            <?php echo number_format($carro->total(), 2, ',', '.'); ?>
+                                    </strong>
                         </label>
                         <!-- Forma Pago -->
                         <label class="sr-only" for="formaPagoSelect">Forma Pago</label>
@@ -87,6 +89,9 @@ $carro = new CarroCompra();
                     <div class="mt-2 alert alert-<?= $_SESSION['tipo_mensaje'] ?>" role="alert">
                         <?= $_SESSION['mensaje'] ?>
                     </div>
+                    <a href="tienda.php" class="form-control btn btn-info btn-block">
+                        Volver a la tienda
+                    </a>
                 <?php } ?>
             </div>
         </div>

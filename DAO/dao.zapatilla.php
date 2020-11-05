@@ -144,7 +144,7 @@ class ZapatillaDataService extends ConnectionDB
 
     /**
      * Consulta que retorna 4 zapatillas de muestra
-     * @return null/Zapatilla[] 
+     * @return null|apatilla[] 
      */
     function getMuestra()
     {
@@ -209,7 +209,11 @@ class ZapatillaDataService extends ConnectionDB
         return $zapatilla;
     }
 
-    // Consulta que inserta una nueva zapatilla
+    /**
+     *  Consulta que inserta una nueva zapatilla.
+     * @param Zapatilla $newZapa
+     * @return bool
+     */
     function insertZapa(Zapatilla $newZapa)
     {
         try {

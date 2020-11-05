@@ -4,9 +4,11 @@ class TarjetaCredito
 {
     // Variables
     private $id_tarjeta;
-    private $fecha_alta;
+    private $nombre_tarjeta;
+    private $nro_tarjeta;
     private $fecha_vencimiento;
-    private $usuario;
+    private $cvv;
+    private $idUsuario;
 
     // Getters y Setters
 
@@ -20,14 +22,24 @@ class TarjetaCredito
         $this->id_tarjeta = $id;
     }
 
-    function get_fechaAlta()
+    function get_nombreTarjeta()
     {
-        return $this->fecha_alta;
+        return $this->nombre_tarjeta;
     }
 
-    function set_fechaAlta($fa)
+    function set_nombreTarjeta($nom)
     {
-        $this->fecha_alta = $fa;
+        $this->nombre_tarjeta = $nom;
+    }
+
+    function get_nroTarjeta()
+    {
+        return $this->nro_tarjeta;
+    }
+
+    function set_nroTarjeta($nro)
+    {
+        $this->nro_tarjeta = $nro;
     }
 
     function get_fechaVencimiento()
@@ -39,14 +51,25 @@ class TarjetaCredito
     {
         $this->fecha_vencimiento = $fv;
     }
-    function get_usuario()
+
+    function get_cvv()
     {
-        return $this->usuario;
+        return $this->cvv;
     }
 
-    function set_usuario($user)
+    function set_cvv($code)
     {
-        $this->usuario = $user;
+        $this->cvv = $code;
+    }
+
+    function get_idUsuario()
+    {
+        return $this->idUsuario;
+    }
+
+    function set_idUsuario($user)
+    {
+        $this->idUsuario = $user;
     }
 }
 

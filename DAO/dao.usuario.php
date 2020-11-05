@@ -225,13 +225,14 @@ class UsuarioService extends ConnectionDB
     {
         try {
         $sql = "UPDATE `usuario` 
-            SET `nombre`= ?, `apellido`= ?, `username`= ?, `email`= ?,`telefono`= ?,
-            `tipo_usuario`= ? WHERE `id_usuario`= ? ;";
+            SET `nombre`=?, `apellido`=?, `username`=?, `email`=?, `telefono`=?, `tipo_usuario`=? 
+            WHERE `id_usuario`= ? ;";
 
+            // die(var_dump($userToUpdate->get_telefono()));
             // Armar statement
             $stmt = $this->connect()->prepare($sql);
             $stmt->bind_param(
-                "ssssiii",
+                "sssssii",
                 $userToUpdate->get_nombre(),
                 $userToUpdate->get_apellido(),
                 $userToUpdate->get_username(),

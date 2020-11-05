@@ -10,6 +10,7 @@ class Compra
     private $fecha_compra;
     private $tipo_pago;
     private $tarjeta;
+    private $direccion_entrega;
 
     // Getters y Setters
     function get_id()
@@ -66,6 +67,7 @@ class Compra
     {
         $this->tipo_pago = $pago;
     }
+
     function get_tarjeta()
     {
         return $this->tarjeta;
@@ -74,6 +76,16 @@ class Compra
     function set_tarjeta($tarjeta)
     {
         $this->tarjeta = $tarjeta;
+    }
+
+    function get_direccionEntrega()
+    {
+        return $this->direccion_entrega;
+    }
+
+    function set_direccionEntrega($dir)
+    {
+        $this->direccion_entrega = $dir;
     }
 }
 ?>

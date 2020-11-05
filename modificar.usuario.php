@@ -33,7 +33,8 @@ if (isset($_GET['id'])) {
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Botstrap CSS -->
     <link rel="stylesheet" href="CSS/Bootstrap/css/bootstrap.min.css" />
     <!-- Font Awesome -->
@@ -85,7 +86,6 @@ if (isset($_GET['id'])) {
         $usuarioActual->get_tipo() == UserTypeEnum::Administrator
     ) {
     ?>
-
         <div class="container mt-3">
             <div class="col justify-content-around">
 
@@ -145,7 +145,14 @@ if (isset($_GET['id'])) {
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="inputTelefono">Telefono:</label>
-                                    <input type="text" class="form-control <?php if (isset($_SESSION['telefErr'])) { ?>is-invalid<?php } ?>" name="inputTelefono" value="<?= $usuario->get_telefono() ?>" placeholder="543413555555" />
+                                    <input 
+                                        type="text" 
+                                        class="form-control <?php if (isset($_SESSION['telefErr'])) { ?>is-invalid<?php } ?>" 
+                                        name="inputTelefono" 
+                                        value="<?= $usuario->get_telefono() ?>" 
+                                        placeholder="3413532234" 
+                                        maxlength="11"
+                                    />
                                     <?php if (isset($_SESSION['telefErr'])) { ?>
                                         <div class="invalid-feedback"><?= $_SESSION["telefErr"] ?></div>
                                     <?php } else { ?>

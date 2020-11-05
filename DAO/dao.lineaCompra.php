@@ -34,6 +34,47 @@ class LineaCompraService extends ConnectionDB {
         return $lineaCompra;
     }
 
+    /**
+     * Metodo que devuelve las lineas de compra de un carro particular
+     * @param int $idCarro
+     * @return null|array(LineaCompra) $lineasCarro
+     */
+    function getLineasCarro($idCarro) {
+        $lineasCarro = null;
+
+        try {
+            // Armar query
+            $query = "SELECT * FROM `carro_zapatilla` WHERE `id_carro` = '$idCarro';";
+            // Ejecutar query
+            $data = $this->connect()->query($query);
+            // Validar devolucion
+            if($data->num_rows > 0) {
+                $lineasCarro = [];
+                while($row = $data->fetch_assoc()) {
+                    $lineaActual = new LineaCompra();
+                    $lineaActual->set_idLineaCompra($row['id_carro_zapatilla']);
+                    $lineaActual->set_idCarro($row['id_carro']);
+                    $lineaActual->set_idZapatilla($row['id_zapatilla']);
+                    $lineaActual->set_qty($row['cantidad']);
+                    $lineaActual->set_subtotalLinea($row['subtotal_linea']);
+                    $lineaActual->set_color($row['color']);
+                    $lineaActual->set_talle($row['talle']);
+
+                    // Agregar al array
+                    array_push($lineasCarro, $lineaActual);
+                }
+            };
+            // Cerrar conexion
+            $this->closeConnection();
+        } catch (mysqli_sql_exception $sqlEx) {
+            die("Error (SQL) al traer datos de una Linea de Compra desde la DB: " . $sqlEx->getMessage());
+        } catch (Exception $ex) {
+            die("Error al traer datos de una Linea de Compra desde la DB: " . $sqlEx->getMessage());
+        }
+        // Devolver resultado
+        return $lineasCarro;
+    }
+
 
     /**
      * Inserta una Linea de Compra en DB
