@@ -3,7 +3,14 @@
 include_once($_SERVER['DOCUMENT_ROOT'] . '/EntornosGraficos_TP-Final/rutas.php');
 include_once(DAO_PATH . "db.php");
 include_once(DAO_PATH . "dao.usuario.php");
-include_once(INCLUDES_PATH . "validacion.forms.admin.php");
+
+function test_input($data)
+{ 
+    $data = trim($data); // Quitar espacios
+    $data = stripslashes($data); // Quitar '\'
+    $data = htmlspecialchars($data); // Formatear caracteres especiales
+    return $data;
+}
 
 // Iniciar sesion
 session_start();
@@ -42,10 +49,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <title>LogIn | Tibbonzapas</title>
 
-    <link
+    <!-- <link
         rel="canonical"
         href="https://getbootstrap.com/docs/4.5/examples/sign-in/"
-    />
+    /> -->
 
     <style>
         .bd-placeholder-img {

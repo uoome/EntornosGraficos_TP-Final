@@ -36,10 +36,8 @@ if (isset($_POST['confirmar_compra'])) {
     // Si hay telefono, validar solo numeros enteros
     if(!empty($_POST['telefono'])) {
         $telefono = test_input($_POST["telefono"]);
-        // die(var_dump($telefono));
         if (!validarNroEntero($telefono)) {
             $_SESSION['telefErr'] = "El telefono debe contener unicamente digitos enteros.";
-            // die(var_dump($_SESSION['telefErr']));
             $flag = false;
         }
     } else $telefono = null;
@@ -98,7 +96,7 @@ if (isset($_POST['confirmar_compra'])) {
                 $_SESSION['mensaje'] = "Error al registrar lineas de compra.";
                 $_SESSION['tipo_mensaje'] = "danger";
                 // Redirect para cortar loop
-                header("Location: ../orderSuccess.php");
+                header("Location: ../checkout.php");
             };
         }
 
@@ -140,7 +138,7 @@ if (isset($_POST['confirmar_compra'])) {
                 // Destruir carro
                 $carro ->destruirCarro();
                 // Redirect a orderSuccess
-                header("Location: ../orderSuccess2.php?id=".$idCompra);
+                header("Location: ../orderSuccess.php?id=".$idCompra);
             } else {
                 $_SESSION['mensaje'] = "Error al enviar comprobante de compra.";
                 $_SESSION['tipo_mensaje'] = "warning";

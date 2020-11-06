@@ -23,7 +23,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $headers = "From: " .$email_contacto;
 
     $mailStatus = mail($to, $subject, $txt, $headers);
-    // die(var_dump($mailStatus));
+    die(var_dump($mailStatus));
     if($mailStatus) {
         // Mensaje error
         $_SESSION['mensaje'] = "El formulario se ha enviado con exito!";

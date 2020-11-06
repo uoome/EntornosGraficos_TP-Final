@@ -52,17 +52,10 @@ if (isset($_GET['id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Botstrap CSS -->
-    <link rel="stylesheet" href="CSS/Bootstrap/css/bootstrap.min.css" />
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="CSS/fontawesome-free-5.14.0-web/css/all.css" />
-    <!-- Icon -->
-    <link rel="shortcut icon" href="IMG/favicon.ico" type="image/x-icon">
+    <!-- Styles -->
+    <?php include(INCLUDES_PATH."styles.links.php") ?>
 
-    <!-- <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/offcanvas/"> -->
-
-    <!-- Custom styles for this template -->
-    <!-- <link href="CSS/detalleCompra.css" rel="stylesheet" /> -->
+    <!-- Custom CSS -->
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -205,11 +198,13 @@ if (isset($_GET['id'])) {
             </small>
         </div>
     </main>
-    
+<!--     
     <div class="container-fluid">
-        <!-- Footer -->
-        <?php include(INCLUDES_PATH . "footer.html") ?>
-    </div>
+        
+    </div> -->
+
+    <!-- Footer -->
+    <?php include(INCLUDES_PATH . "footer.html") ?>
 
     <!-- Mensaje de autorizacion -->
     <?php } else { ?>

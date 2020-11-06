@@ -12,8 +12,6 @@ include_once(DATA_PATH . "data.lineaCompra.php");
 include_once(DATA_PATH . "data.carro.compra.php");
 include_once(DAO_PATH . "dao.usuario.php");
 
-// session_start();
-
 // Fetch usuario
 if (isset($_SESSION['usuarioActual'])) $usuarioActual = $_SESSION['usuarioActual'];
 else $usuarioActual = null;
@@ -23,12 +21,7 @@ $carro = new CarroCompra();
 // redirect to home if cart is empty
 if ($carro->total_items() <= 0) header("Location: index.php");
 
-// set customer ID in session
-// $_SESSION['sessCustomerID'] = $usuarioActual->get_id();
-
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -36,19 +29,10 @@ if ($carro->total_items() <= 0) header("Location: index.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Botstrap CSS -->
-    <link rel="stylesheet" href="CSS/Bootstrap/css/bootstrap.min.css" />
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="CSS/fontawesome-free-5.14.0-web/css/all.css" />
-    <!-- Icon -->
-    <link rel="shortcut icon" href="IMG/favicon.ico" type="image/x-icon">
+    <!-- Styles -->
+    <?php include(INCLUDES_PATH."styles.links.php") ?>
 
-    <link
-        rel="canonical"
-        href="https://getbootstrap.com/docs/4.5/examples/checkout/"
-    />
-
-    <!-- CSS -->
+    <!-- Custom CSS -->
     <style>
         .right {
             float: right;
@@ -464,11 +448,10 @@ if ($carro->total_items() <= 0) header("Location: index.php");
                             </div>
                         </div>                    
                 </div>
-            </div>    
-            
-            <!-- Footer -->
-            <?php include(INCLUDES_PATH . "footer.html") ?>
+            </div>        
         </div>
+        <!-- Footer -->
+        <?php include(INCLUDES_PATH . "footer.html") ?>
         <!-- Mensaje de autorizacion -->
     <?php } else { ?>
         <div class="container mt-3">

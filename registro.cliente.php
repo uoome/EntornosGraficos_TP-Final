@@ -12,6 +12,8 @@ session_start();
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Cabeceras -->
     <?php include(INCLUDES_PATH."styles.links.php") ?>
 
@@ -144,11 +146,11 @@ session_start();
                             <?php } ?>    
                         </div>
                     </div>
-                    <button type="submit" name="save_client" class="mx-auto col-md-4 btn btn-lg btn-success btn-block" >
+                    <button type="submit" name="save_client" class="mx-auto col-md-4 btn btn btn-info btn-block" >
                         <i class="far fa-check-circle"></i>
                         Registrarse
                     </button>                    
-                    <button type="reset" name="reset" class="mx-auto col-md-2 btn btn-secondary btn-block">
+                    <button type="reset" name="reset" class="mx-auto col-md-2 btn btn-sm btn-outline-secondary btn-block">
                         <i class="fas fa-eraser"></i>
                         Borrar
                     </button>
@@ -168,6 +170,9 @@ session_start();
             </div>
         </div>
     </div>
+
+    <!-- Footer -->
+    <?php include(INCLUDES_PATH . "footer.html") ?>
 
     <!-- Scripts -->
     <?php include(INCLUDES_PATH."scripts.php") ?>
