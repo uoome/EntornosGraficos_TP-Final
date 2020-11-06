@@ -202,10 +202,9 @@ $muestra = $zapaService->getMuestra();
             <?php if($muestra != null) { ?>
             <div class="card-deck">
                 <?php foreach($muestra as $m) { ?>
-                <div class="col-sm-6 col-md-3" style="width: 20px;">
                     <div class="card h-100 bg-light mb-1">
                         <img 
-                            class="img-fluid d-block" 
+                            class="card-img-top" 
                             src="<?= $m['img_path'] ?>" 
                             alt="Imagen modelo <?= $m['nombre'] ?>" 
                         />
@@ -225,7 +224,6 @@ $muestra = $zapaService->getMuestra();
                             </a>
                         </div>
                     </div>
-                </div>
                 <?php } ?>
             </div>
             <?php } ?>
