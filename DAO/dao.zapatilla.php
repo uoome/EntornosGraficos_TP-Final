@@ -258,16 +258,23 @@ class ZapatillaDataService extends ConnectionDB
                 SET `nombre`=?, `precio`=?, `descripcion`=?, `img_path`=?, `tipo`=? 
                 WHERE `id_zapatilla` = ? ;";
 
+            $nombre = $zapaToUpdate->get_nombre();
+            $precio = $zapaToUpdate->get_precio();
+            $descrip = $zapaToUpdate->get_descripcion();
+            $ip = $zapaToUpdate->get_img_path();
+            $s = $zapaToUpdate->get_sexo();
+            $id = $zapaToUpdate->get_id();
+
             // Armar statement
             $stmt = $this->connect()->prepare($sql);
             $stmt->bind_param(
                 "sdsssi",
-                $zapaToUpdate->get_nombre(),
-                $zapaToUpdate->get_precio(),
-                $zapaToUpdate->get_descripcion(),
-                $zapaToUpdate->get_img_path(),
-                $zapaToUpdate->get_sexo(),
-                $zapaToUpdate->get_id()
+                $nombre,
+                $precio,
+                $descrip,
+                $ip,
+                $s,
+                $id
             );
             // Ejecutar y guardar resultado
             $flag = $stmt->execute();
@@ -295,15 +302,22 @@ class ZapatillaDataService extends ConnectionDB
                 SET `nombre`=?, `precio`=?, `descripcion`=?, `tipo`=? 
                 WHERE `id_zapatilla` = ? ;";
 
+            $nombre = $zapaToUpdate->get_nombre();
+            $precio = $zapaToUpdate->get_precio();
+            $descrip = $zapaToUpdate->get_descripcion();
+            $s = $zapaToUpdate->get_sexo();
+            $id = $zapaToUpdate->get_id();
+
+
             // Armar statement
             $stmt = $this->connect()->prepare($sql);
             $stmt->bind_param(
                 "sdssi",
-                $zapaToUpdate->get_nombre(),
-                $zapaToUpdate->get_precio(),
-                $zapaToUpdate->get_descripcion(),
-                $zapaToUpdate->get_sexo(),
-                $zapaToUpdate->get_id()
+                $nombre,
+                $precio,
+                $descrip,
+                $s,
+                $id
             );
             // Ejecutar y guardar resultado
             $flag = $stmt->execute();

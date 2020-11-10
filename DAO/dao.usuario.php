@@ -256,7 +256,10 @@ class UsuarioService extends ConnectionDB
         return $flag;
     }
 
-    // Consulta elimina una zapatilla
+    /** Consulta elimina un usuario
+    *   @param string $id
+    *   @return bool $flag 
+    */
     function deleteUsuario($id)
     {
         try {

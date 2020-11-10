@@ -103,7 +103,7 @@ else $usuarioActual = null;
                             <?php } ?>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="inputTelefono">Telefono:</label>
+                            <label for="inputTelefono">Telefono <span class="text-muted">(opcional)</span>:</label>
                             <input 
                                 type="text" 
                                 class="form-control <?php if (isset($_SESSION['telefErr'])) { ?>is-invalid<?php } ?>"

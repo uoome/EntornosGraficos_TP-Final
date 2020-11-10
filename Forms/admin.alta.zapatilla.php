@@ -54,6 +54,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $zapaToUpdate->set_img_path($img_path);
             $zapaToUpdate->set_sexo($sexo);
 
+            // die(var_dump($zapaToUpdate));
+
             $zapatillaService = new ZapatillaDataService(); // Servicio DAO
             // Update
             if(isset($img_path)) $result = $zapatillaService->updateZapaWithImage($zapaToUpdate);
@@ -63,30 +65,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Mensaje exito
                 $_SESSION['mensaje'] = "Zapatilla modificada con exito !";
                 $_SESSION['tipo_mensaje'] = "success";
+                header("Location: ../panel.zapatillas.php");
             } else {
                 // Mensaje error
-                $_SESSION['mensaje'] = "Error al modificar zapatilla.";
+                $_SESSION['mensaje'] = "Error al guardar datos de zapatilla en DB.";
                 $_SESSION['tipo_mensaje'] = "danger";
+                header("Location: " . $_SERVER['HTTP_REFERER']);
             }
         } else {
             $_SESSION['mensaje'] = "<strong>Ups!</strong> Complete los datos correctamente";
             $_SESSION['tipo_mensaje'] = "warning";
-            // Redirect a la pagina anterior
-            // $route = "../modificar.zapa.php?id=" . $_POST['idZapaToUpdate'];
-            // header("Location: " . $route);
             header("Location: " . $_SERVER['HTTP_REFERER']);
         }
     } else {
         $_SESSION['mensaje'] = "Error de request.";
         $_SESSION['tipo_mensaje'] = "danger";
-        //Redireccionar al form
-        header("Location: ../panel.zapatillas.php");
+        header("Location: " . $_SERVER['HTTP_REFERER']);
     }        
 } else {
     $_SESSION['mensaje'] = "Error de request.";
     $_SESSION['tipo_mensaje'] = "danger";
-    //Redireccionar al form
-    header("Location: ../panel.zapatillas.php");
+    header("Location: " . $_SERVER['HTTP_REFERER']);
 }
 
 ?>

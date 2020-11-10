@@ -55,7 +55,7 @@ else $usuarioActual = null;
                 <form action="Forms/admin.alta.zapatilla.php" method="POST" enctype="multipart/form-data">
                     <!-- Input Modelo -->
                     <div class="form-group row">
-                        <label for="inputNombre" class="col-md-2 col-form-label">Nombre/Modelo</label>
+                        <label for="inputNombre" class="col-md-2 col-form-label">Nombre / Modelo</label>
                         <div class="col-md-10">
                             <input 
                                 type="text" 
@@ -75,7 +75,7 @@ else $usuarioActual = null;
                     </div>
                     <!-- Input Precio -->
                     <div class="form-group row">
-                        <label for="inputPrecio" class="col-md-2 col-form-label">Precio</label>
+                        <label for="inputPrecio" class="col-md-2 col-form-label">Precio <span class="text-muted">(opcional)</span></label>
                         <div class="col-md-10">
                             <input 
                                 type="text" 
@@ -95,7 +95,7 @@ else $usuarioActual = null;
                     </div>
                     <!-- Textarea -->
                     <div class="form-group row">
-                        <label for="inputDescripcion" class="col-md-2 col-form-label">Descripcion</label>
+                        <label for="inputDescripcion" class="col-md-2 col-form-label">Descripcion <span class="text-muted">(opcional)</span></label>
                         <div class="col-md-10">
                             <textarea 
                                 class="form-control" 
@@ -111,7 +111,7 @@ else $usuarioActual = null;
                     </div>
                     <!-- Tipo -->
                     <div class="form-group row">
-                        <label for="selectTipo" class="col-md-2 col-form-label">TIpo</label>
+                        <label for="selectTipo" class="col-md-2 col-form-label">TIpo <span class="text-muted">(opcional)</span></label>
                         <div class="col-md-10">
                             <select class="form-control" id="selectTipo" name="selectTipo">
                                 <option value="U" selected>Unisex</option>
@@ -122,7 +122,7 @@ else $usuarioActual = null;
                     </div>
                     <!-- Input IMG -->
                     <div class="form-group row">
-                        <label for="inputImagen" class="col-md-2 col-form-label">Cargue imagen</label>
+                        <label for="inputImagen" class="col-md-2 col-form-label">Cargue imagen <span class="text-muted">(opcional)</span></label>
                         <div class="col-md-10">
                             <!-- MAX_FILE_SIZE debe preceder al campo de entrada del fichero -->
                             <!-- <input type="hidden" name="MAX_FILE_SIZE" value="500000" /> -->

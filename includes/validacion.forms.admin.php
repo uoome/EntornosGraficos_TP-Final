@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Archivo que contiene:
  *  Metodos para el manejo de datos procedentes de formularios.
@@ -14,7 +15,7 @@ include_once(DATA_PATH . "usertype.enum.php");
  * @return string $data
  */
 function test_input($data)
-{ 
+{
     $data = trim($data); // Quitar espacios
     $data = stripslashes($data); // Quitar '\'
     $data = htmlspecialchars($data); // Formatear caracteres especiales
@@ -70,9 +71,9 @@ function validarDatosUsuario()
 
     /* Validar checkbox 'passCheck' */
     // Si esta -> Update user, password no requerida
-    if(isset($_POST['passCheck'])) {
+    if (isset($_POST['passCheck'])) {
         // Si checked -> Password requerida
-        if($_POST['passCheck'] == 'on') {
+        if ($_POST['passCheck'] == 'on') {
             // Validar 'inputPass'
             if (empty($_POST["inputPass"])) {
                 $_SESSION['passErr'] = "La contraseña es requerida";
@@ -92,11 +93,10 @@ function validarDatosUsuario()
                 $_SESSION['validarPassErr'] = "La contraseña y su validacion deben coincidir";
                 $flag = false;
             }
-        } elseif($_POST['passCheck'] == 'off')  // Si unchecked -> Password no requerida
+        } elseif ($_POST['passCheck'] == 'off')  // Si unchecked -> Password no requerida
             $password = null;
-        else 
+        else
             die("Valor erroneo en passCheck");
-
     } else { // Sino -> Insert User -> password requerida
         // Validar password
         if (empty($_POST["inputPass"])) {
@@ -118,10 +118,10 @@ function validarDatosUsuario()
             $flag = false;
         }
     }
-    
+
 
     // Validar telefono | No funca la regex
-    
+
     if (!empty($_POST["inputTelefono"])) {
         $regexEnteros = "/^\d+$/"; // regex que valida solo numeros enteros | No funca
         $telefono = $_POST["inputTelefono"];
@@ -136,7 +136,7 @@ function validarDatosUsuario()
             $flag = false;
         }
     }
-    
+
 
     // Validar tipoUsuario
     if (!isset($_POST["adminCheck"]) || empty($_POST["adminCheck"])) {
@@ -186,68 +186,65 @@ function validarDatosZapatilla()
     } else $precio = null;
 
     /* Validar descripcion */
-    if(empty($_POST['descripcionZapatilla'])) $descripcion = null;
+    if (empty($_POST['descripcionZapatilla'])) $descripcion = null;
     else {
         $descripcion = stripslashes($_POST['descripcionZapatilla']); // Quitar '\'
         $descripcion = htmlspecialchars($descripcion); // Formatear caracteres especiales
     }
 
     /* Validar Tipo */
-    if(isset($_POST['selectTipo'])) 
-        if($_POST['selectTipo'] == "U") $sexo = null; 
+    if (isset($_POST['selectTipo']))
+        if ($_POST['selectTipo'] == "U") $sexo = null;
         else $sexo = $_POST['selectTipo'];
 
     /* Validar Imagen */
-    if(isset($_POST['checkIMG'])) {
-        // Si checked -> Guardar imagen
-        if($_POST['checkIMG'] == 'on') {
-            // Guardar campo en variable local
-            $image = $_FILES['fileZapa'];
-            // die(var_dump($image));
-            $uploadOk = 1; // Bandera
-            // Si el error es 'UPLOAD_ERR_NO_FILE' -> No hay archivo cargado
-            if ($image['error'] != UPLOAD_ERR_NO_FILE) {
-                // Validar extension
-                $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/jpg']; // Permitidas
-                $mimeType = $image['type'];
-                if (!in_array($mimeType, $allowedMimeTypes)) {
-                    $_SESSION['imgErr'] .= "Solo son validos archivos con formato JPG, JPEG y PNG.\n";
-                    $uploadOk = 0;
-                }
 
-                // Validar size
-                $maxFileSize = 500000; // 500KB
-                if ($image['size'] > $maxFileSize) {
-                    $_SESSION['imgErr'] .= "El archivo pesa mas de 500KB.\n";
-                    $uploadOk = 0;
-                }
+    // Si checked -> Guardar imagen
+    if ($_POST['checkIMG'] == 'on') {
+        // die("Check ON");
+        // Guardar campo en variable local
+        $image = $_FILES['fileZapa'];
+        // die(var_dump($image));
+        $uploadOk = 1; // Bandera
+        // Si el error es 'UPLOAD_ERR_NO_FILE' -> No hay archivo cargado
+        if ($image['error'] != UPLOAD_ERR_NO_FILE) {
+            // Validar extension
+            $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/jpg']; // Permitidas
+            $mimeType = $image['type'];
+            if (!in_array($mimeType, $allowedMimeTypes)) {
+                $_SESSION['imgErr'] .= "Solo son validos archivos con formato JPG, JPEG y PNG.\n";
+                $uploadOk = 0;
+            }
 
-                // Validar si ya existe imagen
-                if (file_exists(basename($image['name']))) {
-                    $_SESSION['imgErr'] .=  "El archivo que desea subir ya existe.\n";
-                    $uploadOk = 0;
-                }
+            // Validar size
+            $maxFileSize = 500000; // 500KB
+            if ($image['size'] > $maxFileSize) {
+                $_SESSION['imgErr'] .= "El archivo pesa mas de 500KB.\n";
+                $uploadOk = 0;
+            }
 
-                // Si todo ok -> Guardar img en server
-                if ($uploadOk !== 0 && $flag == TRUE) {
-                    $img_path = "Uploads/" . basename($image['name']); // Path que se guarda en la DB
-                    $directiorio_final = UPLOADS_PATH . basename($image['name']);
-                    
-                    // Si hay error al subir el archivo -> Mensaje error
-                    if (!move_uploaded_file($image['tmp_name'], $directiorio_final)) {
-                        $_SESSION['imgErr'] .= "Hubo un error al subir el archivo. \n" . $image['error'];
-                        $flag = false;
-                    } 
-                } else { // Sino, error en carga de datos -> no subir archivo
-                    $_SESSION['imgErr'] .= "El archivo no fue subido.";
+            // Validar si ya existe imagen
+            if (file_exists(basename($image['name']))) {
+                $_SESSION['imgErr'] .=  "El archivo que desea subir ya existe.\n";
+                $uploadOk = 0;
+            }
+
+            // Si todo ok -> Guardar img en server
+            if ($uploadOk !== 0 && $flag == TRUE) {
+                $img_path = "Uploads/" . basename($image['name']); // Path que se guarda en la DB
+                $directiorio_final = UPLOADS_PATH . basename($image['name']);
+
+                // Si hay error al subir el archivo -> Mensaje error
+                if (!move_uploaded_file($image['tmp_name'], $directiorio_final)) {
+                    $_SESSION['imgErr'] .= "Hubo un error al subir el archivo. \n" . $image['error'];
                     $flag = false;
                 }
+            } else { // Sino, error en carga de datos -> no subir archivo
+                $_SESSION['imgErr'] .= "El archivo no fue subido.";
+                $flag = false;
             }
-        } elseif($_POST['checkIMG'] == 'off') {
-            $img_path = null;
-            $flag = false;
-        } 
-    }
+        }
+    } elseif ($_POST['checkIMG'] == 'off') $img_path = null;     
 
     return $flag;
 }

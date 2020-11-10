@@ -109,7 +109,7 @@ if (isset($_GET['id'])) {
                     <input type="hidden" name="idZapaToUpdate" value="<?= $id ?>">
                     <!-- Input Modelo -->
                     <div class="form-group row">
-                        <label for="inputNombre" class="col-md-2 col-form-label">Nombre/Modelo</label>
+                        <label for="inputNombre" class="col-md-2 col-form-label">Nombre / Modelo</label>
                         <div class="col-md-10">
                             <input 
                                 type="text" 
@@ -130,7 +130,7 @@ if (isset($_GET['id'])) {
                     </div>
                     <!-- Input Precio -->
                     <div class="form-group row">
-                        <label for="inputPrecio" class="col-md-2 col-form-label">Precio</label>
+                        <label for="inputPrecio" class="col-md-2 col-form-label">Precio <span class="text-muted">(opcional)</span></label>
                         <div class="col-md-10">
                             <input 
                                 type="text" 
@@ -151,7 +151,7 @@ if (isset($_GET['id'])) {
                     </div>
                     <!-- Textarea -->
                     <div class="form-group row">
-                        <label for="inputDescripcion" class="col-md-2 col-form-label">Descripcion</label>
+                        <label for="inputDescripcion" class="col-md-2 col-form-label">Descripcion <span class="text-muted">(opcional)</span></label>
                         <div class="col-md-10">
                             <textarea 
                                 class="form-control" 
@@ -167,7 +167,7 @@ if (isset($_GET['id'])) {
                     </div>
                     <!-- Tipo -->
                     <div class="form-group row">
-                        <label for="selectTipo" class="col-md-2 col-form-label">Tipo</label>
+                        <label for="selectTipo" class="col-md-2 col-form-label">Tipo <span class="text-muted">(opcional)</span></label>
                         <div class="col-md-10">
                             <select class="form-control" id="selectTipo" name="selectTipo">
                                 <option 
