@@ -125,7 +125,7 @@ if (isset($_GET['id'])) {
                     <?php 
                         $dir = $compra->get_direccionEntrega(); 
                         if(isset($dir)) echo $dir;
-                        else echo "No indicada."; 
+                        else echo "Retiro por local."; 
                     ?>
                 </p>
             </div>
