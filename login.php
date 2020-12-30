@@ -94,7 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input id="inputPassword" name="password" class="form-control" required placeholder="Contraseña" type="password" />
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">
-            Sign in
+            Loguearse
         </button>
         <a class="btn btn-secondary btn-block" href="registro.cliente.php">
             Registrarse

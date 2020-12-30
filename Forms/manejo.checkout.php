@@ -16,6 +16,7 @@ include_once(DAO_PATH."dao.tarjeta.php");
 
 // Si se quiere confirmar la compra
 if (isset($_POST['confirmar_compra'])) {
+
     $flag = true;
 
     $carro = new CarroCompra();
@@ -28,10 +29,20 @@ if (isset($_POST['confirmar_compra'])) {
         $flag = false;
     }
 
-    if(!empty($_POST['address'])) {
-        $direccion = stripslashes($_POST['address']); 
-        $direccion = htmlspecialchars($direccion);
-    } else $direccion = null;
+    /* Validar 'retiro' o 'envio' */
+    if (isset($_POST['retiroCheck'])) {
+        // Si es 'envio' | unchecked
+        if ($_POST['retiroCheck'] == 'off') {
+            // Validar direccion de entrega
+            if (!empty($_POST['address'])) {
+                $direccion = stripslashes($_POST['address']); 
+                $direccion = htmlspecialchars($direccion);
+            } else {
+                $_SESSION['addressErr'] = "La direccion de entrega es requerida si no se retira por local.";
+                $flag = false;
+            }
+        } else $direccion = null; // si es 'retiro por local' | checked
+    } else $flag = false;
 
     // Si hay telefono, validar solo numeros enteros
     if(!empty($_POST['telefono'])) {
@@ -68,7 +79,10 @@ if (isset($_POST['confirmar_compra'])) {
     $fechaExp = date("m/y", mktime(1, 1, 1, $monthExp, 1, $yearExp)); // Armar fecha
 
     // Si hay algun dato erroneo, volver al form
-    if(!$flag) header("Location: ../checkout.php");
+    if(!$flag) {
+        header("Location: ../checkout.php");
+        die("Corte redirect");
+    } 
 
     $total = $carro->total();
 

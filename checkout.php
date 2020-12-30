@@ -61,6 +61,7 @@ if ($carro->total_items() <= 0) header("Location: index.php");
     </style>
 
     <script>
+        // Funcion para manejar pago en 'efectivo' o 'tarjeta'
         function enableTarjeta() {
             var efectivo = document.getElementById('efectivo');
             var nombreTarjeta = document.getElementById('cc-name');
@@ -86,6 +87,20 @@ if ($carro->total_items() <= 0) header("Location: index.php");
                 anioExp.disabled = false;
             }
         }
+        // Funcion para manejar 'envio' o 'retiro por local'
+        function enableRetiro(checkbox) {
+            var retiro = document.getElementById('retiroCheck');
+            var inputDireccion = document.getElementById('address');
+
+            // checkbox.checkbox ? inputDireccion.disabled = true: inputDireccion.disabled = false;
+            if(checkbox.checked) {
+                console.log("Retiro local.");
+                inputDireccion.disabled = true;
+            } else {
+                console.log("Envio.");
+                inputDireccion.disabled = false;
+            }
+        }
     </script>
     
     <!-- Custom styles for this template -->
@@ -106,7 +121,7 @@ if ($carro->total_items() <= 0) header("Location: index.php");
                 <!-- Card -->
                 <div class="card">
                     <div class="card-header">
-                        <p class="h1">Checkout</p>
+                        <p class="h1">Finalizar Compra</p>
                     </div>
                     
                         <div class="card-body">
@@ -162,7 +177,7 @@ if ($carro->total_items() <= 0) header("Location: index.php");
                                 </div>
                                 <!-- Form entrega -->
                                 <div class="col-md-8 order-md-1">
-                                    <h4 class="mb-3">Direccion de Entrega</h4>
+                                    <h4 class="mb-3">Datos de Usuario</h4>
                                     <form action="Forms/manejo.checkout.php" method="POST" class="needs-validation" novalidate>
                                         <!-- Nombre y Apellido -->
                                         <div class="row">
@@ -230,19 +245,40 @@ if ($carro->total_items() <= 0) header("Location: index.php");
                                                 <?php } ?>  
                                             </div>
                                         </div>
+                                        <!-- Retiro por local -->
+                                        <div class="form-check">
+                                            <input type="hidden" name="retiroCheck" value="off" />
+                                            <input 
+                                                type="checkbox" 
+                                                class="form-check-input" 
+                                                id="retiroCheck" 
+                                                name="retiroCheck" 
+                                                value="on"
+                                                onclick="enableRetiro(this)"
+                                            />
+                                            <label class="form-check-label" for="passCheck">
+                                                Retiro por local.
+                                            </label>
+                                            <small id="passChangeHelp" class="form-text text-muted">
+                                                Si no tilda, indicar direccion de entrega.
+                                            </small>
+                                        </div>
                                         <!-- Direccion (opcional)-->
                                         <div class="mb-3">
-                                            <label for="address">Direccion <span class="text-muted">(opcional)</span></label>
+                                            <label for="address">Direccion</label>
                                             <input 
                                                 type="text" 
-                                                class="form-control" 
+                                                class="form-control <?php if (isset($_SESSION['addressErr'])) { ?>is-invalid<?php } ?>" 
                                                 id="address" 
-                                                name="address" 
-                                                placeholder="Zeballos 1341"  
+                                                name="address"  
+                                                aria-describedby="direccionHelp"
                                             />
-                                            <div class="invalid-feedback">
-                                                Por favor ingrese su direccion de entrega.
-                                            </div>
+                                            <small id="direccionHelp" class="form-text text-muted">Ej: Zeballos 1341.</small>
+                                            <?php if (isset($_SESSION['addressErr'])) { ?>
+                                                <div class="invalid-feedback">
+                                                    <?= $_SESSION["addressErr"] ?>
+                                                </div>
+                                            <?php } ?>  
                                         </div>
                                         <!-- Telefono (opcional) -->
                                         <div class="mb-3">
@@ -252,10 +288,9 @@ if ($carro->total_items() <= 0) header("Location: index.php");
                                                 class="form-control <?php if (isset($_SESSION['telefErr'])) { ?>is-invalid<?php } ?>" 
                                                 id="telefono" 
                                                 name="telefono" 
-                                                placeholder="3413595959"  
                                                 value="<?php if ($usuarioActual != null) echo $usuarioActual->get_telefono(); ?>"
                                             />
-                                            <small id="telefonoHelp" class="form-text text-muted">Solo numeros enteros.</small>
+                                            <small id="telefonoHelp" class="form-text text-muted">Solo numeros enteros. Ej: 3413595959.</small>
                                             <?php if (isset($_SESSION['telefErr'])) { ?>
                                                 <div class="invalid-feedback">
                                                     <?= $_SESSION["telefErr"] ?>
@@ -342,21 +377,7 @@ if ($carro->total_items() <= 0) header("Location: index.php");
                                             </div>
                                         </div>
                                         
-                                        <div class="form-row">
-                                            <!-- Fecha Vencimiento -->
-                                            <!-- <div class="col-md-4 mb-3">
-                                                <label for="cc-expiration">Fecha de Vencimiento</label>
-                                                <input
-                                                    type="month"
-                                                    class="form-control"
-                                                    id="cc-expiration"
-                                                    placeholder="MM/YY"
-                                                    required
-                                                    disabled
-                                                />
-                                                <div class="invalid-feedback">Ingrese la fecha de vencimiento</div>
-                                            </div> -->
-                                            
+                                        <div class="form-row">                                            
                                             <div class="col-md-3 mb-3">   
                                                 <label for="cc-month">Fecha Vencimiento</label>
                                                 <!-- Mes -->
@@ -433,7 +454,7 @@ if ($carro->total_items() <= 0) header("Location: index.php");
                                             <div class="col">
                                                 <a href="tienda.php" class="btn btn-info btn-block">
                                                     <i class="fas fa-angle-left"></i>
-                                                    Continue Shopping
+                                                    Continuar comprando
                                                 </a>
                                             </div>
                                             <div class="col">
@@ -464,6 +485,7 @@ if ($carro->total_items() <= 0) header("Location: index.php");
     <!-- Limpiar mensajes de sesion -->
     <?php 
         if(isset($_SESSION['emailErr'])) unset($_SESSION['emailErr']); 
+        if(isset($_SESSION['addressErr'])) unset($_SESSION['addressErr']); 
         if(isset($_SESSION['telefErr'])) unset($_SESSION['telefErr']); 
         if(isset($_SESSION['cc-numberErr'])) unset($_SESSION['cc-numberErr']); 
         if(isset($_SESSION['cc-cvvErr'])) unset($_SESSION['cc-cvvErr']); 

@@ -176,8 +176,6 @@ function validarDatosZapatilla()
             // preg_match = 1 -> Encontro patron
             // Formatear ',' por '.'
             $precio = str_replace(",", ".", $precio);
-            // die(var_dump($precio));
-            // $precio = preg_replace("/,/", "/./", $_POST['precioZapatilla']);
         } elseif ($valor === 0) {
             // preg_match = 0 -> No encontro patron -> Error
             $_SESSION['precioZapaErr'] = "El precio debe contener unicamente digitos numericos y '.' o ','";
@@ -201,10 +199,8 @@ function validarDatosZapatilla()
 
     // Si checked -> Guardar imagen
     if ($_POST['checkIMG'] == 'on') {
-        // die("Check ON");
         // Guardar campo en variable local
         $image = $_FILES['fileZapa'];
-        // die(var_dump($image));
         $uploadOk = 1; // Bandera
         // Si el error es 'UPLOAD_ERR_NO_FILE' -> No hay archivo cargado
         if ($image['error'] != UPLOAD_ERR_NO_FILE) {

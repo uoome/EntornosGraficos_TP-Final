@@ -229,7 +229,7 @@ if (isset($_SESSION['usuarioActual'])) {
                     </div>
                     <div class="col col-sm-4">
                         <a href="checkout.php" class="btn btn-success btn-block">
-                            Checkout <i class="fas fa-angle-right"></i>
+                            Comprar <i class="fas fa-angle-right"></i>
                         </a>
                     </div>
                 <?php } ?>

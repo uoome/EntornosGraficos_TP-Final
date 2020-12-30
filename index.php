@@ -97,6 +97,9 @@ $muestra = $zapaService->getMuestra();
                                 <i class="fas fa-user-circle"></i> <?= $usuarioActual->get_username() ?>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownLogOutLink">
+                                <a class="dropdown-item" href="perfil.php">
+                                    Perfil
+                                </a>
                                 <a class="dropdown-item" href="logout.php">
                                     <i class="fas fa-sign-in-alt"></i> LogOut
                                 </a>
