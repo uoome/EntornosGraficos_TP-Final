@@ -41,8 +41,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['save_perfil'])) {
 
         // Mensajes 
         if ($result) {
+            $re_log = '<a href="logout.php">Log Out</a>';
             // Mensaje exito
-            $_SESSION['mensaje'] = "Perfil modificado con exito! Reloguee para ver los cambios.";
+            $_SESSION['mensaje'] = "Perfil modificado con exito! Reloguee para ver los cambios. " . $re_log;
             $_SESSION['tipo_mensaje'] = "success";
         } else {
             // Mensaje error
