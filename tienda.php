@@ -69,10 +69,11 @@ $total_paginas  = ceil($cant_prod / $TAMANIO_PAGINA);
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <!-- Icono menú hamburguesa -->
             <span class="fas fa-hamburger"></span>
+            <!-- <span class="navbar-toggler-icon"></span> -->
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <div class="navbar-nav fa-ul">
-                <a class="nav-link" href="index.php">
+                <a class="nav-lin" href="index.php">
                     <i class="fas fa-home"></i> Inicio
                 </a>
                 <a class="nav-link active" href="tienda.php">
@@ -127,6 +128,9 @@ $total_paginas  = ceil($cant_prod / $TAMANIO_PAGINA);
                                 <i class="fas fa-user-circle"></i> <?= $usuarioActual->get_username() ?>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownLogOutLink">
+                                <a class="dropdown-item" href="perfil.php">
+                                    Perfil
+                                </a>
                                 <a class="dropdown-item" href="logout.php">
                                     <i class="fas fa-sign-in-alt"></i> LogOut
                                 </a>
@@ -141,6 +145,7 @@ $total_paginas  = ceil($cant_prod / $TAMANIO_PAGINA);
             </div>
         </div>
     </nav>
+
 
     <!-- Migas de pan -->
     <nav aria-label="breadcrumb">

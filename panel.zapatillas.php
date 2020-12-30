@@ -33,10 +33,11 @@ else $usuarioActual = null;
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <!-- Icono menú hamburguesa -->
             <span class="fas fa-hamburger"></span>
+            <!-- <span class="navbar-toggler-icon"></span> -->
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <div class="navbar-nav fa-ul">
-                <a class="nav-link" href="index.php">
+                <a class="nav-link active" href="index.php">
                     <i class="fas fa-home"></i> Inicio
                 </a>
                 <a class="nav-link" href="tienda.php">
@@ -58,15 +59,15 @@ else $usuarioActual = null;
                     <?php if ($usuarioActual->get_tipo() == UserTypeEnum::Administrator) { ?>
                     <ul class="navbar-nav ml-auto fa-ul">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-wrench"></i> ABMs
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-wrench"></i> ABMs
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="panel.usuarios.php">
-                                    <i class="fas fa-users"></i> Usuarios
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item active" href="panel.zapatillas.php">
+                            <a class="dropdown-item" href="panel.usuarios.php">
+                                <i class="fas fa-users"></i> Usuarios
+                            </a>
+                            <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="panel.zapatillas.php">
                                     <i class="fas fa-shoe-prints"></i> Zapatillas
                                 </a>
                             </div>
@@ -91,6 +92,9 @@ else $usuarioActual = null;
                                 <i class="fas fa-user-circle"></i> <?= $usuarioActual->get_username() ?>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownLogOutLink">
+                                <a class="dropdown-item" href="perfil.php">
+                                    Perfil
+                                </a>
                                 <a class="dropdown-item" href="logout.php">
                                     <i class="fas fa-sign-in-alt"></i> LogOut
                                 </a>
@@ -103,7 +107,9 @@ else $usuarioActual = null;
                     </a>       
                 <?php } ?>      
             </div>
+        </div>
     </nav>
+
     <!-- Content | Solo visible para usuario administrador -->
     <?php
     // Si hay usuario loggeado y  es Admin

@@ -33,6 +33,7 @@ else $usuarioActual = null;
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <!-- Icono menú hamburguesa -->
             <span class="fas fa-hamburger"></span>
+            <!-- <span class="navbar-toggler-icon"></span> -->
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <div class="navbar-nav fa-ul">
@@ -42,7 +43,7 @@ else $usuarioActual = null;
                 <a class="nav-link" href="tienda.php">
                     <i class="fas fa-store"></i> Tienda
                 </a>
-                <a class="nav-link active" href="tienda.php">
+                <a class="nav-link active" href="contacto.php">
                     <i class="fas fa-phone-volume"></i> Contacto
                 </a>
                 <!-- Carro Compra | Usuario Loggeado -->
@@ -91,6 +92,9 @@ else $usuarioActual = null;
                                 <i class="fas fa-user-circle"></i> <?= $usuarioActual->get_username() ?>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownLogOutLink">
+                                <a class="dropdown-item" href="perfil.php">
+                                    Perfil
+                                </a>
                                 <a class="dropdown-item" href="logout.php">
                                     <i class="fas fa-sign-in-alt"></i> LogOut
                                 </a>
@@ -105,6 +109,7 @@ else $usuarioActual = null;
             </div>
         </div>
     </nav>
+
 
     <!-- Content -->
     <div class="container-fuild">
