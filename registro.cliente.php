@@ -9,7 +9,7 @@ session_start();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -52,6 +52,7 @@ session_start();
                                 type="text" 
                                 class="form-control <?php if (isset($_SESSION['nombreErr'])) { ?>is-invalid<?php } ?>" 
                                 name="inputName" 
+                                id="inputName" 
                                 required 
                                 autofocus 
                             />
@@ -67,6 +68,7 @@ session_start();
                                 type="text" 
                                 class="form-control <?php if (isset($_SESSION['apeErr'])) { ?>is-invalid<?php } ?>" 
                                 name="inputApellido" 
+                                id="inputApellido" 
                                 required 
                             />
                             <?php if (isset($_SESSION['apeErr'])) { ?>
@@ -83,6 +85,7 @@ session_start();
                                 type="email" 
                                 class="form-control <?php if (isset($_SESSION['emailErr'])) { ?>is-invalid<?php } ?>" 
                                 name="inputEmail"
+                                id="inputEmail"
                                 required 
                             />
                             <?php if (isset($_SESSION['emailErr'])) { ?>
@@ -97,6 +100,7 @@ session_start();
                                 type="text" 
                                 class="form-control <?php if (isset($_SESSION['usernameErr'])) { ?>is-invalid<?php } ?>"
                                 name="inputUser" 
+                                id="inputUser" 
                                 required 
                                 minlength="2" 
                                 maxlength="10" 
@@ -115,6 +119,7 @@ session_start();
                                 type="password" 
                                 class="form-control <?php if (isset($_SESSION['passErr'])) { ?>is-invalid<?php } ?>" 
                                 name="inputPass" 
+                                id="inputPass" 
                                 required 
                                 minlength="4" 
                                 maxlength="10" 
@@ -131,6 +136,7 @@ session_start();
                                 type="password" 
                                 class="form-control <?php if (isset($_SESSION['validarPassErr'])) { ?>is-invalid<?php } ?>" 
                                 name="inputValidarPass"  
+                                id="inputValidarPass"  
                                 required 
                                 minlength="4" 
                                 maxlength="10" 

@@ -24,7 +24,7 @@ if ($carro->total_items() <= 0) header("Location: index.php");
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">

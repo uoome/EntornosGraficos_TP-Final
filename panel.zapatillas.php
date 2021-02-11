@@ -12,7 +12,7 @@ else $usuarioActual = null;
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -173,6 +173,7 @@ else $usuarioActual = null;
                                                 href="Forms/admin.delete.zapatilla.php?id=<?= $zapa["id_zapatilla"] ?>" 
                                                 class="btn btn-danger" 
                                                 title="Eliminar Zapatilla"
+                                                onclick="return confirm('Desea eliminar la zapatilla?')"
                                             >
                                                 <i class="fas fa-trash"></i>
                                             </a>

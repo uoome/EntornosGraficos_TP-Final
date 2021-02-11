@@ -48,7 +48,7 @@ $total_paginas  = ceil($cant_prod / $TAMANIO_PAGINA);
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -73,7 +73,7 @@ $total_paginas  = ceil($cant_prod / $TAMANIO_PAGINA);
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <div class="navbar-nav fa-ul">
-                <a class="nav-lin" href="index.php">
+                <a class="nav-link" href="index.php">
                     <i class="fas fa-home"></i> Inicio
                 </a>
                 <a class="nav-link active" href="tienda.php">
@@ -205,6 +205,9 @@ $total_paginas  = ceil($cant_prod / $TAMANIO_PAGINA);
                                     <option value="H">Modelos Hombres</option>
                                     <option value="M">Modelos Mujeres</option>
                                 </select>
+                                <small class="text-muted">
+                                    Luego de seleccionar, presione la lupa para filtrar.
+                                </small>
                             </div>
                         </form>
                     </div>

@@ -6,6 +6,37 @@ include_once(DATA_PATH . "data.compra.php");
 
 class CompraService extends ConnectionDB
 {
+
+    /** Consulta que devuelve todas las compras realizadas.
+     * @return null|array(Compra) $compras
+     */
+    function getAllCompras() 
+    {
+        $compras = null;
+        $query = "SELECT * FROM `compra`;";
+
+        try {
+            // Ejecutar query
+            $data = $this->connect()->query($query);
+            $numRows = $data->num_rows;
+            // Si hay datos devueltos
+            if ($numRows > 0) {
+                // Fetch data
+                while ($row = $data->fetch_assoc()) {
+                    $compras[] = $row;
+                }
+            }
+            // Cerrar conexion
+            $this->closeConnection();
+        } catch (mysqli_sql_exception $sqlEx) {
+            die("Error (SQL) en consulta 'getAllCompras': " . $sqlEx->getMessage());
+        } catch (Exception $ex) {
+            die("Error en consulta 'getAllCompras': " . $ex->getMessage());
+        }
+        // Devolver data
+        return $compras;
+    }
+
     /** Consulta que devuelve las compras realizadas por un usuario
      * @param string $idUser
      * @return null|array(Compra) $compras

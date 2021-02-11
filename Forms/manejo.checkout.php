@@ -153,6 +153,7 @@ if (isset($_POST['confirmar_compra'])) {
                 $carro ->destruirCarro();
                 // Redirect a orderSuccess
                 header("Location: ../orderSuccess.php?id=".$idCompra);
+                die("Fix para ejecutar el redirect"); // Fix para el webhost
             } else {
                 $_SESSION['mensaje'] = "Error al enviar comprobante de compra.";
                 $_SESSION['tipo_mensaje'] = "warning";
@@ -245,8 +246,8 @@ function enviarMail(CarroCompra $cc, Compra $c, $idCompra) {
     //para el envío en formato HTML 
     $headers = "MIME-Version: 1.0\r\n"; 
     $headers .= "Content-type: text/html; charset=iso-8859-1\r\n"; 
-    // $headers .= "From: nicogomezwp@gmail.com";
-    $headers .= "From: " . $client->get_email();
+    $headers .= "From: nicogomezwp@gmail.com";
+    // $headers .= "From: " . $client->get_email();
 
     $response = mail($to, $subject, $cuerpo, $headers);
 

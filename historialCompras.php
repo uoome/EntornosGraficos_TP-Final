@@ -12,18 +12,25 @@ session_start();
 
 // Fetch usuario
 $usuarioActual = new Usuario(); // No se si es necesario
+// Validar si el usuario es ADMIN. De serlo, cargar todas las compras.
 if (isset($_SESSION['usuarioActual'])) { 
     $usuarioActual = $_SESSION['usuarioActual'];
-    // Si hay usuario, iniciar/traer carro
+    // Si hay usuario, iniciar/traer servicio
     $compraService = new CompraService();
-    $comprasUsuario = $compraService->getComprasUsuario($usuarioActual->get_id());
+    // Si es administrador, traer todas las compras
+    if ($usuarioActual->get_tipo() == UserTypeEnum::Administrator) {
+        $comprasUsuario = $compraService->getAllCompras();
+    } else // Si no es Admin, traer solo sus compras.
+    {
+        $comprasUsuario = $compraService->getComprasUsuario($usuarioActual->get_id());
+    }
     // var_dump($comprasUsuario);
 } else $usuarioActual = null;
 
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

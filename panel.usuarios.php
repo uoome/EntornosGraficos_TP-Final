@@ -10,10 +10,11 @@ $usuarioActual = new Usuario();
 if(isset($_SESSION['usuarioActual'])) $usuarioActual = $_SESSION['usuarioActual'];
 else $usuarioActual = null;
 
+
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -22,6 +23,7 @@ else $usuarioActual = null;
     <?php include(INCLUDES_PATH."styles.links.php") ?>
 
     <title>Panel de Usuarios | Tibbonzapas</title>
+
 </head>
 
 <body>
@@ -176,9 +178,10 @@ else $usuarioActual = null;
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         <a 
-                                            href="Forms/admin.delete.usuario.php?id=<?= $user["id_usuario"] ?>" 
+                                            href="Forms/admin.delete.usuario.php?id=<?= $user["id_usuario"] ?>"
                                             class="btn btn-danger" 
                                             title="Eliminar Usuario"
+                                            onclick="return confirm('Desea eliminar el usuario?')"
                                         >
                                             <i class="fas fa-trash"></i>
                                         </a>
