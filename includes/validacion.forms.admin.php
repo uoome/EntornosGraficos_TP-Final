@@ -205,6 +205,7 @@ function validarDatosZapatilla()
         $uploadOk = 1; // Bandera
         // Si el error es 'UPLOAD_ERR_NO_FILE' -> No hay archivo cargado
         if ($image['error'] != UPLOAD_ERR_NO_FILE) {
+            $_SESSION['imgErr'] = "";
             // Validar extension
             $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/jpg']; // Permitidas
             $mimeType = $image['type'];

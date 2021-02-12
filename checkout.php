@@ -232,7 +232,7 @@ if ($carro->total_items() <= 0) header("Location: index.php");
                                             <label for="email">Email</label>
                                             <input 
                                                 type="email" 
-                                                class="form-control" 
+                                                class="form-control <?php if (isset($_SESSION['emailErr'])) { ?>is-invalid<?php } ?>" 
                                                 id="email" 
                                                 name="emailInput" 
                                                 placeholder="tu@ejemplo.com" 
@@ -240,10 +240,8 @@ if ($carro->total_items() <= 0) header("Location: index.php");
                                                 required
                                             />
                                             <div class="invalid-feedback">
-                                                <?php if (isset($_SESSION['emailErr'])) echo $_SESSION["emailErr"]; else { ?>
-                                                    Por favor ingrese una direccion de email valida.
-                                                <?php } ?>  
-                                            </div>
+                                                Formato de mail incorrecto.                                         
+                                            </div>                                    
                                         </div>
                                         <!-- Retiro por local -->
                                         <div class="form-check">

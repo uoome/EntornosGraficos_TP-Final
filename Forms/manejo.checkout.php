@@ -188,8 +188,12 @@ function enviarMail(CarroCompra $cc, Compra $c, $idCompra) {
     $usuarioService = new UsuarioService();
     $client = $usuarioService->getUser($clientID);
     // Armar mail
-    $to = "nicogomezwp@gmail.com," . $client->get_email(); 
-    // $to = $client->get_email(); 
+    // Si indico mail en el Input, usar ese mail. Sino, usar el mail predeterminado del ususario (el cargado en DB)
+    if (isset($_POST['emailInput'])) {
+        $to = "nicogomezwp@gmail.com," . $_POST['emailInput'];
+    } else {
+        $to = "nicogomezwp@gmail.com," . $client->get_email();
+    }
 
     $subject = "Recibo de Compra | ID " . $idCompra;
 
@@ -247,7 +251,6 @@ function enviarMail(CarroCompra $cc, Compra $c, $idCompra) {
     $headers = "MIME-Version: 1.0\r\n"; 
     $headers .= "Content-type: text/html; charset=iso-8859-1\r\n"; 
     $headers .= "From: nicogomezwp@gmail.com";
-    // $headers .= "From: " . $client->get_email();
 
     $response = mail($to, $subject, $cuerpo, $headers);
 
@@ -283,5 +286,3 @@ function validarNroEntero($nro) {
 
     return $result;
 }
-
-?>
