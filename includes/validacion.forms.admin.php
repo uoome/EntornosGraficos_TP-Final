@@ -198,7 +198,8 @@ function validarDatosZapatilla()
     /* Validar Imagen */
 
     // Si checked -> Guardar imagen
-    if ($_POST['checkIMG'] == 'on') {
+    // die(var_dump($_POST['checkIMG']));
+    if (isset($_POST['checkIMG']) && $_POST['checkIMG'] == 'on') {
         // Guardar campo en variable local
         $image = $_FILES['fileZapa'];
         $uploadOk = 1; // Bandera

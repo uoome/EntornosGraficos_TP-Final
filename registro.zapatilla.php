@@ -142,6 +142,8 @@ else $usuarioActual = null;
                             <?php } ?>
                         </div>
                     </div>
+                    <!-- Setear check de cambio de imagen escondido y ON -->
+                    <input type="hidden" name="checkIMG" value="on" />
                     <!-- Submit -->
                     <div class="form-group row">
                         <div class="col-md-10">

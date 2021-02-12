@@ -32,16 +32,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Mensaje exito
                 $_SESSION['mensaje'] = "Zapatilla cargada con exito !";
                 $_SESSION['tipo_mensaje'] = "success";
+                header("Location: ../panel.zapatillas.php");
             } else {
                 // Mensaje error
                 $_SESSION['mensaje'] = "Error al guardar zapatilla.";
                 $_SESSION['tipo_mensaje'] = "danger";
+                header("Location: " . $_SERVER['HTTP_REFERER']);
             }
         } else {
+            // Mensaje error
             $_SESSION['mensaje'] = "<strong>Ups!</strong> Complete los datos correctamente";
             $_SESSION['tipo_mensaje'] = "warning";
             // Redirect al form
-            header("Location: ../registro.zapatilla.php");
+            header("Location: " . $_SERVER['HTTP_REFERER']);
+            // header("Location: ../registro.zapatilla.php");
         }
     } elseif(isset($_POST['update_zapa'])) {
         if (validarDatosZapatilla()) {
@@ -73,16 +77,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 header("Location: " . $_SERVER['HTTP_REFERER']);
             }
         } else {
+            // Mensaje error
             $_SESSION['mensaje'] = "<strong>Ups!</strong> Complete los datos correctamente";
             $_SESSION['tipo_mensaje'] = "warning";
             header("Location: " . $_SERVER['HTTP_REFERER']);
         }
     } else {
+        // Mensaje error
         $_SESSION['mensaje'] = "Error de request.";
         $_SESSION['tipo_mensaje'] = "danger";
         header("Location: " . $_SERVER['HTTP_REFERER']);
     }        
 } else {
+    // Mensaje error
     $_SESSION['mensaje'] = "Error de request.";
     $_SESSION['tipo_mensaje'] = "danger";
     header("Location: " . $_SERVER['HTTP_REFERER']);

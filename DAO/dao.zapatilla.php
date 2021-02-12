@@ -220,15 +220,21 @@ class ZapatillaDataService extends ConnectionDB
             // Armar query
             $sql = "INSERT INTO `zapatilla`(nombre, precio, descripcion, img_path, tipo) 
             VALUES (?,?,?,?,?);";
+
+            $nombre = $newZapa->get_nombre();
+            $precio = $newZapa->get_precio();
+            $descrip = $newZapa->get_descripcion();
+            $ip = $newZapa->get_img_path();
+            $s = $newZapa->get_sexo();
             // Armar statement
             $stmt = $this->connect()->prepare($sql);
             $stmt->bind_param(
                 "sdsss",
-                $newZapa->get_nombre(),
-                $newZapa->get_precio(),
-                $newZapa->get_descripcion(),
-                $newZapa->get_img_path(),
-                $newZapa->get_sexo()
+                $nombre,
+                $precio,
+                $descrip,
+                $ip,
+                $s
             );
             // Ejecutar y guardar resultado
             $flag = $stmt->execute();
