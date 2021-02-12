@@ -63,17 +63,38 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
         // Redirect
         header("Location: ../verCarro.php");
     }
-} elseif (isset($_POST['btnAddCarro'])) { // Ver si hay POST
+} elseif (isset($_POST['btnAddCarroDetalleProducto'])) { // Ver si hay POST
     // Crear nueva linea
     $newLinea = new LineaCompra();
+    $flag = true;
     // Fetch values
-    if (isset($_POST['colorSelect'])) $newLinea->set_color($_POST['colorSelect']);
-    if (isset($_POST['talleSelect']) && $_POST['talleSelect'] != 0) $newLinea->set_talle($_POST['talleSelect']);
-    if (isset($_POST['inputCantidad']) && $_POST['inputCantidad'] != 0) $newLinea->set_qty($_POST['inputCantidad']);
-    else $newLinea->set_qty(1);
-    // if(isset($_POST['inputCantidad'])) $newLinea->set_qty($_POST['inputCantidad']);
+    //die(var_dump($_POST['colorSelect'],$_POST['talleSelect'],$_POST['inputCantidad']));
+    if (isset($_POST['colorSelect']) && $_POST['colorSelect'] != "null") {
+        $newLinea->set_color($_POST['colorSelect']);
+    } else {
+        $_SESSION['colorError'] = "Debe seleccionar un color.";
+        $flag = false;
+        // die(var_dump($_SESSION['colorError']));
+    }
+
+    if (isset($_POST['talleSelect']) && $_POST['talleSelect'] != 0) {
+        $newLinea->set_talle($_POST['talleSelect']);
+    } else {
+        $_SESSION['talleError'] = "Debe seleccionar un talle.";
+        $flag = false;
+        // die(var_dump($_SESSION['talleError']));
+    }
+
+    if (isset($_POST['inputCantidad'])) {
+        $newLinea->set_qty($_POST['inputCantidad']);
+    } else $newLinea->set_qty(1);
+
     $newLinea->set_idZapatilla($_POST['idProd']);
 
+    if(!$flag) {
+        header("Location: ../detalle.producto.php?id=".$_POST['idProd']);
+        die("Corte redirect");
+    }
     // Actualizar subtotal
     $itemLinea = $newLinea->get_zapatilla(); //Fetch Zapatilla
     if ($itemLinea != null) {
@@ -86,6 +107,5 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
         header("Location: " . $redirectLoc);
     } else die("No existe el item");
 } else die("Bad request");
-
 
 ?>
